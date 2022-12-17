@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_photos">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.unsplashhomework.presentation.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/navigation_photos"
+        android:name="com.example.unsplashhomework.presentation.photos.PhotosPagingFragment"
+        android:label="@string/title_photos"
+        tools:layout="@layout/fragment_paging_photos" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.unsplashhomework.presentation.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
+        android:id="@+id/navigation_collections"
+        android:name="com.example.unsplashhomework.presentation.collections.DashboardFragment"
+        android:label="@string/title_collections"
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.unsplashhomework.presentation.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
+        android:id="@+id/navigation_user"
+        android:name="com.example.unsplashhomework.presentation.user.NotificationsFragment"
+        android:label="@string/title_user"
         tools:layout="@layout/fragment_notifications" />
 </navigation>
