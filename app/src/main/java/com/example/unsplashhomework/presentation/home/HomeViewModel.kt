@@ -1,4 +1,4 @@
-package com.example.unsplashhomework.ui.home
+package com.example.unsplashhomework.presentation.home
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
