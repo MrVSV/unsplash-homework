@@ -3,13 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_photos">
+    app:startDestination="@+id/authFragment">
 
     <fragment
         android:id="@+id/navigation_photos"
         android:name="com.example.unsplashhomework.presentation.photos.PhotosPagingFragment"
         android:label="@string/title_photos"
-        tools:layout="@layout/fragment_paging_photos" />
+        tools:layout="@layout/fragment_paging_photos" >
+    <deepLink
+        android:id="@+id/deepLink"
+        app:uri="https://unsplash.com/oauth/authorize/native?code={code}" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_collections"
@@ -22,4 +26,10 @@
         android:name="com.example.unsplashhomework.presentation.user.NotificationsFragment"
         android:label="@string/title_user"
         tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.example.unsplashhomework.presentation.AuthFragment"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth"/>
+
 </navigation>

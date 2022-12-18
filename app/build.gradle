@@ -15,9 +15,12 @@ plugins {
 
 android {
     namespace 'com.example.unsplashhomework'
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
+        manifestPlaceholders = [
+                appAuthRedirectScheme: "unsplashhomework"
+        ]
         applicationId "com.example.unsplashhomework"
         minSdk 21
         //noinspection ExpiredTargetSdkVersion
@@ -70,6 +73,7 @@ dependencies {
     //Room
     implementation "androidx.room:room-runtime:$roomVersion"
     implementation "androidx.room:room-ktx:$roomVersion"
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt "androidx.room:room-compiler:$roomVersion"
 
     //Retrofit, Gson

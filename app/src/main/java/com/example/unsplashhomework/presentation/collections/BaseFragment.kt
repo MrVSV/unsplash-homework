@@ -9,7 +9,7 @@ import androidx.viewbinding.ViewBinding
 
 abstract class BaseFragment<B:ViewBinding>:Fragment() {
 
-    protected var _binding:B?=null
+    private var _binding:B?=null
     val binding get()= _binding!!
 
     abstract fun initBinding(inflater: LayoutInflater):B
