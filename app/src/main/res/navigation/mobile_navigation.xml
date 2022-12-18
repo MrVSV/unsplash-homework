@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_photos"
-        android:name="com.example.unsplashhomework.presentation.photos.PhotosPagingFragment"
+        android:name="com.example.unsplashhomework.presentation.auth.AuthFragment"
         android:label="@string/title_photos"
-        tools:layout="@layout/fragment_paging_photos" />
+        tools:layout="@layout/fragment_auth" />
 
     <fragment
         android:id="@+id/navigation_collections"
