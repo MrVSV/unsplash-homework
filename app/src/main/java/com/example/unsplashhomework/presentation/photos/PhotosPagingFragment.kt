@@ -23,6 +23,7 @@ class PhotosPagingFragment : BaseFragment<FragmentPagingPhotosBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         viewModel.createToken(navArgs.code)
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.a.collect {
                 binding.textHome.text = "token = ${it.access_token}"

@@ -9,6 +9,7 @@ private const val BASE_URL = "https://api.unsplash.com/"
 
 interface ApiToken {
 
+
     @POST("https://unsplash.com/oauth/token")
     suspend fun getToken(
         @Query("code") code: String,

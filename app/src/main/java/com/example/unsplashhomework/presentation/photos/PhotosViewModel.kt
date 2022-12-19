@@ -1,5 +1,6 @@
 package com.example.unsplashhomework.presentation.photos
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.unsplashhomework.data.api.ApiToken
@@ -15,7 +16,15 @@ class PhotosViewModel : ViewModel() {
 
     fun createToken(code:String){
         viewModelScope.launch (Dispatchers.IO) {
-            a.emit( ApiToken.retrofit.getToken(code = code))
+            try {
+                Log.e("Kart","start")
+                val b = ApiToken.retrofit.getToken(code = code)
+                Log.e("Kart","${b.access_token}")
+                a.emit( b)
+            } catch (e:Exception){
+                Log.e("Kart",e.message.toString())
+            }
+
         }
     }
 }
