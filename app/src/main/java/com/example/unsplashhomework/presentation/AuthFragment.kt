@@ -8,6 +8,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.example.unsplashhomework.data.api.SCOPE
 import com.example.unsplashhomework.databinding.FragmentAuthBinding
 import com.example.unsplashhomework.presentation.collections.BaseFragment
 
@@ -21,14 +22,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
                 "?client_id=Z3U277lVBSGT_ISIrpUmkhTRsG97PiRgGjAk7UJ8tr8" +
                 "&redirect_uri=unsplashhomework://com.example.unsplashhomework/callback" +
                 "&response_type=code" +
-                "&scope=" +
-                "public+read_user" +
-                "+write_user+read_photos" +
-                "+write_photos+" +
-                "write_likes+" +
-                "write_followers+" +
-                "read_collections+" +
-                "write_collections")
+                "&scope="+SCOPE)
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
