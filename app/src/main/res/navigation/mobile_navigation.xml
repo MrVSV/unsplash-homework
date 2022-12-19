@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/navigation_photos"
-        android:name="com.example.unsplashhomework.presentation.photos.PhotosPagingFragment"
+        android:name="com.example.unsplashhomework.presentation.photos.PhotosFragment"
         android:label="@string/title_photos"
-        tools:layout="@layout/fragment_paging_photos">
+        tools:layout="@layout/fragment_photos">
         <deepLink
             android:id="@+id/deepLink"
             app:uri="https://unsplash.com/oauth/authorize/native?code={code}" />
