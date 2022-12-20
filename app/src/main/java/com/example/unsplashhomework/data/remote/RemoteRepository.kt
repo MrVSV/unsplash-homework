@@ -6,8 +6,6 @@ import javax.inject.Inject
 
 class RemoteRepository@Inject constructor(private val apiPhotos: ApiPhotos) {
 
-    suspend fun getData(page: Int): PhotosModel {
-        Log.d("Kart", "repo: $page")
-        return apiPhotos.getPhotos(page)
-    }
+    suspend fun getData(page: Int) = apiPhotos.getPhotos(page)
+
 }

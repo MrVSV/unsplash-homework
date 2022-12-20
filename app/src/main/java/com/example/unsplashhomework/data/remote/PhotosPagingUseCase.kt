@@ -10,11 +10,10 @@ import javax.inject.Inject
 class PhotosPagingUseCase @Inject constructor(
     private val photosPagingSource: PhotosPagingSource
 ) {
-    fun execute(): Flow<PagingData<PhotosModel.PhotosModelItem>> {
-        Log.d("Kart", "execute: ${PagingData.Companion}")
+    fun getPhoto(): Pager<Int, PhotosModel.PhotosModelItem> {
         return Pager(
             config = PagingConfig(pageSize = 10),
             pagingSourceFactory = { photosPagingSource }
-        ).flow
+        )
     }
 }
