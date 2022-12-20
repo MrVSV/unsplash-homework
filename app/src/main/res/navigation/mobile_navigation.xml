@@ -3,13 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_photos">
+    app:startDestination="@+id/navigation_onboarding">
+
+    <fragment
+        android:id="@+id/navigation_onboarding"
+        android:name="com.example.unsplashhomework.presentation.onboarding.OnboardingFragment"
+        tools:layout="@layout/fragment_onboarding" >
+        <action
+            android:id="@+id/action_navigation_onboarding_to_navigation_auth"
+            app:destination="@id/navigation_auth"
+            app:popUpTo="@id/navigation_onboarding"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_auth"
+        android:name="com.example.unsplashhomework.presentation.auth.AuthFragment"
+        tools:layout="@layout/fragment_authorization" />
 
     <fragment
         android:id="@+id/navigation_photos"
-        android:name="com.example.unsplashhomework.presentation.auth.AuthFragment"
+        android:name="com.example.unsplashhomework.presentation.photos.PhotosFragment"
         android:label="@string/title_photos"
-        tools:layout="@layout/fragment_auth" />
+        tools:layout="@layout/fragment_photos" />
 
     <fragment
         android:id="@+id/navigation_collections"

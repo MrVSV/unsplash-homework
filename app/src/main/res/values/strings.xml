@@ -1,6 +1,14 @@
 <resources>
-    <string name="app_name">Unsplash</string>
+    <string name="app_name" translatable="false">Unsplash</string>
     <string name="title_photos">Photos</string>
     <string name="title_collections">Collections</string>
     <string name="title_user">User</string>
+    <string name="first_onboarding">Make photos, publish, gather an audience, get feedback!</string>
+    <!--Создавайте снимки, публикуйте, собирайте аудиторию, получайте фидбек!-->
+    <string name="second_onboarding">Share with friends, make collections</string>
+    <!--Делитесь с друзьями, собирайте коллекции-->
+    <string name="third_onboarding">Upload your favorite pictures and track statistics</string>
+    <!--Загружайте любимые снимки и отслеживайте статистику-->
+    <string name="go_straight_to_authorization">Go straight to authorization</string>
+    <!--Перейти сразу к авторизации-->
 </resources>
