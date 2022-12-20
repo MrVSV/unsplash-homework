@@ -19,13 +19,13 @@
     <fragment
         android:id="@+id/navigation_auth"
         android:name="com.example.unsplashhomework.presentation.auth.AuthFragment"
-        tools:layout="@layout/fragment_authorization" />
+        tools:layout="@layout/fragment_auth" />
 
     <fragment
         android:id="@+id/navigation_photos"
-        android:name="com.example.unsplashhomework.presentation.photos.PhotosFragment"
+        android:name="com.example.unsplashhomework.presentation.photos.PhotosPagingFragment"
         android:label="@string/title_photos"
-        tools:layout="@layout/fragment_photos" />
+        tools:layout="@layout/fragment_paging_photos" />
 
     <fragment
         android:id="@+id/navigation_collections"
