@@ -3,7 +3,7 @@ package com.example.unsplashhomework.data.remote
 import com.google.gson.annotations.SerializedName
 
 
-//TODO: shorten the values list after authorization is ready and GET in Api.kt revised
+//TODO: shorten the values list after authorization is ready and GET in ApiPhotos.kt revised
 
 class PhotosModel : ArrayList<PhotosModel.PhotosModelItem>(){
     data class PhotosModelItem(
