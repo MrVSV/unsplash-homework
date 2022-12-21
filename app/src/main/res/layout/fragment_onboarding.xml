@@ -1,23 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- у нас тут очень простой экран не пойму зачем тут констрейн-->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".presentation.onboarding.OnboardingFragment">
-
-    <!--  <com.google.android.material.tabs.TabLayout
-          android:id="@+id/tabs"
-          app:tabIndicatorHeight="0dp"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-          app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintHorizontal_bias="0.5"
-          android:layout_marginStart="120dp"
-          android:layout_marginEnd="120dp"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent" />-->
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabs"
@@ -31,8 +18,27 @@
         app:tabBackground="@drawable/ic_ellipse"
         app:tabIndicator="@drawable/ic_tab_selector"
         app:tabIndicatorAnimationMode="elastic"
-        app:tabIndicatorHeight="16dp"
-        />
+        app:tabIndicatorHeight="16dp" />
+
+    <ImageView
+        android:id="@+id/cameras_image"
+        android:layout_width="380dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:src="@drawable/cameras_white_fill_1x"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.35" />
+
+    <ImageView
+        android:id="@+id/ellipse_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ellipse_12"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <androidx.viewpager2.widget.ViewPager2
@@ -49,7 +55,8 @@
     <Button
         android:id="@+id/authorize_button"
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:backgroundTint="@color/green"
         android:text="@string/go_straight_to_authorization"
@@ -57,7 +64,6 @@
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.5" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

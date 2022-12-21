@@ -4,26 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/cameras_image"
-        android:layout_width="600dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="160dp"
-        android:src="@drawable/cameras_white_fill_1x"
-        app:layout_constraintBottom_toBottomOf="@+id/ellipse_image"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.35" />
 
-    <ImageView
+
+    <!--ImageView
         android:id="@+id/ellipse_image"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:src="@drawable/ellipse_12"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" /-->
 
     <TextView
         android:id="@+id/onboarding_texts"
@@ -31,11 +21,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="40dp"
-        android:layout_marginBottom="144dp"
-        android:text="@string/first_onboarding"
+        android:layout_marginBottom="128dp"
+        android:text="Text some text"
         android:textColor="@color/black"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/ellipse_image"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
