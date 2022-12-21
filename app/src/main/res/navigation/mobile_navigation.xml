@@ -11,21 +11,24 @@
         tools:layout="@layout/fragment_onboarding" >
         <action
             android:id="@+id/action_navigation_onboarding_to_navigation_auth"
-            app:destination="@id/navigation_auth"
+            app:destination="@id/authFragment"
             app:popUpTo="@id/navigation_onboarding"
             app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_auth"
-        android:name="com.example.unsplashhomework.presentation.auth.AuthFragment"
-        tools:layout="@layout/fragment_auth" />
-
-    <fragment
         android:id="@+id/navigation_photos"
-        android:name="com.example.unsplashhomework.presentation.photos.PhotosPagingFragment"
+        android:name="com.example.unsplashhomework.presentation.photos.PhotosFragment"
         android:label="@string/title_photos"
-        tools:layout="@layout/fragment_paging_photos" />
+        tools:layout="@layout/fragment_photos">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="https://unsplash.com/oauth/authorize/native?code={code}" />
+        <argument
+            android:name="code"
+            android:defaultValue="123"
+            app:argType="string" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_collections"
@@ -38,4 +41,10 @@
         android:name="com.example.unsplashhomework.presentation.user.NotificationsFragment"
         android:label="@string/title_user"
         tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/authFragment"
+        android:name="com.example.unsplashhomework.presentation.AuthFragment"
+        android:label="fragment_auth"
+        tools:layout="@layout/fragment_auth" />
 </navigation>
