@@ -28,18 +28,14 @@ class PhotosFragment() : BaseFragment<FragmentPhotosBinding>() {
 
     /**пока что не работает. не меняется статус вьюхи**/
     private fun onItemClick(buttonState: ClickableView, item: PhotosModel.PhotosModelItem) {
-        viewLifecycleOwner.lifecycleScope.launch {
             when (buttonState) {
                 ClickableView.PHOTO -> {
 //                findNavController()
                 }
                 ClickableView.LIKE -> {
-                    if (item.likedByUser)
-                        viewModel.unlike(item.id)
-                    else viewModel.like(item.id)
+                    viewModel.like(item.id, item.likedByUser)
                 }
             }
-        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
