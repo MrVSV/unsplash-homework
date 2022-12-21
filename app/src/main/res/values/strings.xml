@@ -3,14 +3,16 @@
     <string name="title_photos">Photos</string>
     <string name="title_collections">Collections</string>
     <string name="title_user">User</string>
-        <string-array name="onboarding_texts_array">
-            <item>Make photos, publish, gather an audience, get feedback!</item>
-            <item>Share with friends, make collections</item>
-            <item>Upload your favorite pictures and track statistics</item>
-        </string-array>
+    <string-array name="onboarding_texts_array">
+        <item>Make photos, publish, gather an audience, get feedback!</item>
+        <item>Share with friends, make collections</item>
+        <item>Upload your favorite pictures and track statistics</item>
+    </string-array>
     <!--Создавайте снимки, публикуйте, собирайте аудиторию, получайте фидбек!-->
     <!--Делитесь с друзьями, собирайте коллекции-->
     <!--Загружайте любимые снимки и отслеживайте статистику-->
     <string name="go_straight_to_authorization">Skip</string>
-    <!--Пропустить-->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login_via_unsplash">Login via Unsplash</string>
+    <!--Пропустить. Войти через приложение-->
 </resources>

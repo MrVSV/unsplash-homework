@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener{ _, destination, _ ->
-            if (destination.id == R.id.navigation_onboarding) {
+            if (destination.id == R.id.navigation_onboarding||destination.id == R.id.authFragment) {
                 supportActionBar?.hide()
                 navView.visibility = View.GONE
             } else {

@@ -9,7 +9,9 @@ import com.example.unsplashhomework.R
 import com.example.unsplashhomework.databinding.FragmentOnboardingBinding
 import com.example.unsplashhomework.presentation.collections.BaseFragment
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
 
     override fun initBinding(inflater: LayoutInflater) =

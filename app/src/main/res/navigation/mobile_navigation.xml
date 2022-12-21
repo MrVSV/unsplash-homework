@@ -28,6 +28,10 @@
             android:name="code"
             android:defaultValue="123"
             app:argType="string" />
+        <action
+            android:id="@+id/action_navigation_photos_to_navigation_photo_details"
+            app:destination="@id/navigation_photo_details"
+            app:popUpTo="@id/navigation_photos"/>
     </fragment>
 
     <fragment
@@ -45,7 +49,11 @@
     <fragment
         android:id="@+id/authFragment"
         android:name="com.example.unsplashhomework.presentation.AuthFragment"
-        android:label="fragment_auth"
         tools:layout="@layout/fragment_auth" />
+
+    <fragment
+        android:id="@+id/navigation_photo_details"
+        android:name="com.example.unsplashhomework.presentation.photos.OnePhotoDetailsFragment"
+        tools:layout="@layout/fragment_one_photo_details"/>
 
 </navigation>

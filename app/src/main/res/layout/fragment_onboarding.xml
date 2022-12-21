@@ -12,6 +12,7 @@
         android:layout_height="16dp"
         android:layout_marginStart="120dp"
         android:layout_marginEnd="120dp"
+        android:layout_marginTop="40dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -37,6 +38,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ellipse_12"
         app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="-10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
