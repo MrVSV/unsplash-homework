@@ -1,8 +1,6 @@
 package com.example.unsplashhomework.di
 
-import com.example.unsplashhomework.data.api.ApiPhotos
-import com.example.unsplashhomework.data.api.ApiToken
-import com.example.unsplashhomework.data.api.AuthTokenInterceptor
+import com.example.unsplashhomework.data.api.*
 import com.example.unsplashhomework.data.remote.AuthTokenInterceptorQualifier
 import com.example.unsplashhomework.data.remote.LoggingInterceptorQualifier
 import dagger.Module
@@ -56,4 +54,12 @@ class ApiModule {
     @Provides
     @Singleton
     fun provideApiPhotos(retrofit: Retrofit): ApiPhotos = retrofit.create(ApiPhotos::class.java)
+
+    @Provides
+    @Singleton
+    fun provideApiDetailInfo(retrofit: Retrofit): ApiDetailInfo = retrofit.create(ApiDetailInfo::class.java)
+
+    @Provides
+    @Singleton
+    fun provideApiLikes(retrofit: Retrofit): ApiLikes = retrofit.create(ApiLikes::class.java)
 }

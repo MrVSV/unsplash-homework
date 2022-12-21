@@ -3,6 +3,7 @@ package com.example.unsplashhomework.presentation.photos
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import com.example.unsplashhomework.data.api.ApiLikes
 import com.example.unsplashhomework.data.api.ApiToken
 import com.example.unsplashhomework.data.api.AuthTokenProvider
 import com.example.unsplashhomework.data.remote.PhotosModel
@@ -19,6 +20,8 @@ import javax.inject.Inject
 class PhotosViewModel @Inject constructor(
     private val apiToken: ApiToken,
     private val photosPagingUseCase: PhotosPagingUseCase,
+    /**это для тестов**/
+    val apiLikes: ApiLikes
 ) : ViewModel() {
 
     val a = MutableSharedFlow<PagingData<PhotosModel.PhotosModelItem>>()
@@ -35,4 +38,7 @@ class PhotosViewModel @Inject constructor(
                 a.emit(it)
             }.launchIn(viewModelScope)
     }
+    /**и это для тестов**/
+    suspend fun like(id: String) = apiLikes.like(id)
+    suspend fun unlike(id: String) = apiLikes.unlike(id)
 }

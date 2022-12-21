@@ -37,19 +37,18 @@ class PhotosPagingAdapter(private val onClick: (ClickableView, PhotosModel.Photo
             }
             authorName.text = item?.user?.name
             currentLikes.text = item?.likes.toString()
-            isLiked.isSelected = item?.likedByUser == true
+            isLiked.isSelected = item?.likedByUser == true //пока что обновляется только при перезагрузке страницы
+            Log.d("Kart", "viewlike = ${isLiked.isSelected}   serverLike = ${item?.likedByUser}")
 
-        }
-
-        holder.binding.photo.setOnClickListener {
-            item?.let {
-                onClick(ClickableView.PHOTO, item)
+            holder.binding.photo.setOnClickListener {
+                item?.let {
+                    onClick(ClickableView.PHOTO, item)
+                }
             }
-        }
-        holder.binding.isLiked.setOnClickListener {
-            item?.let {
-//                holder.binding.isLiked.isSelected =! holder.binding.isLiked.isSelected
-                onClick(ClickableView.LIKE, item)
+            holder.binding.isLiked.setOnClickListener {
+                item?.let {
+                    onClick(ClickableView.LIKE, item)
+                }
             }
         }
     }

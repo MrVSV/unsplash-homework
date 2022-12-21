@@ -19,9 +19,6 @@ android {
     compileSdk 33
 
     defaultConfig {
-//        manifestPlaceholders = [
-//                appAuthRedirectScheme: "unsplashhomework"
-//        ]
         applicationId "com.example.unsplashhomework"
         minSdk 21
         //noinspection ExpiredTargetSdkVersion

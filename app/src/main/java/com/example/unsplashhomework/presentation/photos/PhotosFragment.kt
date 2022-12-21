@@ -15,7 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
+class PhotosFragment() : BaseFragment<FragmentPhotosBinding>() {
 
     override fun initBinding(inflater: LayoutInflater) =
         FragmentPhotosBinding.inflate(inflater)
@@ -23,17 +23,23 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
     private val viewModel by viewModels<PhotosViewModel>()
     private val navArgs: PhotosFragmentArgs by navArgs()
 
-    private val adapter = PhotosPagingAdapter { buttonState, item -> onItemClick(buttonState, item) }
+    private val adapter =
+        PhotosPagingAdapter { buttonState, item -> onItemClick(buttonState, item) }
 
+    /**пока что не работает. не меняется статус вьюхи**/
     private fun onItemClick(buttonState: ClickableView, item: PhotosModel.PhotosModelItem) {
-//        when(buttonState){
-//            ClickableView.PHOTO -> {
+        viewLifecycleOwner.lifecycleScope.launch {
+            when (buttonState) {
+                ClickableView.PHOTO -> {
 //                findNavController()
-//            }
-//            ClickableView.LIKE -> {
-//                sendLike()
-//            }
-//        }
+                }
+                ClickableView.LIKE -> {
+                    if (item.likedByUser)
+                        viewModel.unlike(item.id)
+                    else viewModel.like(item.id)
+                }
+            }
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
