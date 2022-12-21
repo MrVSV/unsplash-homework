@@ -18,7 +18,7 @@ class PhotosPagingSource@Inject constructor(
         val page = params.key ?: FIRST_PAGE
         return kotlin.runCatching {
             withContext(Dispatchers.IO){
-            repository.getData(page)}
+            repository.getPhotos(page)}
         }.fold(
             onSuccess = {
                 LoadResult.Page(

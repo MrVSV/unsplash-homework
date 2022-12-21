@@ -39,6 +39,10 @@ class PhotosViewModel @Inject constructor(
             }.launchIn(viewModelScope)
     }
     /**и это для тестов**/
-    suspend fun like(id: String) = apiLikes.like(id)
-    suspend fun unlike(id: String) = apiLikes.unlike(id)
+    fun like(id: String, isLiked: Boolean){
+        viewModelScope.launch(Dispatchers.IO) {
+            if (isLiked) apiLikes.unlike(id)
+            else apiLikes.like(id)
+        }
+    }
 }
