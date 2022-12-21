@@ -2,15 +2,19 @@ package com.example.unsplashhomework.presentation.onboarding
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.unsplashhomework.databinding.ItemViewpagerBinding
 
-class ViewPagerHolder(val binding: ItemViewpagerBinding) :
-    RecyclerView.ViewHolder(binding.root)
-
 class ViewPagerAdapter(
-    private val texts: List<String>
-) : RecyclerView.Adapter<ViewPagerHolder>() {
+    private val allOnboardingTexts: Array<String>
+) : RecyclerView.Adapter<ViewPagerAdapter.ViewPagerHolder>() {
+
+    class ViewPagerHolder(private val itemBinding: ItemViewpagerBinding) : RecyclerView.ViewHolder(itemBinding.root) {
+    fun bind(): TextView {
+        return itemBinding.onboardingTexts
+    }
+}
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewPagerHolder {
         return ViewPagerHolder(
@@ -19,13 +23,11 @@ class ViewPagerAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewPagerHolder, position: Int) {
-        val item = texts[position]
-        with(holder.binding) {
-            onboardingTexts.text = item
-        }
+        val item = allOnboardingTexts[position]
+        holder.bind().text = item
     }
 
     override fun getItemCount(): Int {
-        return texts.size
+        return allOnboardingTexts.size
     }
 }

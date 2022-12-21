@@ -4,13 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.example.unsplashhomework.databinding.FragmentDashboardBinding
+import com.example.unsplashhomework.databinding.FragmentCollectionsBinding
 
-class DashboardExampleFragment:BaseFragment<FragmentDashboardBinding>() {
+/**это просто заготовка, переименовала Dashboard в Collections
+ */
+class CollectionsFragment:BaseFragment<FragmentCollectionsBinding>() {
 
-    override fun initBinding(inflater: LayoutInflater)= FragmentDashboardBinding.inflate(inflater)
+    override fun initBinding(inflater: LayoutInflater)= FragmentCollectionsBinding.inflate(inflater)
 
-   private val viewModel by viewModels<DashboardViewModel>()
+   private val viewModel by viewModels<CollectionsViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

@@ -32,13 +32,13 @@
 
     <fragment
         android:id="@+id/navigation_collections"
-        android:name="com.example.unsplashhomework.presentation.collections.DashboardFragment"
+        android:name="com.example.unsplashhomework.presentation.collections.CollectionsFragment"
         android:label="@string/title_collections"
-        tools:layout="@layout/fragment_dashboard" />
+        tools:layout="@layout/fragment_collections" />
 
     <fragment
         android:id="@+id/navigation_user"
-        android:name="com.example.unsplashhomework.presentation.user.NotificationsFragment"
+        android:name="com.example.unsplashhomework.presentation.user.UserFragment"
         android:label="@string/title_user"
         tools:layout="@layout/fragment_notifications" />
 
@@ -47,4 +47,5 @@
         android:name="com.example.unsplashhomework.presentation.AuthFragment"
         android:label="fragment_auth"
         tools:layout="@layout/fragment_auth" />
+        tools:layout="@layout/fragment_user" />
 </navigation>

@@ -3,12 +3,14 @@
     <string name="title_photos">Photos</string>
     <string name="title_collections">Collections</string>
     <string name="title_user">User</string>
-    <string name="first_onboarding">Make photos, publish, gather an audience, get feedback!</string>
+        <string-array name="onboarding_texts_array">
+            <item>Make photos, publish, gather an audience, get feedback!</item>
+            <item>Share with friends, make collections</item>
+            <item>Upload your favorite pictures and track statistics</item>
+        </string-array>
     <!--Создавайте снимки, публикуйте, собирайте аудиторию, получайте фидбек!-->
-    <string name="second_onboarding">Share with friends, make collections</string>
     <!--Делитесь с друзьями, собирайте коллекции-->
-    <string name="third_onboarding">Upload your favorite pictures and track statistics</string>
     <!--Загружайте любимые снимки и отслеживайте статистику-->
-    <string name="go_straight_to_authorization">Go straight to authorization</string>
-    <!--Перейти сразу к авторизации-->
+    <string name="go_straight_to_authorization">Skip</string>
+    <!--Пропустить-->
 </resources>
