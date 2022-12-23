@@ -14,5 +14,6 @@
     <string name="go_straight_to_authorization">Skip</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login_via_unsplash">Login via Unsplash</string>
+    <string name="about">About \@%1$s:\n%2$s</string>
     <!--Пропустить. Войти через приложение-->
 </resources>

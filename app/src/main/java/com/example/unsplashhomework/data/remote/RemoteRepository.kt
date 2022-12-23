@@ -7,4 +7,6 @@ class RemoteRepository@Inject constructor(private val apiPhotos: ApiPhotos) {
 
     suspend fun getPhotos(page: Int) = apiPhotos.getPhotos(page)
 
+    suspend fun getPhotoDetails(id: String) = apiPhotos.getPhotoDetails(id)
+
 }
