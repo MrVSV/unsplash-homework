@@ -7,7 +7,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.unsplashhomework.R
@@ -29,6 +31,8 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         getPhotoDetails(args.photoId)
+        /**почему-то клик срабатывает, виден прямоугольник тулбара, но текст и иконка на тулбаре невидимы*/
+        setToolbar()
 
         viewLifecycleOwner.lifecycleScope
             .launchWhenStarted {
@@ -39,41 +43,47 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
 
     private fun getPhotoDetails(id: String) {
         viewLifecycleOwner.lifecycleScope.launch {
-            //  viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-            viewModel.loadPhotoDetails(id)
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.loadPhotoDetails(id)
+            }
         }
-        //}
     }
 
     private fun updateUi(state: DetailsState) {
         when (state) {
             DetailsState.NotStartedYet -> {}
             is DetailsState.Success -> {
-                binding.authorName.text = state.data.user.first_name + state.data.user.name
+                binding.authorName.text = state.data.user.name
                 binding.authorAccount.text = "@" + state.data.user.username
                 //binding.isLiked = ?
 
-                binding.location.text = state.data.location.city
+                binding.location.text = state.data.location.city ?: "N/A"
                 binding.currentLikes.text = state.data.likes.toString()
 
                 binding.tags.text = state.data.tags.joinToString { tag ->
                     "#${tag.title ?: "N/A"}"
                 }
-                binding.exif.text = "Made with: " + state.data.exif.model
-
+                binding.exif.text = buildExifText(state)
                 binding.aboutAuthor.text = getString(
                     R.string.about, state.data.user.username, state.data.user.bio ?: "N/A"
                 )
 
-                binding.downloadsCount.text = "Download (" + state.data.downloads.toString() + ")"
+                binding.downloadsCount.text = getString(
+                    R.string.download,
+                    state.data.downloads.toString()
+                )
                 loadImages(state)
+
+                binding.downloadButton.setOnClickListener{
+                    //TODO: check permissions, download to gallery
+                }
 
                 val lat = state.data.location.position.latitude
                 val lon = state.data.location.position.longitude
 
                 val onLocationClick: (lat: Double, lon: Double) -> Unit = { lat, lon ->
                     val locationUri = Uri.parse("geo: $lat,$lon")
-                    showLocationInMap(locationUri)
+                    showLocationOnMap(locationUri)
                 }
 
                 binding.locationButton.setOnClickListener {
@@ -89,10 +99,22 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         }
     }
 
+    private fun buildExifText(state: DetailsState.Success): String {
+        return buildString {
+            append(getString(R.string.made_with, state.data.exif.model ?: "N/A"))
+            append(getString(R.string.model, state.data.exif.model))
+            append(getString(R.string.exposure, state.data.exif.exposure_time))
+
+            append(getString(R.string.aperture, state.data.exif.aperture))
+            append(getString(R.string.focal_length, state.data.exif.focal_length))
+            append(getString(R.string.iso, state.data.exif.iso.toString()))
+        }
+    }
+
     private fun loadImages(state: DetailsState.Success) {
         Glide
             .with(binding.photo.context)
-            .load(state.data.urls.regular)
+            .load(state.data.urls.regular) //raw грузиться будет дольше, но его потом надо скачивать
             .into(binding.photo)
         Glide
             .with(binding.authorAvatar.context)
@@ -100,12 +122,21 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
             .into(binding.authorAvatar)
     }
 
-    private fun showLocationInMap(locationUri: Uri) {
+    private fun showLocationOnMap(locationUri: Uri) {
         val intent = Intent(Intent.ACTION_VIEW).apply {
             data = locationUri
         }
         if (activity?.packageManager != null) {
             startActivity(intent)
+        }
+    }
+
+    private fun setToolbar() {
+        with(binding.toolbar) {
+            setOnClickListener {
+                //share()
+                binding.currentLikes.text = "100500"
+            }
         }
     }
 }

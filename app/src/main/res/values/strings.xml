@@ -15,8 +15,17 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login_via_unsplash">Login via Unsplash</string>
     <string name="about">About \@%1$s:\n%2$s</string>
+    <string name="made_with">Made with: %1$s\n</string>
+    <string name="model">Model: %1$s\n</string>
+    <string name="exposure">Exposure: %1$s\n</string>
+    <string name="aperture">Aperture: %1$s\n</string>
+    <string name="focal_length">Focal length: %1$s\n</string>
+    <string name="iso">ISO: %1$s</string>
+    <string name="download">Download (%1$s)</string>
 
     <string name="error_text"> "Ошибка загрузки!\n
         Приносим извинения за предоставленные неудобства"</string>
+    <string name="auth_success">Successful authorisation</string>
+    <!--Авторизация прошла успешно-->
     <!--Пропустить. Войти через приложение-->
 </resources>

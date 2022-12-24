@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_gravity="top|start"
+    android:orientation="vertical"
     tools:context=".presentation.photos.OnePhotoDetailsFragment">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top|start"
-        android:orientation="vertical">
+        android:layout_height="40dp"
+        android:tooltipText="Share"
+        android:title="Share"
+        android:textAlignment="textEnd"
+        android:background="@color/green"
+        app:titleTextColor="@color/black" />
+
     <ImageView
         android:id="@+id/photo"
         android:layout_width="match_parent"
         android:layout_height="343dp"
-        android:layout_marginTop="32dp"
         android:layout_gravity="center"
         android:adjustViewBounds="true"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
@@ -51,7 +59,7 @@
                 android:layout_marginStart="10dp"
                 android:text="Alex Victor"
                 android:textColor="@color/white"
-                android:textSize="14sp" />
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/authorAccount"
@@ -60,7 +68,7 @@
                 android:layout_marginStart="10dp"
                 android:text="\@account"
                 android:textColor="@color/white"
-                android:textSize="11sp" />
+                android:textSize="14sp" />
         </LinearLayout>
 
         <androidx.legacy.widget.Space
@@ -74,7 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textSize="14sp"
+            android:textSize="18sp"
             android:layout_marginEnd="10dp"
             android:text="155555"
             android:textColor="@color/white" />
@@ -91,61 +99,63 @@
 
     </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp">
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp">
+
         <ImageView
             android:id="@+id/location_button"
-            android:layout_width="18dp"
-            android:layout_height="24dp"
-            android:layout_gravity="bottom|start"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:focusable="true"
             app:srcCompat="@drawable/ic_outline_location_on_24" />
 
-            <TextView
-                android:id="@+id/location"
-                android:layout_width="174dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center|start"
-                android:text="SanFrancisco, CA" />
-        </LinearLayout>
-
         <TextView
-            android:id="@+id/tags"
-            android:layout_width="match_parent"
-            android:layout_height="36dp"
-            android:layout_gravity="top|center"
-            android:layout_margin="8dp"
-            android:text="#woman #model #nature #rights #womanrights"
-            android:textAlignment="center" />
+            android:id="@+id/location"
+            android:layout_width="362dp"
+            android:layout_height="match_parent"
+            android:text="SanFrancisco, CA"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tags"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:layout_gravity="top|center"
+        android:layout_margin="8dp"
+        android:text="#woman #model #nature #rights #womanrights"
+        android:textAlignment="center" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="137dp"
         android:orientation="horizontal">
 
         <TextView
             android:id="@+id/exif"
             android:layout_width="wrap_content"
-            android:layout_height="88dp"
-            android:layout_marginLeft="8dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="12dp"
             android:lineSpacingExtra="2sp"
             android:text="Made with: Canon \nModel: EOS 40D \nExposure: 0.01s\nAperture: 4.970854 \nFocal Length: 37\nISO: 100"
             android:textAlignment="textStart" />
 
         <androidx.legacy.widget.Space
             android:id="@+id/space2"
-            android:layout_width="40dp"
+            android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_weight="1" />
+
         <TextView
             android:id="@+id/about_author"
-            android:layout_width="130dp"
-            android:layout_height="110dp"
-            android:textAlignment="textStart"
+            android:layout_width="140dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="12dp"
             android:lineSpacingExtra="2sp"
-            android:layout_marginRight="8dp"
-            android:text="About @alexosesso: Dreamer, creator. Strong man with red nose and long white beard"/>
+            android:text="About @alexosesso: Dreamer, creator. Strong man with red nose and long white beard"
+            android:textAlignment="textStart" />
     </LinearLayout>
         <LinearLayout
             android:id="@+id/downloadLine"
@@ -170,5 +180,4 @@
                 android:focusable="true"
                 android:backgroundTint="#00FFFFFF"/>
         </LinearLayout>
-    </LinearLayout>
-</FrameLayout>
+</LinearLayout>
