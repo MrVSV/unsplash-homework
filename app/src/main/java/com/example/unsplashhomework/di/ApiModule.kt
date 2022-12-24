@@ -1,11 +1,13 @@
 package com.example.unsplashhomework.di
 
+import android.content.Context
 import com.example.unsplashhomework.data.api.*
 import com.example.unsplashhomework.data.remote.AuthTokenInterceptorQualifier
 import com.example.unsplashhomework.data.remote.LoggingInterceptorQualifier
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -19,8 +21,12 @@ import javax.inject.Singleton
 class ApiModule {
 
     @Provides
+    @Singleton
+    fun provideAuthTokenProvider(@ApplicationContext context: Context): AuthTokenProvider = AuthTokenProvider(context)
+
+    @Provides
     @AuthTokenInterceptorQualifier
-    fun provideAuthTokenInterceptor(): Interceptor = AuthTokenInterceptor()
+    fun provideAuthTokenInterceptor(tokenProvider: AuthTokenProvider): Interceptor = AuthTokenInterceptor(tokenProvider)
 
     @Provides
     @LoggingInterceptorQualifier

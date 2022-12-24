@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.unsplashhomework.databinding.FragmentUserBinding
-import com.example.unsplashhomework.presentation.collections.BaseFragment
+import com.example.unsplashhomework.tools.BaseFragment
 
 /**это просто заготовка, переименовала Notifications в User
  */

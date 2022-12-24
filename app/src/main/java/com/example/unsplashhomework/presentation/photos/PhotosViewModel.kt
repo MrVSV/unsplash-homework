@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import com.example.unsplashhomework.data.api.ApiLikes
 import com.example.unsplashhomework.data.api.ApiToken
-import com.example.unsplashhomework.data.api.AuthTokenProvider
 import com.example.unsplashhomework.data.remote.PhotosModel
 import com.example.unsplashhomework.data.remote.PhotosPagingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,18 +25,19 @@ class PhotosViewModel @Inject constructor(
 
     val a = MutableSharedFlow<PagingData<PhotosModel.PhotosModelItem>>()
 
-    fun createToken(code: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            AuthTokenProvider.authToken = apiToken.getToken(code = code).access_token
-            getPhoto()
-        }
-    }
+//    fun createToken(code: String) {
+//        viewModelScope.launch(Dispatchers.IO) {
+//            AuthTokenProvider.authToken = apiToken.getToken(code = code).access_token
+//            getPhoto()
+//        }
+//    }
 
-    private suspend fun getPhoto() {
+    suspend fun getPhoto() {
             photosPagingUseCase.getPhoto().flow.onEach {
                 a.emit(it)
             }.launchIn(viewModelScope)
     }
+
     /**и это для тестов**/
     fun like(id: String, isLiked: Boolean){
         viewModelScope.launch(Dispatchers.IO) {

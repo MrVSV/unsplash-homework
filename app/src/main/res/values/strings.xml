@@ -15,5 +15,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="login_via_unsplash">Login via Unsplash</string>
     <string name="about">About \@%1$s:\n%2$s</string>
+
+    <string name="error_text"> "Ошибка загрузки!\n
+        Приносим извинения за предоставленные неудобства"</string>
     <!--Пропустить. Войти через приложение-->
 </resources>

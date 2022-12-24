@@ -7,7 +7,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.unsplashhomework.R
 import com.example.unsplashhomework.databinding.FragmentOnboardingBinding
-import com.example.unsplashhomework.presentation.collections.BaseFragment
+import com.example.unsplashhomework.tools.BaseFragment
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 

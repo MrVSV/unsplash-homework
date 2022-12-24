@@ -5,12 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.navArgs
+import androidx.navigation.fragment.findNavController
 import com.example.unsplashhomework.data.remote.ClickableView
 import com.example.unsplashhomework.data.remote.PhotosModel
 import com.example.unsplashhomework.data.remote.PhotosPagingAdapter
 import com.example.unsplashhomework.databinding.FragmentPhotosBinding
-import com.example.unsplashhomework.presentation.collections.BaseFragment
+import com.example.unsplashhomework.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -21,7 +21,7 @@ class PhotosFragment() : BaseFragment<FragmentPhotosBinding>() {
         FragmentPhotosBinding.inflate(inflater)
 
     private val viewModel by viewModels<PhotosViewModel>()
-    private val navArgs: PhotosFragmentArgs by navArgs()
+//    private val navArgs: PhotosFragmentArgs by navArgs()
 
     private val adapter =
         PhotosPagingAdapter { buttonState, item -> onItemClick(buttonState, item) }
@@ -30,7 +30,7 @@ class PhotosFragment() : BaseFragment<FragmentPhotosBinding>() {
     private fun onItemClick(buttonState: ClickableView, item: PhotosModel.PhotosModelItem) {
             when (buttonState) {
                 ClickableView.PHOTO -> {
-//                findNavController()
+                findNavController().navigate(PhotosFragmentDirections.actionNavigationPhotosToNavigationPhotoDetails(item.id))
                 }
                 ClickableView.LIKE -> {
                     viewModel.like(item.id, item.likedByUser)
@@ -41,10 +41,11 @@ class PhotosFragment() : BaseFragment<FragmentPhotosBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.createToken(navArgs.code)
+
         binding.photoRecycler.adapter = adapter
 
         viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.getPhoto()
             viewModel.a.collect {
                 adapter.submitData(it)
             }

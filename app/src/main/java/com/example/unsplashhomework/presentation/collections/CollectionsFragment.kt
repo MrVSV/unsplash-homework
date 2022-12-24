@@ -5,10 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.unsplashhomework.databinding.FragmentCollectionsBinding
+import com.example.unsplashhomework.tools.BaseFragment
 
 /**это просто заготовка, переименовала Dashboard в Collections
  */
-class CollectionsFragment:BaseFragment<FragmentCollectionsBinding>() {
+class CollectionsFragment: BaseFragment<FragmentCollectionsBinding>() {
 
     override fun initBinding(inflater: LayoutInflater)= FragmentCollectionsBinding.inflate(inflater)
 

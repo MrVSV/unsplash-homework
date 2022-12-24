@@ -12,7 +12,7 @@ import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
 import com.example.unsplashhomework.R
 import com.example.unsplashhomework.databinding.FragmentOnePhotoDetailsBinding
-import com.example.unsplashhomework.presentation.collections.BaseFragment
+import com.example.unsplashhomework.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

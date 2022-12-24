@@ -4,16 +4,13 @@ import android.util.Log
 import okhttp3.Interceptor
 import okhttp3.Response
 
-class AuthTokenInterceptor : Interceptor {
-
+class AuthTokenInterceptor(private val tokenProvider: AuthTokenProvider) : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
-        val request = chain.request()
-
-        val modifiedRequest = request.newBuilder()
-            .addHeader("Authorization", "Bearer ${AuthTokenProvider.authToken}")
-            .addHeader("Accept-Version", "v1")
+        Log.e("Kart", "интецептор токен = ${tokenProvider.getToken()}")
+        val request = chain.request().newBuilder()
+            .addHeader("Authorization", "Bearer ${tokenProvider.getToken()}")
             .build()
-        Log.d("Kart", "intercept: ${AuthTokenProvider.authToken}")
-        return chain.proceed(modifiedRequest)
+        return chain.proceed(request)
     }
+
 }

@@ -26,7 +26,7 @@ class PhotosPagingAdapter(private val onClick: (ClickableView, PhotosModel.Photo
             item?.let {
                 Glide
                     .with(photo.context)
-                    .load(it.urls.raw)
+                    .load(it.urls.small)
                     .into(photo)
             }
             item?.let {
