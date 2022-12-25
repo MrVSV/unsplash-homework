@@ -31,8 +31,6 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         getPhotoDetails(args.photoId)
-        /**почему-то клик срабатывает, виден прямоугольник тулбара, но текст и иконка на тулбаре невидимы*/
-        setToolbar()
 
         viewLifecycleOwner.lifecycleScope
             .launchWhenStarted {
@@ -74,7 +72,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
                 )
                 loadImages(state)
 
-                binding.downloadButton.setOnClickListener{
+                binding.downloadButton.setOnClickListener {
                     //TODO: check permissions, download to gallery
                 }
 
@@ -91,6 +89,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
                         onLocationClick(lat, lon)
                     }
                 }
+                setToolbar(state.data.id)
             }
             is DetailsState.LoadingError -> {
                 Toast.makeText(context, "Loading Error", Toast.LENGTH_SHORT).show()
@@ -101,13 +100,13 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
 
     private fun buildExifText(state: DetailsState.Success): String {
         return buildString {
-            append(getString(R.string.made_with, state.data.exif.model ?: "N/A"))
-            append(getString(R.string.model, state.data.exif.model))
-            append(getString(R.string.exposure, state.data.exif.exposureTime))
+            append(getString(R.string.made_with, state.data.exif.make ?: "N/A"))
+            append(getString(R.string.model, state.data.exif.model ?: "N/A"))
+            append(getString(R.string.exposure, state.data.exif.exposureTime ?: "N/A"))
 
-            append(getString(R.string.aperture, state.data.exif.aperture))
-            append(getString(R.string.focal_length, state.data.exif.focalLength))
-            append(getString(R.string.iso, state.data.exif.iso.toString()))
+            append(getString(R.string.aperture, state.data.exif.aperture ?: "N/A"))
+            append(getString(R.string.focal_length, state.data.exif.focalLength ?: "N/A"))
+            append(getString(R.string.iso, if (state.data.exif.iso !== null) state.data.exif.iso.toString() else "N/A"))
         }
     }
 
@@ -131,12 +130,16 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         }
     }
 
-    private fun setToolbar() {
-        with(binding.toolbar) {
-            setOnClickListener {
-                //share()
-                binding.currentLikes.text = "100500"
-            }
+    private fun setToolbar(id: String) {
+        binding.toolbar.setOnClickListener {
+            shareLinkOnPhoto(id)
         }
+    }
+
+    private fun shareLinkOnPhoto(id: String) {
+        val sharingIntent = Intent(Intent.ACTION_SEND)
+        sharingIntent.type = "text/plain"
+        sharingIntent.putExtra(Intent.EXTRA_TEXT, "https://unsplash.com/photos/$id")
+        startActivity(Intent.createChooser(sharingIntent, "Share using"))
     }
 }

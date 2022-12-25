@@ -15,11 +15,11 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:tooltipText="Share"
-        android:title="Share"
         android:textAlignment="textEnd"
         android:background="@color/green"
-        app:titleTextColor="@color/black" />
+        app:titleTextColor="@color/black"
+        app:title="Share"
+        app:navigationIcon="@drawable/ic_baseline_share_24"/>
 
     <ImageView
         android:id="@+id/photo"
@@ -95,7 +95,7 @@
             android:layout_marginEnd="10dp"
             android:backgroundTint="#00FFFFFF"
             app:srcCompat="@drawable/like_selector"
-            tools:ignore="TouchTargetSizeCheck" />
+            tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
     </LinearLayout>
 
@@ -122,7 +122,7 @@
     <TextView
         android:id="@+id/tags"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="36dp"
         android:layout_gravity="top|center"
         android:layout_margin="8dp"
         android:text="#woman #model #nature #rights #womanrights"
@@ -130,7 +130,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="137dp"
+        android:layout_height="149dp"
         android:orientation="horizontal">
 
         <TextView
@@ -171,13 +171,15 @@
                 android:textAlignment="textEnd"
                 android:layout_marginEnd="8dp"
                 android:text="Download(124)" />
+
             <ImageButton
                 android:id="@+id/downloadButton"
                 android:layout_width="18dp"
                 android:layout_height="24dp"
                 android:layout_gravity="bottom|start"
-                app:srcCompat="@drawable/download_line"
+                android:backgroundTint="#00FFFFFF"
                 android:focusable="true"
-                android:backgroundTint="#00FFFFFF"/>
+                app:srcCompat="@drawable/download_line"
+                tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
 </LinearLayout>

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-/**это просто заготовка, переименовала Notifications в UserDto
+/**это просто заготовка, переименовала Notifications в User
  */
 class UserViewModel : ViewModel() {
 

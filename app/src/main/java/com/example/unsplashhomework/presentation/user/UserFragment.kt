@@ -7,7 +7,7 @@ import androidx.fragment.app.viewModels
 import com.example.unsplashhomework.databinding.FragmentUserBinding
 import com.example.unsplashhomework.tools.BaseFragment
 
-/**это просто заготовка, переименовала Notifications в UserDto
+/**это просто заготовка, переименовала Notifications в User
  */
 class UserFragment : BaseFragment<FragmentUserBinding>() {
 
