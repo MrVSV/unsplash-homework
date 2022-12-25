@@ -1,14 +1,16 @@
 package com.example.unsplashhomework.data.repository
 
 import androidx.paging.*
+import com.example.unsplashhomework.data.api.dto.WrapperPhotoDto
 import com.example.unsplashhomework.data.local.entity.PhotoEntity
 import com.example.unsplashhomework.data.model.Photo
 import com.example.unsplashhomework.domain.LocalRepository
 import com.example.unsplashhomework.domain.RemoteRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class PhotosPagingSourceRepository(
+class PhotosPagingSourceRepository @Inject constructor(
     private val remote: RemoteRepository,
     private val local: LocalRepository
 ) {
@@ -29,9 +31,9 @@ class PhotosPagingSourceRepository(
         }
     }
 
-    suspend fun setLick(id: String) = remote.likePhoto(id)
+    suspend fun setLike(id: String): WrapperPhotoDto = remote.likePhoto(id)
 
-    suspend fun deleteLick(id: String) = remote.unlikePhoto(id)
+    suspend fun deleteLike(id: String): WrapperPhotoDto = remote.unlikePhoto(id)
 
-    suspend fun updateLikeDB(entity: PhotoEntity) = local.setLickInDataBase(entity)
+    suspend fun updateLikeDB(entity: PhotoEntity) = local.setLikeInDataBase(entity)
 }

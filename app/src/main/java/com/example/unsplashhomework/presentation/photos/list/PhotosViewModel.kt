@@ -1,16 +1,12 @@
 package com.example.unsplashhomework.presentation.photos.list
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
-import com.example.unsplashhomework.data.api.dto.PhotoDto
+import com.example.unsplashhomework.data.model.Photo
 import com.example.unsplashhomework.domain.PhotoLikeUseCase
 import com.example.unsplashhomework.domain.PhotosPagingUseCase
+import com.example.unsplashhomework.tools.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,19 +14,18 @@ import javax.inject.Inject
 class PhotosViewModel @Inject constructor(
     private val photosPagingUseCase: PhotosPagingUseCase,
     private val photoLikeUseCase: PhotoLikeUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
-    val a = MutableSharedFlow<PagingData<PhotoDto>>()
+//    val a = MutableSharedFlow<PagingData<PhotoDto>>()
 
-    suspend fun getPhoto() {
-            photosPagingUseCase.getPhoto().flow.onEach {
-                a.emit(it)
-            }.launchIn(viewModelScope)
-    }
+    fun getPhoto() = photosPagingUseCase.getPhoto()
 
-    fun like(id: String, isLiked: Boolean){
-        viewModelScope.launch(Dispatchers.IO) {
-            photoLikeUseCase.likePhoto(id, isLiked)
+
+    fun like(item: Photo) {
+        viewModelScope.launch(Dispatchers.IO + handler) {
+            photoLikeUseCase.likePhoto(item)
+//            Log.d(TAG, "old like: ${item.id} isLiked = ${item.likedByUser} likes = ${item.likes}")
+//            Log.d(TAG, "new like: ${newItem.id} isLiked = ${newItem.likedByUser} likes = ${newItem.likes}")
         }
     }
 }

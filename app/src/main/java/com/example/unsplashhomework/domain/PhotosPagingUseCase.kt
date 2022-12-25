@@ -1,18 +1,10 @@
 package com.example.unsplashhomework.domain
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import com.example.unsplashhomework.data.remote.PhotosPagingSource
-import com.example.unsplashhomework.data.api.dto.PhotoDto
+import com.example.unsplashhomework.data.repository.PhotosPagingSourceRepository
 import javax.inject.Inject
 
 class PhotosPagingUseCase @Inject constructor(
-    private val photosPagingSource: PhotosPagingSource
+    private val photosRepository: PhotosPagingSourceRepository
 ) {
-    fun getPhoto(): Pager<Int, PhotoDto> {
-        return Pager(
-            config = PagingConfig(pageSize = 10),
-            pagingSourceFactory = { photosPagingSource }
-        )
-    }
+    fun getPhoto() = photosRepository.getFlowPhoto()
 }

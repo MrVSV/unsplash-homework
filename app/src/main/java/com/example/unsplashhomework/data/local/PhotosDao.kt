@@ -1,5 +1,6 @@
 package com.example.unsplashhomework.data.local
 
+import androidx.paging.PagingSource
 import androidx.room.*
 import com.example.unsplashhomework.data.local.entity.PhotoEntity
 
@@ -10,13 +11,19 @@ interface PhotosDao {
     fun insert(photoEntity: List<PhotoEntity>)
 
     @Query("SELECT * FROM photos")
-    fun getPhotos(): List<PhotoEntity>
+    fun getPhotos(): PagingSource<Int, PhotoEntity>
 
     @Query("DELETE FROM photos")
     suspend fun deleteAll()
 
-    @Update
+    @Update()
     suspend fun updateLocalLikes(photoEntity: PhotoEntity)
+
+    @Transaction
+    suspend fun refresh(data: List<PhotoEntity>){
+        deleteAll()
+        insert(data)
+    }
 
 
 }
