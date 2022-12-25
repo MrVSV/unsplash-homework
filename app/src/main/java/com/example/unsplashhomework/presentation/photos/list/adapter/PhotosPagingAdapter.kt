@@ -1,4 +1,4 @@
-package com.example.unsplashhomework.data.remote
+package com.example.unsplashhomework.presentation.photos.list.adapter
 
 import android.util.Log
 import android.view.LayoutInflater

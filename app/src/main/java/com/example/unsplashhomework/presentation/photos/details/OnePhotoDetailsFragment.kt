@@ -1,4 +1,4 @@
-package com.example.unsplashhomework.presentation.photos
+package com.example.unsplashhomework.presentation.photos.details
 
 import android.content.Intent
 import android.net.Uri

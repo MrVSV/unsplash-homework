@@ -2,8 +2,6 @@ package com.example.unsplashhomework.di
 
 import android.content.Context
 import com.example.unsplashhomework.data.api.*
-import com.example.unsplashhomework.data.remote.AuthTokenInterceptorQualifier
-import com.example.unsplashhomework.data.remote.LoggingInterceptorQualifier
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -4,6 +4,7 @@ package com.example.unsplashhomework.data.remote
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.unsplashhomework.data.remote.photosmodel.PhotosModelItem
+import com.example.unsplashhomework.domain.RemoteRepository
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext

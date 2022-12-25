@@ -9,7 +9,7 @@
     android:layout_marginTop="8dp"
     android:layout_gravity="top|start"
     android:orientation="vertical"
-    tools:context=".presentation.photos.OnePhotoDetailsFragment">
+    tools:context=".presentation.photos.details.OnePhotoDetailsFragment">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"

@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import com.example.unsplashhomework.R
-import com.example.unsplashhomework.data.state.LoadState
+import com.example.unsplashhomework.presentation.auth.state.LoadState
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 

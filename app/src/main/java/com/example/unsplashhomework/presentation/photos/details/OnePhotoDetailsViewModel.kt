@@ -1,8 +1,8 @@
-package com.example.unsplashhomework.presentation.photos
+package com.example.unsplashhomework.presentation.photos.details
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.unsplashhomework.data.remote.RemoteRepository
+import com.example.unsplashhomework.domain.RemoteRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow

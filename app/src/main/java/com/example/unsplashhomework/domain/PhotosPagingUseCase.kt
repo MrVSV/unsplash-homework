@@ -1,7 +1,8 @@
-package com.example.unsplashhomework.data.remote
+package com.example.unsplashhomework.domain
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
+import com.example.unsplashhomework.data.remote.PhotosPagingSource
 import com.example.unsplashhomework.data.remote.photosmodel.PhotosModelItem
 import javax.inject.Inject
 

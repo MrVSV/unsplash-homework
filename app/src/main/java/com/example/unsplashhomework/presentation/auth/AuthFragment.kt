@@ -16,7 +16,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.unsplashhomework.R
 import com.example.unsplashhomework.data.api.TOKEN_SHARED_NAME
 import com.example.unsplashhomework.data.api.call
-import com.example.unsplashhomework.data.state.LoadState
+import com.example.unsplashhomework.presentation.auth.state.LoadState
 import com.example.unsplashhomework.databinding.FragmentAuthBinding
 import com.example.unsplashhomework.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint

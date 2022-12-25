@@ -2,7 +2,7 @@ package com.example.unsplashhomework.presentation.auth
 
 import androidx.lifecycle.viewModelScope
 import com.example.unsplashhomework.data.api.ApiToken
-import com.example.unsplashhomework.data.state.LoadState
+import com.example.unsplashhomework.presentation.auth.state.LoadState
 import com.example.unsplashhomework.tools.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

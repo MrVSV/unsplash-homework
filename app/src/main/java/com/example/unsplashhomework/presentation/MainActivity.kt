@@ -1,4 +1,4 @@
-package com.example.unsplashhomework
+package com.example.unsplashhomework.presentation
 
 import android.os.Bundle
 import android.view.View
@@ -7,6 +7,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.example.unsplashhomework.R
 import com.example.unsplashhomework.databinding.ActivityMainBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,12 +28,13 @@ class MainActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
         val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_photos, R.id.navigation_collections, R.id.navigation_user))
+            R.id.navigation_photos, R.id.navigation_collections, R.id.navigation_user
+        ))
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener{ _, destination, _ ->
-            if (destination.id == R.id.navigation_onboarding||destination.id == R.id.authFragment) {
+            if (destination.id == R.id.navigation_onboarding ||destination.id == R.id.authFragment) {
                 supportActionBar?.hide()
                 navView.visibility = View.GONE
             } else {
