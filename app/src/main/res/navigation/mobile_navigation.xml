@@ -18,7 +18,7 @@
 
     <fragment
         android:id="@+id/navigation_photos"
-        android:name="com.example.unsplashhomework.presentation.photos.PhotosFragment"
+        android:name="com.example.unsplashhomework.presentation.photos.list.PhotosFragment"
         android:label="@string/title_photos"
         tools:layout="@layout/fragment_photos">
         <action
@@ -41,7 +41,7 @@
 
     <fragment
         android:id="@+id/authFragment"
-        android:name="com.example.unsplashhomework.presentation.AuthFragment"
+        android:name="com.example.unsplashhomework.presentation.auth.AuthFragment"
         tools:layout="@layout/fragment_auth" >
     <deepLink
         android:id="@+id/deepLink"
@@ -57,7 +57,7 @@
 
     <fragment
         android:id="@+id/navigation_photo_details"
-        android:name="com.example.unsplashhomework.presentation.photos.OnePhotoDetailsFragment"
+        android:name="com.example.unsplashhomework.presentation.photos.details.OnePhotoDetailsFragment"
         tools:layout="@layout/fragment_one_photo_details">
         <argument
             android:name="photo_id"
