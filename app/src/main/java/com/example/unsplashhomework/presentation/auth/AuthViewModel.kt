@@ -1,4 +1,4 @@
-package com.example.unsplashhomework.presentation
+package com.example.unsplashhomework.presentation.auth
 
 import androidx.lifecycle.viewModelScope
 import com.example.unsplashhomework.data.api.ApiToken

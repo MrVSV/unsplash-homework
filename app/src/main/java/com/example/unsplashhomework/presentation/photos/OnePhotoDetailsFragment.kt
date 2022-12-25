@@ -103,10 +103,10 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         return buildString {
             append(getString(R.string.made_with, state.data.exif.model ?: "N/A"))
             append(getString(R.string.model, state.data.exif.model))
-            append(getString(R.string.exposure, state.data.exif.exposure_time))
+            append(getString(R.string.exposure, state.data.exif.exposureTime))
 
             append(getString(R.string.aperture, state.data.exif.aperture))
-            append(getString(R.string.focal_length, state.data.exif.focal_length))
+            append(getString(R.string.focal_length, state.data.exif.focalLength))
             append(getString(R.string.iso, state.data.exif.iso.toString()))
         }
     }
@@ -118,7 +118,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
             .into(binding.photo)
         Glide
             .with(binding.authorAvatar.context)
-            .load(state.data.user.profile_image.small)
+            .load(state.data.user.profileImage.small)
             .into(binding.authorAvatar)
     }
 

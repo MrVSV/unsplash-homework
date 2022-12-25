@@ -12,7 +12,7 @@ interface ApiToken {
         @Query("client_secret") clientSecret: String = SECRET_KEY,
         @Query("redirect_uri") redirectUri: String = REDIRECT_URI,
         @Query("grant_type") grantType: String = "authorization_code"
-    ) :ResponseToken
+    ): ResponseToken
 }
 
 class ResponseToken(

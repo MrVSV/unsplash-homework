@@ -19,12 +19,12 @@ class OnePhotoDetailsViewModel @Inject constructor(private val repository: Remot
 
     fun loadPhotoDetails(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
-//            try {
+            try {
             val a = repository.getPhotoDetails(id = id)
                 _state.value = DetailsState.Success(a)
-//            } catch (_: Exception) {
-//                _state.value = DetailsState.LoadingError
-//            }
+            } catch (_: Exception) {
+                _state.value = DetailsState.LoadingError
+            }
         }
     }
 }

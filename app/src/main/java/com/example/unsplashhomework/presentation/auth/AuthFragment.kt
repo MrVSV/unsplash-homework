@@ -1,4 +1,4 @@
-package com.example.unsplashhomework.presentation
+package com.example.unsplashhomework.presentation.auth
 
 import android.content.ContentValues.TAG
 import android.content.Intent

@@ -7,10 +7,11 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.unsplashhomework.data.remote.photosmodel.PhotosModelItem
 import com.example.unsplashhomework.databinding.PhotoViewHolderBinding
 
-class PhotosPagingAdapter(private val onClick: (ClickableView, PhotosModel.PhotosModelItem) -> Unit) :
-    PagingDataAdapter<PhotosModel.PhotosModelItem, PhotoViewHolder>(DiffUtilCallback()) {
+class PhotosPagingAdapter(private val onClick: (ClickableView, PhotosModelItem) -> Unit) :
+    PagingDataAdapter<PhotosModelItem, PhotoViewHolder>(DiffUtilCallback()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
         Log.d("Kart", "onCreateViewHolder: ")
@@ -54,16 +55,16 @@ class PhotosPagingAdapter(private val onClick: (ClickableView, PhotosModel.Photo
     }
 }
 
-class DiffUtilCallback : DiffUtil.ItemCallback<PhotosModel.PhotosModelItem>() {
+class DiffUtilCallback : DiffUtil.ItemCallback<PhotosModelItem>() {
     override fun areItemsTheSame(
-        oldItem: PhotosModel.PhotosModelItem,
-        newItem: PhotosModel.PhotosModelItem
+        oldItem: PhotosModelItem,
+        newItem: PhotosModelItem
     ): Boolean =
         oldItem.id == newItem.id
 
     override fun areContentsTheSame(
-        oldItem: PhotosModel.PhotosModelItem,
-        newItem: PhotosModel.PhotosModelItem
+        oldItem: PhotosModelItem,
+        newItem: PhotosModelItem
     ): Boolean =
         (oldItem == newItem)
 }

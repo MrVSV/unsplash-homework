@@ -7,8 +7,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.unsplashhomework.data.remote.ClickableView
-import com.example.unsplashhomework.data.remote.PhotosModel
+
 import com.example.unsplashhomework.data.remote.PhotosPagingAdapter
+import com.example.unsplashhomework.data.remote.photosmodel.PhotosModelItem
+
 import com.example.unsplashhomework.databinding.FragmentPhotosBinding
 import com.example.unsplashhomework.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,7 +29,7 @@ class PhotosFragment() : BaseFragment<FragmentPhotosBinding>() {
         PhotosPagingAdapter { buttonState, item -> onItemClick(buttonState, item) }
 
     /**пока что не работает. не меняется статус вьюхи**/
-    private fun onItemClick(buttonState: ClickableView, item: PhotosModel.PhotosModelItem) {
+    private fun onItemClick(buttonState: ClickableView, item: PhotosModelItem) {
             when (buttonState) {
                 ClickableView.PHOTO -> {
                 findNavController().navigate(PhotosFragmentDirections.actionNavigationPhotosToNavigationPhotoDetails(item.id))
