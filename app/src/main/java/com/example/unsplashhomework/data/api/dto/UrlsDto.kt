@@ -1,6 +1,6 @@
-package com.example.unsplashhomework.data.remote.photosmodel
+package com.example.unsplashhomework.data.api.dto
 
-data class Urls(
+data class UrlsDto(
     val full: String,
     val raw: String,
     val regular: String,

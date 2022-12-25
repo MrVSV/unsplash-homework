@@ -1,6 +1,6 @@
-package com.example.unsplashhomework.data.remote.photosmodel
+package com.example.unsplashhomework.data.api.dto
 
-data class Links(
+data class LinksDto(
     val download: String,
     val downloadLocation: String,
     val html: String,

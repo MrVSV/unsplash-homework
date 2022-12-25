@@ -1,6 +1,6 @@
-package com.example.unsplashhomework.data.remote.photodetailsmodel
+package com.example.unsplashhomework.data.api.dto
 
-data class Exif(
+data class ExifDto(
     val make: String?,
     val model: String?,
     val name: String?,

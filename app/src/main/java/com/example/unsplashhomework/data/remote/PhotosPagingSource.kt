@@ -3,7 +3,7 @@ package com.example.unsplashhomework.data.remote
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.example.unsplashhomework.data.remote.photosmodel.PhotosModelItem
+import com.example.unsplashhomework.data.api.dto.PhotoDto
 import com.example.unsplashhomework.domain.RemoteRepository
 
 import kotlinx.coroutines.Dispatchers
@@ -12,11 +12,11 @@ import javax.inject.Inject
 
 class PhotosPagingSource@Inject constructor(
     private val repository: RemoteRepository
-) : PagingSource<Int, PhotosModelItem>() {
+) : PagingSource<Int, PhotoDto>() {
 
-    override fun getRefreshKey(state: PagingState<Int, PhotosModelItem>) = FIRST_PAGE
+    override fun getRefreshKey(state: PagingState<Int, PhotoDto>) = FIRST_PAGE
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PhotosModelItem> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, PhotoDto> {
         val page = params.key ?: FIRST_PAGE
         return kotlin.runCatching {
             withContext(Dispatchers.IO){

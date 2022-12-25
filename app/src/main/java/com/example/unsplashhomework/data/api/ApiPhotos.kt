@@ -1,8 +1,8 @@
 package com.example.unsplashhomework.data.api
 
-import com.example.unsplashhomework.data.remote.photodetailsmodel.PhotoDetails
-import com.example.unsplashhomework.data.remote.photosmodel.PhotosModel
-import com.example.unsplashhomework.data.remote.photosmodel.PhotosModelItem
+import com.example.unsplashhomework.data.api.dto.PhotoDetailsDto
+import com.example.unsplashhomework.data.api.dto.PhotoListDto
+import com.example.unsplashhomework.data.api.dto.PhotoDto
 import retrofit2.http.*
 
 interface ApiPhotos {
@@ -10,21 +10,21 @@ interface ApiPhotos {
     @GET("photos")
     suspend fun getPhotos(
         @Query("page") page: Int
-    ): PhotosModel
+    ): PhotoListDto
 
     @GET("photos/{id}")
     suspend fun getPhotoDetails(
         @Path("id") id: String
-    ): PhotoDetails
+    ): PhotoDetailsDto
 
     @POST("photos/{id}/like")
     suspend fun like(
         @Path("id") id: String
-    ): PhotosModelItem
+    ): PhotoDto
 
     @DELETE("photos/{id}/like")
     suspend fun unlike(
         @Path("id") id: String
-    ): PhotosModelItem
+    ): PhotoDto
 
 }

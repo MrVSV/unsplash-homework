@@ -4,7 +4,7 @@
     <string name="title_collections">Collections</string>
     <string name="title_user">User</string>
     <string-array name="onboarding_texts_array">
-        <item>Make photos, publish, gather an audience, get feedback!</item>
+        <item>Make photoEntity, publish, gather an audience, get feedback!</item>
         <item>Share with friends, make collections</item>
         <item>Upload your favorite pictures and track statistics</item>
     </string-array>

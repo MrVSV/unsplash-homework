@@ -17,7 +17,7 @@ class DatabaseModule {
     @Provides
     @Singleton
     fun providePhotosDao(appDatabase: AppDatabase): PhotosDao {
-        return appDatabase.photosDao()
+        return appDatabase.getPhotosDao()
     }
 
     @Provides

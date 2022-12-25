@@ -6,12 +6,10 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.unsplashhomework.presentation.photos.list.adapter.ClickableView
-
-import com.example.unsplashhomework.presentation.photos.list.adapter.PhotosPagingAdapter
-import com.example.unsplashhomework.data.remote.photosmodel.PhotosModelItem
-
+import com.example.unsplashhomework.data.api.dto.PhotoDto
 import com.example.unsplashhomework.databinding.FragmentPhotosBinding
+import com.example.unsplashhomework.presentation.photos.list.adapter.ClickableView
+import com.example.unsplashhomework.presentation.photos.list.adapter.PhotosPagingAdapter
 import com.example.unsplashhomework.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -28,7 +26,7 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
         PhotosPagingAdapter { buttonState, item -> onItemClick(buttonState, item) }
 
     /**пока что не работает. не меняется статус вьюхи**/
-    private fun onItemClick(buttonState: ClickableView, item: PhotosModelItem) {
+    private fun onItemClick(buttonState: ClickableView, item: PhotoDto) {
         when (buttonState) {
             ClickableView.PHOTO -> {
                 findNavController().navigate(

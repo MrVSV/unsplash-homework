@@ -2,10 +2,10 @@ package com.example.unsplashhomework.unused
 
 
 
-/**заменена на com/example/unsplashhomework/data/remote/photosmodel/PhotosModel.kt**/
+/**заменена на com/example/unsplashhomework/data/remote/photosmodel/PhotoListDto.kt**/
 
-//class PhotosModel : ArrayList<PhotosModel.PhotosModelItem>(){
-//    data class PhotosModelItem(
+//class PhotoListDto : ArrayList<PhotoListDto.PhotoDto>(){
+//    data class PhotoDto(
 //        @SerializedName("alt_description")
 //        val altDescription: String?,
 //        @SerializedName("blur_hash")
@@ -27,7 +27,7 @@ package com.example.unsplashhomework.unused
 //        @SerializedName("likes")
 //        val likes: Int,
 //        @SerializedName("links")
-//        val links: Links,
+//        val links: LinksDto,
 //        @SerializedName("promoted_at")
 //        val promotedAt: String?,
 //        @SerializedName("sponsorship")
@@ -37,13 +37,13 @@ package com.example.unsplashhomework.unused
 //        @SerializedName("updated_at")
 //        val updatedAt: String,
 //        @SerializedName("urls")
-//        val urls: Urls,
+//        val urls: UrlsDto,
 //        @SerializedName("user")
-//        val user: User,
+//        val user: UserDto,
 //        @SerializedName("width")
 //        val width: Int
 //    ) {
-//        data class Links(
+//        data class LinksDto(
 //            @SerializedName("download")
 //            val download: String,
 //            @SerializedName("download_location")
@@ -80,7 +80,7 @@ package com.example.unsplashhomework.unused
 //                @SerializedName("last_name")
 //                val lastName: Any?,
 //                @SerializedName("links")
-//                val links: Links,
+//                val links: LinksDto,
 //                @SerializedName("location")
 //                val location: Any?,
 //                @SerializedName("name")
@@ -88,7 +88,7 @@ package com.example.unsplashhomework.unused
 //                @SerializedName("portfolio_url")
 //                val portfolioUrl: String,
 //                @SerializedName("profile_image")
-//                val profileImage: ProfileImage,
+//                val profileImage: ProfileImageDto,
 //                @SerializedName("social")
 //                val social: Social,
 //                @SerializedName("total_collections")
@@ -104,7 +104,7 @@ package com.example.unsplashhomework.unused
 //                @SerializedName("username")
 //                val username: String
 //            ) {
-//                data class Links(
+//                data class LinksDto(
 //                    @SerializedName("followers")
 //                    val followers: String,
 //                    @SerializedName("following")
@@ -121,7 +121,7 @@ package com.example.unsplashhomework.unused
 //                    val self: String
 //                )
 //
-//                data class ProfileImage(
+//                data class ProfileImageDto(
 //                    @SerializedName("large")
 //                    val large: String,
 //                    @SerializedName("medium")
@@ -174,7 +174,7 @@ package com.example.unsplashhomework.unused
 //            )
 //        }
 //
-//        data class Urls(
+//        data class UrlsDto(
 //            @SerializedName("full")
 //            val full: String,
 //            @SerializedName("raw")
@@ -189,7 +189,7 @@ package com.example.unsplashhomework.unused
 //            val thumb: String
 //        )
 //
-//        data class User(
+//        data class UserDto(
 //            @SerializedName("accepted_tos")
 //            val acceptedTos: Boolean,
 //            @SerializedName("bio")
@@ -205,7 +205,7 @@ package com.example.unsplashhomework.unused
 //            @SerializedName("last_name")
 //            val lastName: String?,
 //            @SerializedName("links")
-//            val links: Links,
+//            val links: LinksDto,
 //            @SerializedName("location")
 //            val location: String?,
 //            @SerializedName("name")
@@ -213,7 +213,7 @@ package com.example.unsplashhomework.unused
 //            @SerializedName("portfolio_url")
 //            val portfolioUrl: String,
 //            @SerializedName("profile_image")
-//            val profileImage: ProfileImage,
+//            val profileImage: ProfileImageDto,
 //            @SerializedName("social")
 //            val social: Social,
 //            @SerializedName("total_collections")
@@ -229,7 +229,7 @@ package com.example.unsplashhomework.unused
 //            @SerializedName("username")
 //            val username: String
 //        ) {
-//            data class Links(
+//            data class LinksDto(
 //                @SerializedName("followers")
 //                val followers: String,
 //                @SerializedName("following")
@@ -246,7 +246,7 @@ package com.example.unsplashhomework.unused
 //                val self: String
 //            )
 //
-//            data class ProfileImage(
+//            data class ProfileImageDto(
 //                @SerializedName("large")
 //                val large: String,
 //                @SerializedName("medium")

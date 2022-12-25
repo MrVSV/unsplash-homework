@@ -3,7 +3,7 @@ package com.example.unsplashhomework.presentation.photos.list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import com.example.unsplashhomework.data.remote.photosmodel.PhotosModelItem
+import com.example.unsplashhomework.data.api.dto.PhotoDto
 import com.example.unsplashhomework.domain.PhotoLikeUseCase
 import com.example.unsplashhomework.domain.PhotosPagingUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +20,7 @@ class PhotosViewModel @Inject constructor(
     private val photoLikeUseCase: PhotoLikeUseCase
 ) : ViewModel() {
 
-    val a = MutableSharedFlow<PagingData<PhotosModelItem>>()
+    val a = MutableSharedFlow<PagingData<PhotoDto>>()
 
     suspend fun getPhoto() {
             photosPagingUseCase.getPhoto().flow.onEach {
