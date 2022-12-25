@@ -2,8 +2,8 @@ package com.example.unsplashhomework.data.repository
 
 import com.example.unsplashhomework.data.api.ApiPhotos
 import com.example.unsplashhomework.data.api.dto.PhotoDetailsDto
-import com.example.unsplashhomework.data.api.dto.PhotoDto
 import com.example.unsplashhomework.data.api.dto.PhotoListDto
+import com.example.unsplashhomework.data.api.dto.WrapperPhotoDto
 import com.example.unsplashhomework.domain.RemoteRepository
 import javax.inject.Inject
 
@@ -13,8 +13,8 @@ class RemoteRepositoryImpl @Inject constructor(private val apiPhotos: ApiPhotos)
 
     override suspend fun getPhotoDetails(id: String): PhotoDetailsDto = apiPhotos.getPhotoDetails(id)
 
-    override suspend fun likePhoto(id: String): PhotoDto = apiPhotos.like(id)
+    override suspend fun likePhoto(id: String): WrapperPhotoDto = apiPhotos.like(id)
 
-    override suspend fun unlikePhoto(id: String): PhotoDto = apiPhotos.unlike(id)
+    override suspend fun unlikePhoto(id: String): WrapperPhotoDto = apiPhotos.unlike(id)
 
 }

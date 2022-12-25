@@ -1,8 +1,8 @@
 package com.example.unsplashhomework.domain
 
 import com.example.unsplashhomework.data.api.dto.PhotoDetailsDto
-import com.example.unsplashhomework.data.api.dto.PhotoDto
 import com.example.unsplashhomework.data.api.dto.PhotoListDto
+import com.example.unsplashhomework.data.api.dto.WrapperPhotoDto
 
 interface RemoteRepository {
 
@@ -10,7 +10,7 @@ interface RemoteRepository {
 
     suspend fun getPhotoDetails(id: String): PhotoDetailsDto
 
-    suspend fun likePhoto(id: String): PhotoDto
+    suspend fun likePhoto(id: String): WrapperPhotoDto
 
-    suspend fun unlikePhoto(id: String): PhotoDto
+    suspend fun unlikePhoto(id: String): WrapperPhotoDto
 }

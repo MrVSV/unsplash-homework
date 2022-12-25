@@ -6,10 +6,10 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.unsplashhomework.data.api.dto.PhotoDto
+import com.example.unsplashhomework.data.model.Photo
 import com.example.unsplashhomework.databinding.FragmentPhotosBinding
 import com.example.unsplashhomework.presentation.photos.list.adapter.ClickableView
-import com.example.unsplashhomework.presentation.photos.list.adapter.PhotosPagingAdapter
+import com.example.unsplashhomework.presentation.photos.list.adapter.PagingPhotoAdapter
 import com.example.unsplashhomework.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -22,11 +22,13 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
 
     private val viewModel by viewModels<PhotosViewModel>()
 
-    private val adapter =
-        PhotosPagingAdapter { buttonState, item -> onItemClick(buttonState, item) }
+    private val adapter by lazy {
+        PagingPhotoAdapter { buttonState, item ->
+            onClick(buttonState, item)
+        }
+    }
 
-    /**пока что не работает. не меняется статус вьюхи**/
-    private fun onItemClick(buttonState: ClickableView, item: PhotoDto) {
+    private fun onClick(buttonState: ClickableView, item: Photo) {
         when (buttonState) {
             ClickableView.PHOTO -> {
                 findNavController().navigate(
@@ -36,7 +38,7 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
                 )
             }
             ClickableView.LIKE -> {
-                viewModel.like(item.id, item.likedByUser)
+                viewModel.like(item)
             }
         }
     }
@@ -44,11 +46,13 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        observe()
         binding.photoRecycler.adapter = adapter
+    }
 
+    private fun observe() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.getPhoto()
-            viewModel.a.collect {
+            viewModel.getPhoto().collect {
                 adapter.submitData(it)
             }
         }

@@ -2,10 +2,12 @@ package com.example.unsplashhomework.data.api.dto
 
 import com.example.unsplashhomework.data.local.entity.PhotoEntity
 import com.example.unsplashhomework.data.model.Photo
+import com.google.gson.annotations.SerializedName
 
 data class PhotoDto(
     val id: String,
     val urls: UrlsDto,
+    @SerializedName("liked_by_user")
     val likedByUser: Boolean,
     val likes: Int,
     val links: LinksDto,

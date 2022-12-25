@@ -11,7 +11,7 @@ interface LocalRepository {
 
     suspend fun clear()
 
-    suspend fun setLickInDataBase(photoEntity: PhotoEntity)
+    suspend fun setLikeInDataBase(photoEntity: PhotoEntity)
 
     suspend fun refresh(data: List<PhotoEntity>)
 }

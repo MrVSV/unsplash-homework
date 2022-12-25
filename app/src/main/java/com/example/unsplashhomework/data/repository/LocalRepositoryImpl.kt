@@ -10,19 +10,11 @@ class LocalRepositoryImpl @Inject constructor(private val photosDao: PhotosDao):
 
     override suspend fun insertData(data: List<PhotoEntity>) = photosDao.insert(data)
 
-    override fun getPagingData(): PagingSource<Int, PhotoEntity> {
-        TODO("Not yet implemented")
-    }
+    override fun getPagingData(): PagingSource<Int, PhotoEntity> = photosDao.getPhotos()
 
-    override suspend fun clear() {
-        TODO("Not yet implemented")
-    }
+    override suspend fun clear() = photosDao.deleteAll()
 
-    override suspend fun setLickInDataBase(photoEntity: PhotoEntity) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun setLikeInDataBase(photoEntity: PhotoEntity) = photosDao.updateLocalLikes(photoEntity)
 
-    override suspend fun refresh(data: List<PhotoEntity>) {
-        TODO("Not yet implemented")
-    }
+    override suspend fun refresh(data: List<PhotoEntity>) = photosDao.refresh(data)
 }
