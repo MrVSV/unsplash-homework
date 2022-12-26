@@ -6,13 +6,13 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.example.unsplashhomework.data.local.entity.PhotoEntity
 import com.example.unsplashhomework.domain.LocalRepository
-import com.example.unsplashhomework.domain.RemoteRepository
+import com.example.unsplashhomework.domain.RemotePhotoRepository
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 class PhotosRemoteMediator @Inject constructor(
     private val local: LocalRepository,
-    private val remote: RemoteRepository,
+    private val remote: RemotePhotoRepository,
 ) : RemoteMediator<Int, PhotoEntity>() {
 
     private var pageIndex = 0

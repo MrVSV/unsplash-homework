@@ -1,13 +1,13 @@
 package com.example.unsplashhomework.data.repository
 
 import com.example.unsplashhomework.data.api.ApiPhotos
-import com.example.unsplashhomework.data.api.dto.PhotoDetailsDto
-import com.example.unsplashhomework.data.api.dto.PhotoListDto
-import com.example.unsplashhomework.data.api.dto.WrapperPhotoDto
-import com.example.unsplashhomework.domain.RemoteRepository
+import com.example.unsplashhomework.data.api.photodto.PhotoDetailsDto
+import com.example.unsplashhomework.data.api.photodto.PhotoListDto
+import com.example.unsplashhomework.data.api.photodto.WrapperPhotoDto
+import com.example.unsplashhomework.domain.RemotePhotoRepository
 import javax.inject.Inject
 
-class RemoteRepositoryImpl @Inject constructor(private val apiPhotos: ApiPhotos): RemoteRepository {
+class RemotePhotoRepositoryImpl @Inject constructor(private val apiPhotos: ApiPhotos): RemotePhotoRepository {
 
     override suspend fun getPhotos(page: Int): PhotoListDto = apiPhotos.getPhotos(page)
 

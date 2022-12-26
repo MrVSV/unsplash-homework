@@ -1,10 +1,9 @@
 package com.example.unsplashhomework.presentation.photos.details
 
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.unsplashhomework.data.model.Photo
 import com.example.unsplashhomework.domain.PhotoLikeUseCase
-import com.example.unsplashhomework.domain.RemoteRepository
+import com.example.unsplashhomework.domain.RemotePhotoRepository
 import com.example.unsplashhomework.tools.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -15,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OnePhotoDetailsViewModel @Inject constructor(
-    private val repository: RemoteRepository,
+    private val repository: RemotePhotoRepository,
     private val photoLikeUseCase: PhotoLikeUseCase
 ) : BaseViewModel() {
 

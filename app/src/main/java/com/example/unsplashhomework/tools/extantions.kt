@@ -4,7 +4,7 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.unsplashhomework.R
-import com.example.unsplashhomework.data.api.dto.PhotoDto
+import com.example.unsplashhomework.data.api.photodto.PhotoDto
 import com.example.unsplashhomework.data.model.Photo
 
 fun List<PhotoDto>.toListPhoto(): List<Photo> {

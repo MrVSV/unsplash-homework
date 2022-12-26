@@ -1,4 +1,4 @@
-package com.example.unsplashhomework.data.api.dto
+package com.example.unsplashhomework.data.api.photodto
 
 import com.example.unsplashhomework.data.local.entity.PhotoEntity
 import com.example.unsplashhomework.data.model.Photo

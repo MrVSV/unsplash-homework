@@ -1,6 +1,6 @@
 package com.example.unsplashhomework.data.model
 
-import com.example.unsplashhomework.data.api.dto.*
+import com.example.unsplashhomework.data.api.photodto.*
 
 data class PhotoDetails(
     val id: String,

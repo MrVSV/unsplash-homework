@@ -1,4 +1,4 @@
-package com.example.unsplashhomework.data.api.dto
+package com.example.unsplashhomework.data.api.photodto
 
 data class ExifDto(
     val make: String?,

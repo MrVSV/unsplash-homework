@@ -1,8 +1,8 @@
 package com.example.unsplashhomework.data.api
 
-import com.example.unsplashhomework.data.api.dto.PhotoDetailsDto
-import com.example.unsplashhomework.data.api.dto.PhotoListDto
-import com.example.unsplashhomework.data.api.dto.WrapperPhotoDto
+import com.example.unsplashhomework.data.api.photodto.PhotoDetailsDto
+import com.example.unsplashhomework.data.api.photodto.PhotoListDto
+import com.example.unsplashhomework.data.api.photodto.WrapperPhotoDto
 import retrofit2.http.*
 
 interface ApiPhotos {
