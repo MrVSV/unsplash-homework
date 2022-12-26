@@ -16,7 +16,6 @@ class PhotoViewHolder(private val binding: PhotoViewHolderBinding) :
             onClick(ClickableView.PHOTO, item)
         }
         binding.isLiked.setOnClickListener {
-//            binding.isLiked.isSelected =! binding.isLiked.isSelected
             onClick(ClickableView.LIKE, item)
         }
 //        binding.progressBar.isVisible = item.isLikeProgress
