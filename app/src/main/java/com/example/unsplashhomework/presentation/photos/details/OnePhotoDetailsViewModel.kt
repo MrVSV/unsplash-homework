@@ -19,9 +19,11 @@ class OnePhotoDetailsViewModel @Inject constructor(
     private val photoLikeUseCase: PhotoLikeUseCase
 ) : BaseViewModel() {
 
+    /** лучше разделять стейт загрузки и данных */
     private val _state = MutableStateFlow<DetailsState>(DetailsState.NotStartedYet)
     val state = _state.asStateFlow()
 
+    /** тогда и эта запись будет лучше */
     fun loadPhotoDetails(id: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
@@ -32,6 +34,8 @@ class OnePhotoDetailsViewModel @Inject constructor(
             }
         }
     }
+
+    /** пока нечего говорить */
     fun like(item: Photo) {
         viewModelScope.launch(Dispatchers.IO + handler) {
             photoLikeUseCase.likePhoto(item)

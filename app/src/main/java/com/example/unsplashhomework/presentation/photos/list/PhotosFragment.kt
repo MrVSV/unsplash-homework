@@ -32,9 +32,8 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
         when (buttonState) {
             ClickableView.PHOTO -> {
                 findNavController().navigate(
-                    PhotosFragmentDirections.actionNavigationPhotosToNavigationPhotoDetails(
-                        item.id
-                    )
+                    PhotosFragmentDirections
+                        .actionNavigationPhotosToNavigationPhotoDetails(item.id)
                 )
             }
             ClickableView.LIKE -> {
