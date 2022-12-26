@@ -1,6 +1,5 @@
 package com.example.unsplashhomework.presentation.photos.list.adapter
 
-import android.util.Log
 import androidx.recyclerview.widget.RecyclerView
 import com.example.unsplashhomework.data.model.Photo
 import com.example.unsplashhomework.databinding.PhotoViewHolderBinding
@@ -26,7 +25,7 @@ class PhotoViewHolder(private val binding: PhotoViewHolderBinding) :
         binding.authorAvatar.loadImage(item.userAvatar)
 
         binding.authorName.text = item.userName
-        Log.d("Kart", "bind: ${item.likedByUser}")
+
 
     }
 }

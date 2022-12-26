@@ -7,9 +7,9 @@ import com.example.unsplashhomework.data.model.Photo
 import com.example.unsplashhomework.databinding.PhotoViewHolderBinding
 
 
-class PagingPhotoAdapter(
+class PhotoPagingAdapter(
     private val onClick: (ClickableView, Photo) -> Unit
-) : PagingDataAdapter<Photo, PhotoViewHolder>(DiffPhoto()) {
+) : PagingDataAdapter<Photo, PhotoViewHolder>(PhotoDiff()) {
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         getItem(position)?.let { item ->

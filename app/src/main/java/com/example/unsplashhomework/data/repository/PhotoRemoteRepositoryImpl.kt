@@ -4,10 +4,10 @@ import com.example.unsplashhomework.data.api.ApiPhotos
 import com.example.unsplashhomework.data.api.photodto.PhotoDetailsDto
 import com.example.unsplashhomework.data.api.photodto.PhotoListDto
 import com.example.unsplashhomework.data.api.photodto.WrapperPhotoDto
-import com.example.unsplashhomework.domain.RemotePhotoRepository
+import com.example.unsplashhomework.domain.PhotoRemoteRepository
 import javax.inject.Inject
 
-class RemotePhotoRepositoryImpl @Inject constructor(private val apiPhotos: ApiPhotos): RemotePhotoRepository {
+class PhotoRemoteRepositoryImpl @Inject constructor(private val apiPhotos: ApiPhotos): PhotoRemoteRepository {
 
     override suspend fun getPhotos(page: Int): PhotoListDto = apiPhotos.getPhotos(page)
 

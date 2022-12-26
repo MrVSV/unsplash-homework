@@ -4,7 +4,7 @@ import com.example.unsplashhomework.data.api.photodto.PhotoDetailsDto
 import com.example.unsplashhomework.data.api.photodto.PhotoListDto
 import com.example.unsplashhomework.data.api.photodto.WrapperPhotoDto
 
-interface RemotePhotoRepository {
+interface PhotoRemoteRepository {
 
     suspend fun getPhotos(page: Int): PhotoListDto
 

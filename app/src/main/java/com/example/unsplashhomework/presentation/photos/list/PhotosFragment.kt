@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.unsplashhomework.data.model.Photo
 import com.example.unsplashhomework.databinding.FragmentPhotosBinding
 import com.example.unsplashhomework.presentation.photos.list.adapter.ClickableView
-import com.example.unsplashhomework.presentation.photos.list.adapter.PagingPhotoAdapter
+import com.example.unsplashhomework.presentation.photos.list.adapter.PhotoPagingAdapter
 import com.example.unsplashhomework.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -23,7 +23,7 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
     private val viewModel by viewModels<PhotosViewModel>()
 
     private val adapter by lazy {
-        PagingPhotoAdapter { buttonState, item ->
+        PhotoPagingAdapter { buttonState, item ->
             onClick(buttonState, item)
         }
     }

@@ -7,7 +7,7 @@
         android:title="@string/title_photos" />
 
     <item
-        android:id="@+id/navigation_collections"
+        android:id="@+id/navigation_digest"
         android:icon="@drawable/ic_baseline_star_outline_24"
         android:title="@string/title_collections" />
 

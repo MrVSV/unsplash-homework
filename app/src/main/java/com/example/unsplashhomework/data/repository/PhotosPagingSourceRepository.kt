@@ -5,13 +5,13 @@ import com.example.unsplashhomework.data.api.photodto.WrapperPhotoDto
 import com.example.unsplashhomework.data.local.entity.PhotoEntity
 import com.example.unsplashhomework.data.model.Photo
 import com.example.unsplashhomework.domain.LocalRepository
-import com.example.unsplashhomework.domain.RemotePhotoRepository
+import com.example.unsplashhomework.domain.PhotoRemoteRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class PhotosPagingSourceRepository @Inject constructor(
-    private val remote: RemotePhotoRepository,
+    private val remote: PhotoRemoteRepository,
     private val local: LocalRepository
 ) {
 

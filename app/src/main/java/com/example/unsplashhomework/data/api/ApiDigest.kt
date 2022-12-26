@@ -5,7 +5,7 @@ import retrofit2.http.*
 
 interface ApiDigest {
 
-    @GET("collection")
+    @GET("collections")
     suspend fun getDigests(@Query("page") page: Int): DigestListDto
 
 //    @GET("photos/{id}")

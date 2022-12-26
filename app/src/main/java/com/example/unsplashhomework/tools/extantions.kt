@@ -4,7 +4,9 @@ import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.unsplashhomework.R
+import com.example.unsplashhomework.data.api.digestdto.DigestDto
 import com.example.unsplashhomework.data.api.photodto.PhotoDto
+import com.example.unsplashhomework.data.model.Digest
 import com.example.unsplashhomework.data.model.Photo
 
 fun List<PhotoDto>.toListPhoto(): List<Photo> {
@@ -12,6 +14,15 @@ fun List<PhotoDto>.toListPhoto(): List<Photo> {
 
     this.forEach{ item->
         newList.add(item.toPhoto())
+    }
+    return newList
+}
+
+fun List<DigestDto>.toListDigest(): List<Digest> {
+    val newList = mutableListOf<Digest>()
+
+    this.forEach{ item->
+        newList.add(item.toDigest())
     }
     return newList
 }
