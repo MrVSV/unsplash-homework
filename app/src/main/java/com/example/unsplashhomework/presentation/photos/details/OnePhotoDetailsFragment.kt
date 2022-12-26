@@ -65,13 +65,22 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         getPhotoDetails(args.photoId)
-
+        /** это вынести в отдельный метод и я бы все таки разделил слушатель состоя ний и слушатель для данных
+         * в слушателе состояний будет метод отвечабщий за визибилити ui а в слушателя данных будет бинд в ui
+         * темболие стейт состояний уже написан и спрятан в базовой вью модели его можно и нужно от туда дергать*/
         viewLifecycleOwner.lifecycleScope
             .launchWhenStarted {
                 viewModel.state
                     .collect { state -> updateUi(state) }
             }
     }
+
+    /** вижу не в первый раз и не могу понять зачем и для чего?
+     * что изменится если написать так?
+     * private fun getPhotoDetails(id: String)=viewModel.loadPhotoDetails(id)
+
+     давай просто разберемся что происходит.... ты запускаешь корутину в которой запускаешь еще корутину
+     что бы вызвать метод из вью можели который запускает третью корутину*/
 
     private fun getPhotoDetails(id: String) {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -81,6 +90,10 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         }
     }
 
+    /** Первое что я говорил уже говорил разделить стейт и данные(темболее появляется не очень красивое is)
+     * ...нужно взять за правило одна функция
+     * одна опирация...темболие методо получилься большой и читать его сложновато
+     * второе, если всетаки оставлять так, то вынеси каждое действие when в функции */
     private fun updateUi(state: DetailsState) {
         when (state) {
             DetailsState.NotStartedYet -> {}
@@ -105,16 +118,28 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
                     R.string.download,
                     state.data.downloads.toString()
                 )
+                /** у нас уже есть экстеншен для glide почему не использовать его?*/
                 loadImages(state)
 
+                /** я бы эти преременные сделал глобальные соответсвенно клик по кнопке не нужно будет
+                 * описывать в стейте и вынести его можно отдельно*/
                 val lat = state.data.location.position.latitude
                 val lon = state.data.location.position.longitude
 
+                /** очень хорошо что есть пониманя что такое колбек но тут он не уместен достаточно
+                 * просто запонти переменные выше,
+                 * кстати у тебя тут пременные и кликер в одном методе, не очень пойму щачем тут колбек*/
                 val onLocationClick: (lat: Double, lon: Double) -> Unit = { lat, lon ->
                     val locationUri = Uri.parse("geo: $lat,$lon")
                     showLocationOnMap(locationUri)
                 }
-
+                /** как уже было сказано выше он тут не нужен, лучше сделатьб lat и lon глабальными
+                 * и тогда этот клик будет обособленным...вот этот медод не зависит от стейта*/
+  /**              binding.locationButton.setOnClickListener {
+                    if (lat != null && lon != null) {
+                        showLocationOnMap(Uri.parse("geo: $lat,$lon"))
+                    }
+                }*/
                 binding.locationButton.setOnClickListener {
                     if (lat != null && lon != null) {
                         onLocationClick(lat, lon)
@@ -147,6 +172,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         }
     }
 
+    /** к нас написан есть экстеншен для imageView это дублирование кода получется и нафиг тут не надо */
     private fun loadImages(state: DetailsState.Success) {
         Glide
             .with(binding.photo.context)
@@ -158,21 +184,27 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
             .into(binding.authorAvatar)
     }
 
+    /** я так понимаю просто что бы не писать свой фрагмент с навигацией? ничего против не имею)*/
     private fun showLocationOnMap(locationUri: Uri) {
         val intent = Intent(Intent.ACTION_VIEW).apply {
             data = locationUri
         }
+        /** зачем тут проверка?*/
         if (activity?.packageManager != null) {
             startActivity(intent)
         }
     }
 
     private fun setToolbar(id: String) {
+        /** договоритесь с Сергеем что вы юзаете... просто ты написала свой тул бар
+         * он на сколько я видел юзает его из активит*/
         binding.toolbar.setOnClickListener {
             shareLinkOnPhoto(id)
         }
     }
 
+    /** просто ради сокращеня кода напеши экстеншен для фрашмента и тогда вот этого просто не будет тут
+     * лежать */
     private fun shareLinkOnPhoto(id: String) {
         val sharingIntent = Intent(Intent.ACTION_SEND)
         sharingIntent.type = "text/plain"
@@ -180,6 +212,10 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         startActivity(Intent.createChooser(sharingIntent, "Share using"))
     }
 
+
+    /** сюда не лезу...единственно что что либо убери отсюда сет он клик лисененр, и вызывай этот
+     * методод внутри лиснера, либо переименую этот медот так что бы было понятно что
+     * это именно действие по клику. Просто по названию должно быть четко понятно что это такое*/
     private fun setDownload(path: String) {
         var mImage: Bitmap?
 
@@ -204,6 +240,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         }
     }
 
+    /**не лезу... */
     //TODO: добавить загрузку в фоне, тестировать отсутствие сети
     private fun saveMediaToStorage(bitmap: Bitmap?) {
         val filename = "${System.currentTimeMillis()}.jpg"
@@ -259,6 +296,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         return null
     }
 
+    /**опять такиж в виде жкстаншена лучше бы смотрелось */
     private fun checkPermission() {
         if (ContextCompat.checkSelfPermission(
                 requireActivity(),
@@ -273,6 +311,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         }
     }
 
+    /**опять такиж в виде жкстаншена лучше бы смотрелось */
     private fun showMissingPermissionAlert() {
         val alertDialog = AlertDialog.Builder(requireActivity().applicationContext).create()
         alertDialog.setTitle("Info")
