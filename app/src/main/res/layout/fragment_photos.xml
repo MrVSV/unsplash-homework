@@ -6,6 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".presentation.photos.list.PhotosFragment">
 
+
+
 <!--    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout-->
 <!--        android:id="@+id/refreshLayout"-->
 <!--        android:layout_width="0dp"-->
@@ -16,6 +18,7 @@
 <!--        app:layout_constraintEnd_toEndOf="parent"-->
 <!--        app:layout_constraintStart_toStartOf="parent"-->
 <!--        app:layout_constraintTop_toTopOf="parent">-->
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/photoRecycler"
@@ -28,8 +31,7 @@
             app:layout_constraintBottom_toTopOf="@id/text_home"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:listitem="@layout/photo_view_holder"/>
+            app:layout_constraintTop_toTopOf="parent"/>
 
 
 <!--    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>-->
