@@ -1,11 +1,9 @@
 package com.example.unsplashhomework.presentation.auth
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.view.isVisible
@@ -16,7 +14,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.unsplashhomework.R
 import com.example.unsplashhomework.data.api.TOKEN_SHARED_NAME
 import com.example.unsplashhomework.data.api.call
-import com.example.unsplashhomework.presentation.auth.state.LoadState
+import com.example.unsplashhomework.data.state.LoadState
 import com.example.unsplashhomework.databinding.FragmentAuthBinding
 import com.example.unsplashhomework.tools.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,14 +28,10 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d(TAG, "onViewCreated: ")
 
         startAuth()
-
         tokenObserve(createSharedPreference(TOKEN_SHARED_NAME))
-
         loadingObserve()
-
         viewModel.createToken(args.code)
 
     }

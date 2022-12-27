@@ -6,5 +6,5 @@ import javax.inject.Inject
 class PhotosPagingUseCase @Inject constructor(
     private val photosRepository: PhotosPagingSourceRepository
 ) {
-    fun getPhoto() = photosRepository.getFlowPhoto()
+    fun getPhoto(query:String) = photosRepository.getFlowPhoto(query)
 }

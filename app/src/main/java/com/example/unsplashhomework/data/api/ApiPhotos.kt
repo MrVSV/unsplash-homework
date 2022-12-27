@@ -2,6 +2,7 @@ package com.example.unsplashhomework.data.api
 
 import com.example.unsplashhomework.data.api.dto.PhotoDetailsDto
 import com.example.unsplashhomework.data.api.dto.PhotoListDto
+import com.example.unsplashhomework.data.api.dto.SearchDto
 import com.example.unsplashhomework.data.api.dto.WrapperPhotoDto
 import retrofit2.http.*
 
@@ -18,5 +19,8 @@ interface ApiPhotos {
 
     @DELETE("photos/{id}/like")
     suspend fun unlike(@Path("id") id: String): WrapperPhotoDto
+
+    @GET("search/photos")
+    suspend fun searchPhotos(@Query("query") query: String,@Query("page") page: Int,): SearchDto
 
 }

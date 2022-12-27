@@ -11,4 +11,6 @@
     <color name="red">#FF4D00</color>
     <color name="grey">#DADADA</color>
     <color name="dark_grey">#ECEFF1</color>
+    <color name="black_100">#C8000000</color>
+    <color name="error_text">#F63F3F</color>
 </resources>
