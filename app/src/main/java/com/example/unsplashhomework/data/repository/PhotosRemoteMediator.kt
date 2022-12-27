@@ -6,9 +6,8 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.example.unsplashhomework.data.local.entity.PhotoEntity
 import com.example.unsplashhomework.domain.LocalRepository
-import com.example.unsplashhomework.domain.RemoteRepository
-import com.example.unsplashhomework.tools.toListPhotoEntity
 import com.example.unsplashhomework.domain.PhotoRemoteRepository
+import com.example.unsplashhomework.tools.toListPhotoEntity
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)

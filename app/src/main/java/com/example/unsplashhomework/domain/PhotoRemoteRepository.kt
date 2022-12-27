@@ -2,11 +2,8 @@ package com.example.unsplashhomework.domain
 
 import com.example.unsplashhomework.data.api.photodto.PhotoDetailsDto
 import com.example.unsplashhomework.data.api.photodto.PhotoListDto
+import com.example.unsplashhomework.data.api.photodto.SearchDto
 import com.example.unsplashhomework.data.api.photodto.WrapperPhotoDto
-import com.example.unsplashhomework.data.api.dto.PhotoDetailsDto
-import com.example.unsplashhomework.data.api.dto.PhotoListDto
-import com.example.unsplashhomework.data.api.dto.SearchDto
-import com.example.unsplashhomework.data.api.dto.WrapperPhotoDto
 
 interface PhotoRemoteRepository {
 

@@ -9,7 +9,6 @@ import com.example.unsplashhomework.R
 import com.example.unsplashhomework.data.api.digestdto.DigestDto
 import com.example.unsplashhomework.data.api.photodto.PhotoDto
 import com.example.unsplashhomework.data.model.Digest
-import com.example.unsplashhomework.data.api.dto.PhotoDto
 import com.example.unsplashhomework.data.local.entity.PhotoEntity
 import com.example.unsplashhomework.data.model.Photo
 
