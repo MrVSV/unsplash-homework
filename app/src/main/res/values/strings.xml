@@ -4,7 +4,7 @@
     <string name="title_collections">Collections</string>
     <string name="title_user">User</string>
     <string-array name="onboarding_texts_array">
-        <item>Make photoEntity, publish, gather an audience, get feedback!</item>
+        <item>Make photo, publish, gather an audience, get feedback!</item>
         <item>Share with friends, make collections</item>
         <item>Upload your favorite pictures and track statistics</item>
     </string-array>
@@ -26,6 +26,7 @@
     <string name="error_text"> "Ошибка загрузки!\n
         Приносим извинения за предоставленные неудобства"</string>
     <string name="auth_success">Successful authorisation</string>
+    <string name="alert_text">You have not given permission needed to save photo in the gallery. Please give permission and return back to the app.</string>
     <!--Авторизация прошла успешно-->
     <!--Пропустить. Войти через приложение-->
 </resources>

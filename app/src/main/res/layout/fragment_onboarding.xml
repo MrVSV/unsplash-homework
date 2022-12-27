@@ -25,7 +25,7 @@
         android:id="@+id/cameras_image"
         android:layout_width="380dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="100dp"
         android:src="@drawable/cameras_white_fill_1x"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:src="@drawable/ellipse_12"
         app:layout_constraintBottom_toBottomOf="parent"
-        android:layout_marginBottom="-10dp"
+        android:layout_marginBottom="-20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
