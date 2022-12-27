@@ -168,12 +168,10 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/downloadLine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginEnd="32dp"
-                android:focusable="true">
+                android:layout_marginEnd="32dp">
 
                 <TextView
                     android:id="@+id/downloadsCount"
@@ -189,9 +187,7 @@
                     android:layout_height="24dp"
                     android:layout_gravity="bottom|start"
                     android:backgroundTint="#00FFFFFF"
-                    android:focusable="true"
-                    app:srcCompat="@drawable/download_line"
-                    tools:ignore="SpeakableTextPresentCheck" />
+                    app:srcCompat="@drawable/download_line"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

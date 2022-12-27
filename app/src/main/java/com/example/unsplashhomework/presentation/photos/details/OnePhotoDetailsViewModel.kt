@@ -1,5 +1,6 @@
 package com.example.unsplashhomework.presentation.photos.details
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.unsplashhomework.data.model.Photo
 import com.example.unsplashhomework.domain.PhotoLikeUseCase
@@ -31,6 +32,7 @@ class OnePhotoDetailsViewModel @Inject constructor(
             }
         }
     }
+
     fun like(item: Photo) {
         viewModelScope.launch(Dispatchers.IO + handler) {
             photoLikeUseCase.likePhoto(item)

@@ -33,3 +33,7 @@ const val TOKEN_SHARED_NAME ="Pref_Token"
 //три
 //const val ACCESS_KEY = "aFYYZK6kx8GMEoIHFhzT27rhwgZZtnENvc0M8mAW7XI"
 //const val SECRET_KEY = "cOKBHRzF_cc6Cer9SKQ4gR_Y4vD-YFE2u-YGbLYqEMA"
+
+//четыре
+//const val ACCESS_KEY = "mj_2vu5NRd4iwh6pYzpqOymkmK79_WqclNutm5-O2UQ"
+//const val SECRET_KEY = "C_vgTr-b2b6-ZdhllFr35MO5uNLk5mxGmFpuoq4-Bt0"
