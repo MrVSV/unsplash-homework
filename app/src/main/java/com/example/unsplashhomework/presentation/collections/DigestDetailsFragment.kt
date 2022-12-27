@@ -19,7 +19,7 @@ class DigestDetailsFragment : BaseFragment<FragmentDigestDetailsBinding>() {
         super.onViewCreated(view, savedInstanceState)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
+
+
+
 }
