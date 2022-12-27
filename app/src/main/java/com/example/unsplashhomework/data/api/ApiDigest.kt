@@ -9,8 +9,8 @@ interface ApiDigest {
     suspend fun getDigests(@Query("page") page: Int): DigestListDto
 
 //    @GET("photos/{id}")
-//    suspend fun getPhotoDetails(@Path("id") id: String): PhotoDetailsDto
-//
+//    suspend fun getDigestDetails(@Path("id") id: String): PhotoDetailsDto
+
 //    @POST("photos/{id}/like")
 //    suspend fun like(@Path("id") id: String): WrapperPhotoDto
 //
