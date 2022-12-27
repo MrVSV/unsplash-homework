@@ -26,6 +26,7 @@
     <string name="error_text"> "Ошибка загрузки!\n
         Приносим извинения за предоставленные неудобства"</string>
     <string name="auth_success">Successful authorisation</string>
+    <string name="search_hint">request</string>
     <!--Авторизация прошла успешно-->
     <!--Пропустить. Войти через приложение-->
 </resources>

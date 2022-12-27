@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import com.example.unsplashhomework.data.model.Photo
+import com.example.unsplashhomework.data.state.ClickableView
 import com.example.unsplashhomework.databinding.PhotoViewHolderBinding
 
 

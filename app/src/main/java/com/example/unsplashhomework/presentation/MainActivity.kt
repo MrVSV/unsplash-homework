@@ -4,8 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.unsplashhomework.R
 import com.example.unsplashhomework.databinding.ActivityMainBinding
@@ -27,18 +25,18 @@ class MainActivity : AppCompatActivity() {
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
 
-        val appBarConfiguration = AppBarConfiguration(setOf(
-            R.id.navigation_photos, R.id.navigation_digest, R.id.navigation_user
-        ))
-        setupActionBarWithNavController(navController, appBarConfiguration)
+//        val appBarConfiguration = AppBarConfiguration(setOf(
+//            R.id.navigation_photos, R.id.navigation_collections, R.id.navigation_user
+//        ))
+//        setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
         navController.addOnDestinationChangedListener{ _, destination, _ ->
             if (destination.id == R.id.navigation_onboarding ||destination.id == R.id.authFragment) {
-                supportActionBar?.hide()
+//                supportActionBar?.hide()
                 navView.visibility = View.GONE
             } else {
-                supportActionBar?.hide()
+//                supportActionBar?.show()
                 navView.visibility = View.VISIBLE
             }
         }

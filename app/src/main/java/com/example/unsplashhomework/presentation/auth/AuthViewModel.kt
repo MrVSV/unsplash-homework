@@ -2,7 +2,7 @@ package com.example.unsplashhomework.presentation.auth
 
 import androidx.lifecycle.viewModelScope
 import com.example.unsplashhomework.data.api.ApiToken
-import com.example.unsplashhomework.presentation.auth.state.LoadState
+import com.example.unsplashhomework.data.state.LoadState
 import com.example.unsplashhomework.tools.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class AuthViewModel @Inject constructor(private val apiToken: ApiToken): BaseViewModel() {
+class AuthViewModel @Inject constructor(private val apiToken: ApiToken) : BaseViewModel() {
 
     private val _token = MutableSharedFlow<String>()
     val token = _token.asSharedFlow()
@@ -40,13 +40,10 @@ class AuthViewModel @Inject constructor(private val apiToken: ApiToken): BaseVie
                     _loadState.emit(LoadState.ERROR.apply { message = t.message.toString() })
                     PLUG
                 }
-
                 _token.emit(accessToken)
                 _loadState.emit(LoadState.SUCCESS)
-
             }
     }
-
 
     companion object {
         const val PLUG = ""

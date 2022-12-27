@@ -1,5 +1,7 @@
 package com.example.unsplashhomework.data.repository
 
+import android.content.ContentValues
+import android.util.Log
 import androidx.paging.*
 import com.example.unsplashhomework.data.api.photodto.WrapperPhotoDto
 import com.example.unsplashhomework.data.local.entity.PhotoEntity
@@ -16,19 +18,21 @@ class PhotosPagingSourceRepository @Inject constructor(
 ) {
 
     @OptIn(ExperimentalPagingApi::class)
-    fun getFlowPhoto(): Flow<PagingData<Photo>> {
+    fun getFlowPhoto(query:String): Flow<PagingData<Photo>> {
+        Log.d(ContentValues.TAG, "getFlowPhoto: ")
         return Pager(
             config = PagingConfig(
                 pageSize = 10,
                 enablePlaceholders = false
             ),
-            remoteMediator = PhotosRemoteMediator(local, remote),
+            remoteMediator = PhotosRemoteMediator(local, remote, query),
             pagingSourceFactory = { local.getPagingData() }
         ).flow.map {
             it.map { entity ->
                 entity.toPhoto()
             }
         }
+
     }
 
     suspend fun setLike(id: String): WrapperPhotoDto = remote.likePhoto(id)
