@@ -1,5 +1,7 @@
 package com.example.unsplashhomework.data.api.photodto
 
+import com.example.unsplashhomework.data.model.Urls
+
 data class UrlsDto(
     val full: String,
     val raw: String,
@@ -7,4 +9,6 @@ data class UrlsDto(
     val small: String,
     val smallS3: String,
     val thumb: String
-)
+) {
+    fun toPhotoDetailsUrls() = Urls(raw, regular)
+}

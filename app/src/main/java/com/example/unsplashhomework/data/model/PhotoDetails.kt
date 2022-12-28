@@ -1,16 +1,57 @@
 package com.example.unsplashhomework.data.model
 
 import com.example.unsplashhomework.data.api.photodto.*
+import com.google.gson.annotations.SerializedName
 
 data class PhotoDetails(
     val id: String,
     val downloads: Int,
     val likes: Int,
     val likedByUser: Boolean,
-    val exif: ExifDto,
-    val location: LocationDto,
-    val tags: List<TagDto>,
-    val urls: UrlsDto,
-    val links: LinksDto,
-    val user: UserDto
+    val exif: Exif,
+    val location: Location,
+    val tags: List<Tags>,
+    val urls: Urls,
+    val user: User
+)
+
+data class Location(
+    val city: String?,
+    val position: Position
+)
+
+data class Tags(
+    val title: String?
+)
+
+data class Exif(
+    val make: String?,
+    val model: String?,
+    val name: String?,
+    val exposureTime: String?,
+    val aperture: String?,
+    val focalLength: String?,
+    val iso: Int?
+)
+
+data class Position(
+    val latitude: Double?,
+    val longitude: Double?
+)
+
+data class Urls(
+    val raw: String,
+    val regular: String
+)
+
+data class User(
+    val bio: String?,
+    val name: String,
+    @SerializedName("profile_image")
+    val profileImage: ProfileImage,
+    val username: String
+)
+
+data class ProfileImage(
+    val small: String
 )

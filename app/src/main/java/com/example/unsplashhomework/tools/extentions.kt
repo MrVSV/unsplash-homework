@@ -8,23 +8,29 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.unsplashhomework.R
 import com.example.unsplashhomework.data.api.digestdto.DigestDto
 import com.example.unsplashhomework.data.api.photodto.PhotoDto
+import com.example.unsplashhomework.data.api.photodto.TagDto
 import com.example.unsplashhomework.data.model.Digest
 import com.example.unsplashhomework.data.local.entity.PhotoEntity
 import com.example.unsplashhomework.data.model.Photo
+import com.example.unsplashhomework.data.model.Tags
 
 fun List<PhotoDto>.toListPhoto(): List<Photo> {
     val newList = mutableListOf<Photo>()
 
-    this.forEach{ item->
+    this.forEach { item ->
         newList.add(item.toPhoto())
     }
     return newList
 }
 
+fun List<TagDto>.toListTag(): List<Tags> {
+    return this.map { item -> item.toPhotoDetailsTags() }
+}
+
 fun List<DigestDto>.toListDigest(): List<Digest> {
     val newList = mutableListOf<Digest>()
 
-    this.forEach{ item->
+    this.forEach { item ->
         newList.add(item.toDigest())
     }
     return newList
@@ -36,7 +42,7 @@ fun List<PhotoDto>.toListPhotoEntity(): List<PhotoEntity> {
     }
 }
 
-fun ImageView.loadImage(urls:String){
+fun ImageView.loadImage(urls: String) {
     Glide.with(this)
         .load(urls)
         .error(R.drawable.error_image)
@@ -45,7 +51,7 @@ fun ImageView.loadImage(urls:String){
         .into(this)
 }
 
-fun ImageView.loadImage(imageId:Int){
+fun ImageView.loadImage(imageId: Int) {
     Glide.with(this)
         .load(imageId)
         .error(R.drawable.error_image)
@@ -53,7 +59,7 @@ fun ImageView.loadImage(imageId:Int){
         .into(this)
 }
 
-fun SearchView.setChangeTextListener(block:(query:String)->Unit){
+fun SearchView.setChangeTextListener(block: (query: String) -> Unit) {
 
     this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 

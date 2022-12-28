@@ -103,8 +103,7 @@
                     android:layout_gravity="center"
                     android:layout_marginEnd="10dp"
                     android:backgroundTint="#00FFFFFF"
-                    app:srcCompat="@drawable/like_selector"
-                    tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
+                    app:srcCompat="@drawable/like_selector" />
 
             </LinearLayout>
 
@@ -191,4 +190,30 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
+    <FrameLayout
+        android:visibility="invisible"
+        android:id="@+id/error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="45dp"
+        android:paddingVertical="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/black_100">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/no_connection"
+            android:layout_gravity="center_vertical"
+            android:textColor="#F63F3F" />
+
+        <ImageView
+            android:layout_gravity="end|center_vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_wifi_off"
+            app:tint="@color/error_text" />
+    </FrameLayout>
 </LinearLayout>

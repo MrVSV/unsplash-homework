@@ -1,5 +1,6 @@
 package com.example.unsplashhomework.data.api.photodto
 
+import com.example.unsplashhomework.data.model.User
 import com.google.gson.annotations.SerializedName
 
 data class UserDto(
@@ -8,4 +9,6 @@ data class UserDto(
     @SerializedName("profile_image")
     val profileImage: ProfileImageDto,
     val username: String
-)
+) {
+    fun toPhotoDetailsUser() = User(bio, name, profileImage.toPhotoDetailsProfileImage(), username)
+}

@@ -1,5 +1,7 @@
 package com.example.unsplashhomework.data.api.photodto
 
+import com.example.unsplashhomework.data.model.PhotoDetails
+import com.example.unsplashhomework.tools.toListTag
 import com.google.gson.annotations.SerializedName
 
 data class PhotoDetailsDto(
@@ -14,4 +16,16 @@ data class PhotoDetailsDto(
     val urls: UrlsDto,
     val links: LinksDto,
     val user: UserDto
-)
+) {
+    fun toPhotoDetails() = PhotoDetails(
+        id = id,
+        downloads = downloads,
+        likedByUser = likedByUser,
+        likes = likes,
+        exif = exif.toPhotoDetailsExif(),
+        location = location.toPhotoDetailsLocation(),
+        tags = tags.toListTag(),
+        urls = urls.toPhotoDetailsUrls(),
+        user = user.toPhotoDetailsUser()
+    )
+}

@@ -39,7 +39,7 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
 
         observe()
         loadStateItemsObserve()
-        loadStateLick()
+        loadStateLike()
         settingAdapter()
         setSearchView()
     }
@@ -82,7 +82,7 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
         }
     }
 
-    private fun loadStateLick() {
+    private fun loadStateLike() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.loadState.collect { loadStateLike ->
                 binding.error.isVisible =

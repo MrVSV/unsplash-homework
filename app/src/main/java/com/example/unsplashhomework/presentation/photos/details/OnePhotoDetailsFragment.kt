@@ -19,14 +19,18 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.unsplashhomework.R
+import com.example.unsplashhomework.data.model.PhotoDetails
+import com.example.unsplashhomework.data.state.LoadState
 import com.example.unsplashhomework.databinding.FragmentOnePhotoDetailsBinding
 import com.example.unsplashhomework.tools.BaseFragment
 import com.example.unsplashhomework.tools.loadImage
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 import java.io.*
 import java.net.HttpURLConnection
 import java.net.MalformedURLException
@@ -64,6 +68,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         viewModel.loadPhotoDetails(args.photoId)
         getCurrentState()
         setLocationClick()
+        loadStateLike()
     }
 
     private fun getCurrentState() {
@@ -86,6 +91,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
                 setUploadedLocation(state)
                 setToolbar(state.data.id)
                 setDownload(state.data.urls.raw)
+                setLikeClick(state.data)
             }
             is DetailsState.LoadingError -> {
                 Toast.makeText(context, "Loading Error", Toast.LENGTH_SHORT).show()
@@ -131,6 +137,21 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
             if (lat != null && lon != null ) {
                 showLocationOnMap(Uri.parse("geo: $lat,$lon"))
             }
+        }
+    }
+
+    private fun loadStateLike() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.loadState.collect { loadStateLike ->
+                binding.error.isVisible =
+                    loadStateLike == LoadState.ERROR
+            }
+        }
+    }
+
+    private fun setLikeClick(photo: PhotoDetails) {
+        binding.isLiked.setOnClickListener {
+            viewModel.like(photo)
         }
     }
 
