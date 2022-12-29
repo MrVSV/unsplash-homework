@@ -1,5 +1,8 @@
 package com.example.unsplashhomework.presentation.photos.details
 
+import android.app.DownloadManager
+import android.net.Uri
+import android.os.Environment
 import androidx.lifecycle.viewModelScope
 import com.example.unsplashhomework.domain.LikeDetailPhotoUseCaseImpl
 import com.example.unsplashhomework.domain.OnePhotoDetailsUseCaseImpl
@@ -10,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import java.io.File
 import javax.inject.Inject
 
 //TODO:здесь должна быть зависимость на интерфейсы юзкейсов, переписать,
@@ -41,5 +45,17 @@ class OnePhotoDetailsViewModel @Inject constructor(
                 _state.value = DetailsState.Success(a)
 
         }
+    }
+
+    fun startDownLoad(url: String, downloadManager: DownloadManager) {
+        val downloadRequest = DownloadManager.Request(Uri.parse(url))
+            .setAllowedNetworkTypes(DownloadManager.Request.NETWORK_WIFI)
+            .setTitle("Unsplash photo")
+            .setDestinationInExternalPublicDir(
+                Environment.DIRECTORY_DOWNLOADS,
+                File.separator + "fromUnsplash.jpg")
+            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+
+        downloadManager.enqueue(downloadRequest)
     }
 }

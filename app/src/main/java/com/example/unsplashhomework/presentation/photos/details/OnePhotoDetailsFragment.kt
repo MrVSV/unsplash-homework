@@ -1,7 +1,9 @@
 package com.example.unsplashhomework.presentation.photos.details
 
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.app.DownloadManager
 import android.content.ContentValues
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -49,6 +51,10 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
     private var lat: Double? = null
     private var lon: Double? = null
 
+    private val downloadManager by lazy {
+        requireContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
+    }
+
     private var enableDownloadFlag = false
 
     private val launcher = registerForActivityResult(
@@ -88,8 +94,8 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
                 bindUploadedImages(state)
                 setUploadedLocation(state)
                 setToolbar(state.data.id)
-                setDownload(state.data.urls.raw)
                 setLikeClick(state.data)
+                setDownloadClick(state.data.urls.raw, downloadManager)
             }
             is DetailsState.LoadingError -> {
                 Toast.makeText(context, "Loading Error", Toast.LENGTH_SHORT).show()
@@ -145,6 +151,12 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
                 binding.error.isVisible =
                     loadStateLike == LoadState.ERROR
             }
+        }
+    }
+
+    private fun setDownloadClick(url: String, downloadManager: DownloadManager){
+        binding.downloadButton.setOnClickListener {
+            viewModel.startDownLoad(url, downloadManager)
         }
     }
 
