@@ -1,7 +1,7 @@
 package com.example.unsplashhomework.presentation.collections.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.unsplashhomework.data.model.Digest
+import com.example.unsplashhomework.domain.model.Digest
 
 class DigestDiff : DiffUtil.ItemCallback<Digest>() {
 

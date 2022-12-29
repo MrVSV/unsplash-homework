@@ -3,7 +3,7 @@ package com.example.unsplashhomework.data.local.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.unsplashhomework.data.model.Photo
+import com.example.unsplashhomework.domain.model.Photo
 
 
 /**Для каждой фотографии в списке отобразить картинку, лайк от текущего пользователя (или

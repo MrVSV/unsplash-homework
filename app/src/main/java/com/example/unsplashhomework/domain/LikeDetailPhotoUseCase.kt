@@ -1,6 +1,6 @@
 package com.example.unsplashhomework.domain
 
-import com.example.unsplashhomework.data.model.PhotoDetails
+import com.example.unsplashhomework.domain.model.PhotoDetails
 
 interface LikeDetailPhotoUseCase {
 

@@ -2,7 +2,7 @@ package com.example.unsplashhomework.presentation.collections
 
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
-import com.example.unsplashhomework.data.model.Digest
+import com.example.unsplashhomework.domain.model.Digest
 import com.example.unsplashhomework.domain.DigestPagingUseCase
 import com.example.unsplashhomework.tools.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel

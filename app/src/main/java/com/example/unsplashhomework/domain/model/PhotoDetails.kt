@@ -1,4 +1,4 @@
-package com.example.unsplashhomework.data.model
+package com.example.unsplashhomework.domain.model
 
 import com.example.unsplashhomework.data.api.photodto.*
 import com.google.gson.annotations.SerializedName

@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.paging.*
 import com.example.unsplashhomework.data.api.photodto.WrapperPhotoDto
 import com.example.unsplashhomework.data.local.entity.PhotoEntity
-import com.example.unsplashhomework.data.model.Photo
+import com.example.unsplashhomework.domain.model.Photo
 import com.example.unsplashhomework.domain.LocalRepository
 import com.example.unsplashhomework.domain.PhotoRemoteRepository
 import kotlinx.coroutines.flow.Flow

@@ -46,7 +46,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     android:background="@color/green"
-                    app:title="Лента"
+                    app:title="@string/feed"
                     app:menu="@menu/search_menu"
                     />
 

@@ -1,7 +1,7 @@
 package com.example.unsplashhomework.data.api.digestdto
 
 
-import com.example.unsplashhomework.data.model.Digest
+import com.example.unsplashhomework.domain.model.Digest
 import com.google.gson.annotations.SerializedName
 
 data class DigestDto(

@@ -3,7 +3,7 @@ package com.example.unsplashhomework.presentation.collections.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
-import com.example.unsplashhomework.data.model.Digest
+import com.example.unsplashhomework.domain.model.Digest
 import com.example.unsplashhomework.databinding.DigestViewHolderBinding
 
 

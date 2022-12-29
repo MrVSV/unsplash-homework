@@ -1,6 +1,6 @@
 package com.example.unsplashhomework.data.api.photodto
 
-import com.example.unsplashhomework.data.model.PhotoDetails
+import com.example.unsplashhomework.domain.model.PhotoDetails
 import com.example.unsplashhomework.tools.toListTag
 import com.google.gson.annotations.SerializedName
 

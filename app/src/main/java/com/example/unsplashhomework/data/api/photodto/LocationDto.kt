@@ -1,6 +1,6 @@
 package com.example.unsplashhomework.data.api.photodto
 
-import com.example.unsplashhomework.data.model.Location
+import com.example.unsplashhomework.domain.model.Location
 
 data class LocationDto(
     val city: String?,

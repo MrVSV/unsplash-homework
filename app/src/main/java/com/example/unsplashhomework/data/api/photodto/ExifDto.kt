@@ -1,6 +1,6 @@
 package com.example.unsplashhomework.data.api.photodto
 
-import com.example.unsplashhomework.data.model.Exif
+import com.example.unsplashhomework.domain.model.Exif
 
 data class ExifDto(
     val make: String?,

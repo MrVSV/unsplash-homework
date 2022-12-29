@@ -7,7 +7,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.unsplashhomework.data.model.Digest
+import com.example.unsplashhomework.domain.model.Digest
 import com.example.unsplashhomework.databinding.FragmentDigestBinding
 import com.example.unsplashhomework.presentation.collections.adapter.DigestPagingAdapter
 import com.example.unsplashhomework.tools.BaseFragment

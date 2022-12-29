@@ -9,10 +9,10 @@ import com.example.unsplashhomework.R
 import com.example.unsplashhomework.data.api.digestdto.DigestDto
 import com.example.unsplashhomework.data.api.photodto.PhotoDto
 import com.example.unsplashhomework.data.api.photodto.TagDto
-import com.example.unsplashhomework.data.model.Digest
+import com.example.unsplashhomework.domain.model.Digest
 import com.example.unsplashhomework.data.local.entity.PhotoEntity
-import com.example.unsplashhomework.data.model.Photo
-import com.example.unsplashhomework.data.model.Tags
+import com.example.unsplashhomework.domain.model.Photo
+import com.example.unsplashhomework.domain.model.Tags
 
 fun List<PhotoDto>.toListPhoto(): List<Photo> {
     val newList = mutableListOf<Photo>()

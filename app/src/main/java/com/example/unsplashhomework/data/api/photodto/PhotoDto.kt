@@ -1,7 +1,7 @@
 package com.example.unsplashhomework.data.api.photodto
 
 import com.example.unsplashhomework.data.local.entity.PhotoEntity
-import com.example.unsplashhomework.data.model.Photo
+import com.example.unsplashhomework.domain.model.Photo
 import com.google.gson.annotations.SerializedName
 
 data class PhotoDto(

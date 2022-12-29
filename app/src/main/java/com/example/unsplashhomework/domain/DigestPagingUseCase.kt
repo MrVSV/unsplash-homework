@@ -4,7 +4,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import com.example.unsplashhomework.data.model.Digest
+import com.example.unsplashhomework.domain.model.Digest
 import com.example.unsplashhomework.data.repository.DigestPagingSource
 import javax.inject.Inject
 

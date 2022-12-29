@@ -1,6 +1,6 @@
 package com.example.unsplashhomework.data.api.photodto
 
-import com.example.unsplashhomework.data.model.ProfileImage
+import com.example.unsplashhomework.domain.model.ProfileImage
 
 data class ProfileImageDto(
     val large: String,

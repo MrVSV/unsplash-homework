@@ -1,6 +1,6 @@
 package com.example.unsplashhomework.domain
 
-import com.example.unsplashhomework.data.model.Photo
+import com.example.unsplashhomework.domain.model.Photo
 import com.example.unsplashhomework.data.repository.PhotosPagingSourceRepository
 import javax.inject.Inject
 

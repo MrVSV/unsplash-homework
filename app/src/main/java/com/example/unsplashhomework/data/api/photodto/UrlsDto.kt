@@ -1,6 +1,6 @@
 package com.example.unsplashhomework.data.api.photodto
 
-import com.example.unsplashhomework.data.model.Urls
+import com.example.unsplashhomework.domain.model.Urls
 
 data class UrlsDto(
     val full: String,

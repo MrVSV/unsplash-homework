@@ -1,6 +1,6 @@
 package com.example.unsplashhomework.data.api.photodto
 
-import com.example.unsplashhomework.data.model.User
+import com.example.unsplashhomework.domain.model.User
 import com.google.gson.annotations.SerializedName
 
 data class UserDto(

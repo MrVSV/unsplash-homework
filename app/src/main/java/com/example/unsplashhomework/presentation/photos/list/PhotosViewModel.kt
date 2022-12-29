@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
-import com.example.unsplashhomework.data.model.Photo
+import com.example.unsplashhomework.domain.model.Photo
 import com.example.unsplashhomework.data.state.LoadState
 import com.example.unsplashhomework.domain.PhotoLikeUseCase
 import com.example.unsplashhomework.domain.PhotosPagingUseCase

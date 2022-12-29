@@ -1,7 +1,7 @@
 package com.example.unsplashhomework.presentation.photos.list.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.unsplashhomework.data.model.Photo
+import com.example.unsplashhomework.domain.model.Photo
 
 class PhotoDiff : DiffUtil.ItemCallback<Photo>() {
 

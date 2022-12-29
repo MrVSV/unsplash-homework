@@ -1,7 +1,7 @@
 package com.example.unsplashhomework.presentation.collections.adapter
 
 import androidx.recyclerview.widget.RecyclerView
-import com.example.unsplashhomework.data.model.Digest
+import com.example.unsplashhomework.domain.model.Digest
 import com.example.unsplashhomework.databinding.DigestViewHolderBinding
 import com.example.unsplashhomework.tools.loadImage
 

@@ -24,7 +24,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.unsplashhomework.R
-import com.example.unsplashhomework.data.model.PhotoDetails
+import com.example.unsplashhomework.domain.model.PhotoDetails
 import com.example.unsplashhomework.data.state.LoadState
 import com.example.unsplashhomework.databinding.FragmentOnePhotoDetailsBinding
 import com.example.unsplashhomework.tools.BaseFragment
@@ -83,8 +83,6 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         when (state) {
             DetailsState.NotStartedYet -> {}
             is DetailsState.Success -> {
-                //TODO: поставить/убрать лайк
-                //binding.isLiked = ?
 
                 bindUploadedTexts(state)
                 bindUploadedImages(state)
@@ -106,6 +104,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
 
         binding.location.text = state.data.location.city ?: "N/A"
         binding.currentLikes.text = state.data.likes.toString()
+        binding.isLiked.isSelected = state.data.likedByUser
 
         binding.tags.text = state.data.tags.joinToString { tag ->
             "#${tag.title ?: "N/A"}"
@@ -134,7 +133,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
 
     private fun setLocationClick() {
         binding.locationButton.setOnClickListener {
-            if (lat != null && lon != null ) {
+            if (lat != null && lon != null) {
                 showLocationOnMap(Uri.parse("geo: $lat,$lon"))
             }
         }
@@ -170,7 +169,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         val intent = Intent(Intent.ACTION_VIEW).apply {
             data = locationUri
         }
-            startActivity(intent)
+        startActivity(intent)
     }
 
     private fun setToolbar(id: String) {
@@ -186,7 +185,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         startActivity(Intent.createChooser(sharingIntent, "Share using"))
     }
 
-    //TODO: Переписать на download manager с нотификацией и загрузкой в фоне, тестировать отсутствие сети
+//TODO: Переписать на download manager с нотификацией и загрузкой в фоне, тестировать отсутствие сети
     /** сюда не лезу...единственно что что либо убери отсюда сет он клик лисененр, и вызывай этот
      * методод внутри лиснера, либо переименую этот медот так что бы было понятно что
      * это именно действие по клику. Просто по названию должно быть четко понятно что это такое*/

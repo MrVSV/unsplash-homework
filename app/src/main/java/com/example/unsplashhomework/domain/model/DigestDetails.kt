@@ -1,4 +1,4 @@
-package com.example.unsplashhomework.data.model
+package com.example.unsplashhomework.domain.model
 
 data class DigestDetails(
     val id: String,
