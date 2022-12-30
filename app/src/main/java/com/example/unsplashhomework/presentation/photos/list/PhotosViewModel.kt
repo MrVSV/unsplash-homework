@@ -1,6 +1,5 @@
 package com.example.unsplashhomework.presentation.photos.list
 
-import android.content.ContentValues.TAG
 import android.util.Log
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -30,8 +29,8 @@ class PhotosViewModel @Inject constructor(
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun getPhoto(): Flow<PagingData<Photo>> {
-        return if (query.value == "") {
-            Log.d(TAG, "getPhoto: $query")
+        Log.d("Query", "viewModel: ${query.asStateFlow().value}")
+        return if (query.asStateFlow().value == "") {
             query.asStateFlow()
                 .flatMapLatest { photosPagingUseCase.getPhoto(it) }
                 .cachedIn(viewModelScope)
