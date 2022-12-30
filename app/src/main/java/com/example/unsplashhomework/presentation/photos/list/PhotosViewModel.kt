@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.unsplashhomework.data.state.LoadState
+import com.example.unsplashhomework.data.state.Requester
 import com.example.unsplashhomework.domain.PhotoLikeUseCase
 import com.example.unsplashhomework.domain.PhotosPagingUseCase
 import com.example.unsplashhomework.domain.SearchPhotoUseCase
@@ -22,24 +23,24 @@ import javax.inject.Inject
 class PhotosViewModel @Inject constructor(
     private val photosPagingUseCase: PhotosPagingUseCase,
     private val photoLikeUseCase: PhotoLikeUseCase,
-    private val searchPhotoUseCase: SearchPhotoUseCase
+    /**у тебя вью модель не будет работь с этим юзкейсом на прямую
+     * зачем он тут> */
+    private val searchPhotoUseCase: SearchPhotoUseCase,
 ) : BaseViewModel() {
 
     private val query = MutableStateFlow("")
+    /** это переменная она поидеи должнать всегда в верху
+     * мне так просто проще было именно в тот момент*/
+    private var job: Job? = null
 
+    /** тут далой условие вопервых слишком по уебански выглядить во вторых так не будет работать
+     * потому что ты меняешь не состояния потока а сам поток
+     * поэтомы оставляем только так, а вся магия по выбору откуда грузить ложится на плечи медиатора*/
     @OptIn(ExperimentalCoroutinesApi::class)
-    fun getPhoto(): Flow<PagingData<Photo>> {
-        Log.d("Query", "viewModel: ${query.asStateFlow().value}")
-        return if (query.asStateFlow().value == "") {
-            query.asStateFlow()
-                .flatMapLatest { photosPagingUseCase.getPhoto(it) }
-                .cachedIn(viewModelScope)
-        } else {
-            query.asStateFlow()
-                .flatMapLatest { searchPhotoUseCase.searchPhoto(it) }
-                .cachedIn(viewModelScope)
-        }
-    }
+    fun getPhoto() = query.asStateFlow()
+        .flatMapLatest { photosPagingUseCase.getPhoto(Requester.ALL_LIST.apply { query =it }) }
+        .cachedIn(viewModelScope)
+
 
     fun like(item: Photo) {
         viewModelScope.launch(Dispatchers.IO + handler) {
@@ -48,7 +49,6 @@ class PhotosViewModel @Inject constructor(
         }
     }
 
-    private var job: Job? = null
     fun setQuery(newText: String, refresh: () -> Unit) {
         job?.cancel()
         job = viewModelScope.launch() {

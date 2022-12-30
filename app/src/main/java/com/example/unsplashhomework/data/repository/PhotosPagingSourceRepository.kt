@@ -19,22 +19,19 @@ class PhotosPagingSourceRepository @Inject constructor(
 ) {
 
     @OptIn(ExperimentalPagingApi::class)
-    fun getFlowPhoto(query:String, requester: Requester): Flow<PagingData<Photo>> {
-        Log.d(ContentValues.TAG, "getFlowPhoto: ")
-        return Pager(
+    fun getFlowPhoto(requester: Requester): Flow<PagingData<Photo>>
+        = Pager(
             config = PagingConfig(
                 pageSize = 10,
                 enablePlaceholders = false
             ),
-            remoteMediator = PhotosRemoteMediator(local, remote, query, requester),
+            remoteMediator = PhotosRemoteMediator(local, remote, requester),
             pagingSourceFactory = { local.getPagingData() }
         ).flow.map {
             it.map { entity ->
                 entity.toPhoto()
             }
         }
-
-    }
 
     suspend fun setLike(id: String): WrapperPhotoDto = remote.likePhoto(id)
 

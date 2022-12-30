@@ -11,8 +11,7 @@ import javax.inject.Inject
 class PhotosPagingUseCase @Inject constructor(
     private val photosRepository: PhotosPagingSourceRepository
 ) {
-    fun getPhoto(query:String): Flow<PagingData<Photo>> {
-        Log.d("Query", "getPhoto: $query")
-        return photosRepository.getFlowPhoto(query, requester = Requester.FEED)
-    }
+    fun getPhoto(requester: Requester)=
+        photosRepository.getFlowPhoto(requester)
+
 }

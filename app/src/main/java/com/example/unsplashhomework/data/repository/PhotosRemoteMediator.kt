@@ -15,7 +15,6 @@ import javax.inject.Inject
 class PhotosRemoteMediator @Inject constructor(
     private val local: LocalRepository,
     private val remote: PhotoRemoteRepository,
-    private val query: String,
     private val requester: Requester
 ) : RemoteMediator<Int, PhotoEntity>() {
 
@@ -33,14 +32,9 @@ class PhotosRemoteMediator @Inject constructor(
         pageIndex = getIndex(loadType) ?: return MediatorResult.Success(true)
 
         return try {
-            val response = when (requester) {
-                Requester.FEED -> {
-                    remote.getPhotos(page = pageIndex).toListEntity()
-                }
-                Requester.SEARCH -> {
-                    remote.searchPhotos(query = query, page = pageIndex).results.toListPhotoEntity()
-                }
-            }
+
+            val response = remote.test(requester,pageIndex)
+
             if (loadType == LoadType.REFRESH) local.refresh(response)
             else local.insertData(response)
             MediatorResult.Success(endOfPaginationReached = response.isEmpty())

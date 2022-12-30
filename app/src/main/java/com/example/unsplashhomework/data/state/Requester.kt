@@ -1,8 +1,5 @@
 package com.example.unsplashhomework.data.state
 
-enum class Requester (
-    val query: String
-        ) {
-    FEED(""),
-    SEARCH("")
+enum class Requester (var query: String="") {
+    ALL_LIST,COLLECTIONS
 }
