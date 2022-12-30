@@ -4,8 +4,8 @@ import com.example.unsplashhomework.data.repository.PhotosPagingSourceRepository
 import com.example.unsplashhomework.data.state.Requester
 import javax.inject.Inject
 
-class PhotosPagingUseCase @Inject constructor(
+class SearchPhotoUseCase @Inject constructor(
     private val photosRepository: PhotosPagingSourceRepository
 ) {
-    fun getPhoto(query:String) = photosRepository.getFlowPhoto(query, requester = Requester.FEED)
+    fun searchPhoto(query:String) = photosRepository.getFlowPhoto(query, requester = Requester.SEARCH)
 }

@@ -5,6 +5,7 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.example.unsplashhomework.data.local.entity.PhotoEntity
+import com.example.unsplashhomework.data.state.Requester
 import com.example.unsplashhomework.domain.LocalRepository
 import com.example.unsplashhomework.domain.PhotoRemoteRepository
 import com.example.unsplashhomework.tools.toListPhotoEntity
@@ -14,7 +15,8 @@ import javax.inject.Inject
 class PhotosRemoteMediator @Inject constructor(
     private val local: LocalRepository,
     private val remote: PhotoRemoteRepository,
-    private val query: String
+    private val query: String,
+    private val requester: Requester
 ) : RemoteMediator<Int, PhotoEntity>() {
 
     private var pageIndex = 0
@@ -31,11 +33,13 @@ class PhotosRemoteMediator @Inject constructor(
         pageIndex = getIndex(loadType) ?: return MediatorResult.Success(true)
 
         return try {
-            val response = if (query=="") {
-                remote.getPhotos(page = pageIndex).toListEntity()
-            }
-            else{
-                remote.searchPhotos(query = query, page = pageIndex).results.toListPhotoEntity()
+            val response = when (requester) {
+                Requester.FEED -> {
+                    remote.getPhotos(page = pageIndex).toListEntity()
+                }
+                Requester.SEARCH -> {
+                    remote.searchPhotos(query = query, page = pageIndex).results.toListPhotoEntity()
+                }
             }
             if (loadType == LoadType.REFRESH) local.refresh(response)
             else local.insertData(response)
