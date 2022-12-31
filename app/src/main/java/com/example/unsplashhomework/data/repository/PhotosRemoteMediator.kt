@@ -8,7 +8,6 @@ import com.example.unsplashhomework.data.local.entity.PhotoEntity
 import com.example.unsplashhomework.data.state.Requester
 import com.example.unsplashhomework.domain.LocalRepository
 import com.example.unsplashhomework.domain.PhotoRemoteRepository
-import com.example.unsplashhomework.tools.toListPhotoEntity
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
@@ -33,7 +32,7 @@ class PhotosRemoteMediator @Inject constructor(
 
         return try {
 
-            val response = remote.test(requester,pageIndex)
+            val response = remote.test(requester,pageIndex).toListEntity()
 
             if (loadType == LoadType.REFRESH) local.refresh(response)
             else local.insertData(response)

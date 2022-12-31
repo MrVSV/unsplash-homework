@@ -4,11 +4,8 @@ import com.example.unsplashhomework.data.api.ApiPhotos
 import com.example.unsplashhomework.data.api.photodto.PhotoDetailsDto
 import com.example.unsplashhomework.data.api.photodto.PhotoListDto
 import com.example.unsplashhomework.data.api.photodto.WrapperPhotoDto
-import com.example.unsplashhomework.domain.PhotoRemoteRepository
-import com.example.unsplashhomework.data.api.photodto.SearchDto
-import com.example.unsplashhomework.data.local.entity.PhotoEntity
 import com.example.unsplashhomework.data.state.Requester
-import com.example.unsplashhomework.tools.toListPhotoEntity
+import com.example.unsplashhomework.domain.PhotoRemoteRepository
 import javax.inject.Inject
 
 class PhotoRemoteRepositoryImpl @Inject constructor(private val apiPhotos: ApiPhotos) :
@@ -19,7 +16,7 @@ class PhotoRemoteRepositoryImpl @Inject constructor(private val apiPhotos: ApiPh
             Requester.ALL_LIST -> checkRequester(requester.query, page)
             Requester.COLLECTIONS -> {
                 /**  а вот тут вызов колеекции*/
-                emptyList<PhotoEntity>()
+                PhotoListDto()
             }
         }
 
@@ -29,9 +26,9 @@ class PhotoRemoteRepositoryImpl @Inject constructor(private val apiPhotos: ApiPh
      * ааа .... надо просто думать что возвращаете в одном месте аррей лист в другом просто лист
      * поэтому вам так просто не выбрать, что бы не удалили что то отвалится*/
 
-    suspend fun checkRequester(query: String, page: Int) =
-        if (query == "") apiPhotos.getPhotos(page).toListEntity()
-        else apiPhotos.searchPhotos(query, page).results.toListPhotoEntity()
+    private suspend fun checkRequester(query: String, page: Int) =
+        if (query == "") apiPhotos.getPhotos(page)
+        else apiPhotos.searchPhotos(query, page).results
 
 
  /*   override suspend fun getPhotos(page: Int): PhotoListDto = apiPhotos.getPhotos(page)

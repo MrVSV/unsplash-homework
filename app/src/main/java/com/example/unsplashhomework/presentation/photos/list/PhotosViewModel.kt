@@ -1,19 +1,15 @@
 package com.example.unsplashhomework.presentation.photos.list
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
-import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.example.unsplashhomework.data.state.LoadState
 import com.example.unsplashhomework.data.state.Requester
 import com.example.unsplashhomework.domain.PhotoLikeUseCase
 import com.example.unsplashhomework.domain.PhotosPagingUseCase
-import com.example.unsplashhomework.domain.SearchPhotoUseCase
 import com.example.unsplashhomework.domain.model.Photo
 import com.example.unsplashhomework.tools.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
@@ -22,10 +18,7 @@ import javax.inject.Inject
 @HiltViewModel
 class PhotosViewModel @Inject constructor(
     private val photosPagingUseCase: PhotosPagingUseCase,
-    private val photoLikeUseCase: PhotoLikeUseCase,
-    /**у тебя вью модель не будет работь с этим юзкейсом на прямую
-     * зачем он тут> */
-    private val searchPhotoUseCase: SearchPhotoUseCase,
+    private val photoLikeUseCase: PhotoLikeUseCase
 ) : BaseViewModel() {
 
     private val query = MutableStateFlow("")
