@@ -4,6 +4,7 @@ import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.unsplashhomework.data.api.ApiDigest
 import com.example.unsplashhomework.data.api.ApiPhotos
+import com.example.unsplashhomework.data.api.ApiProfile
 import com.example.unsplashhomework.data.api.photodto.PhotoDetailsDto
 import com.example.unsplashhomework.data.api.photodto.PhotoListDto
 import com.example.unsplashhomework.data.api.photodto.WrapperPhotoDto
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 class PhotoRemoteRepositoryImpl @Inject constructor(
     private val apiPhotos: ApiPhotos,
-    private val apiDigest: ApiDigest
+    private val apiDigest: ApiDigest,
+    private val apiProfile: ApiProfile
 ) :
     PhotoRemoteRepository {
 
@@ -22,7 +24,7 @@ class PhotoRemoteRepositoryImpl @Inject constructor(
         return when (requester) {
             Requester.ALL_LIST -> checkRequester(requester.param, page)
             Requester.COLLECTIONS -> apiDigest.getDigestPhotos(requester.param, page)
-
+            Requester.PROFILE -> apiProfile.getProfileLikes(requester.param, page)
         }
     }
 

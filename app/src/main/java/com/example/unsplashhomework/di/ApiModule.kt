@@ -63,4 +63,8 @@ class ApiModule {
     @Singleton
     fun provideApiDigest(retrofit: Retrofit): ApiDigest = retrofit.create(ApiDigest::class.java)
 
+    @Provides
+    @Singleton
+    fun provideApiProfile(retrofit: Retrofit): ApiProfile = retrofit.create(ApiProfile::class.java)
+
 }

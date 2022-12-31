@@ -39,9 +39,9 @@
 
     <fragment
         android:id="@+id/navigation_user"
-        android:name="com.example.unsplashhomework.presentation.user.UserFragment"
+        android:name="com.example.unsplashhomework.presentation.user.ProfileFragment"
         android:label="@string/title_user"
-        tools:layout="@layout/fragment_user" />
+        tools:layout="@layout/fragment_profile" />
 
     <fragment
         android:id="@+id/authFragment"
