@@ -42,7 +42,6 @@ class DigestDetailsFragment : BaseFragment<FragmentDigestDetailsBinding>() {
         loadStateItemsObserve()
         loadStateLike()
         settingAdapter()
-        refresh()
         initRefresher()
     }
 
@@ -100,14 +99,10 @@ class DigestDetailsFragment : BaseFragment<FragmentDigestDetailsBinding>() {
         }
     }
 
-    private fun refresh() {
-        binding.photoRecycler.isVisible = true
-        adapter.refresh()
-    }
-
     private fun initRefresher() {
         binding.swipeRefresh.setOnRefreshListener {
-            refresh()
+            binding.photoRecycler.isVisible = true
+            adapter.refresh()
             binding.swipeRefresh.isRefreshing = false
         }
     }

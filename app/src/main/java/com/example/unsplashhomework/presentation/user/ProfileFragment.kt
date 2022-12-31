@@ -1,6 +1,8 @@
 package com.example.unsplashhomework.presentation.user
 
+import android.content.ContentValues.TAG
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.view.isVisible
@@ -11,7 +13,6 @@ import com.example.unsplashhomework.data.state.ClickableView
 import com.example.unsplashhomework.data.state.LoadState
 import com.example.unsplashhomework.databinding.FragmentProfileBinding
 import com.example.unsplashhomework.domain.model.Photo
-import com.example.unsplashhomework.presentation.collections.DigestDetailsFragmentDirections
 import com.example.unsplashhomework.presentation.photos.list.adapter.PhotoPagingAdapter
 import com.example.unsplashhomework.tools.BaseFragment
 import com.example.unsplashhomework.tools.loadImage
@@ -34,26 +35,27 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        observe()
+        observe()
         showInfo()
         loadStateItemsObserve()
         loadStateLike()
         settingAdapter()
-        refresh()
         initRefresher()
     }
 
-//    private fun observe() {
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            viewModel.getPhoto().collect { pagingData ->
-//                adapter.submitData(pagingData)
-//            }
-//        }
-//    }
+    private fun observe() {
+        Log.d(TAG, "observe: ")
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.getPhoto().collect { pagingData ->
+                adapter.submitData(pagingData)
+            }
+        }
+    }
 
     private fun showInfo(){
         viewLifecycleOwner.lifecycleScope.launch {
             val profileInfo = viewModel.getProfile()
+            viewModel.setUsername(profileInfo.userName) {adapter.refresh()}
             binding.location.text = profileInfo.location
             binding.username.text = profileInfo.userName
             binding.name.text = profileInfo.name
@@ -65,7 +67,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     private fun onClick(buttonState: ClickableView, item: Photo) {
         val action =
-            DigestDetailsFragmentDirections.actionDigestDetailsFragmentToNavigationPhotoDetails(item.id)
+            ProfileFragmentDirections.actionNavigationUserToNavigationPhotoDetails(item.id)
         when (buttonState) {
             ClickableView.PHOTO ->
                 findNavController().navigate(action)
@@ -94,14 +96,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         }
     }
 
-    private fun refresh() {
-        binding.photoRecycler.isVisible = true
-        adapter.refresh()
-    }
-
     private fun initRefresher() {
         binding.swipeRefresh.setOnRefreshListener {
-            refresh()
+            binding.photoRecycler.isVisible = true
+            adapter.refresh()
             binding.swipeRefresh.isRefreshing = false
         }
     }

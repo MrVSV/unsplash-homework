@@ -40,7 +40,6 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
         loadStateLike()
         settingAdapter()
         setSearchView()
-        refresh()
         initRefresher()
     }
 
@@ -90,14 +89,10 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
         }
     }
 
-    private fun refresh(){
-        binding.photoRecycler.isVisible = true
-        adapter.refresh()
-    }
-
     private fun initRefresher(){
         binding.swipeRefresh.setOnRefreshListener {
-            refresh()
+            binding.photoRecycler.isVisible = true
+            adapter.refresh()
             binding.swipeRefresh.isRefreshing = false
         }
     }

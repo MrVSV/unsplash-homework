@@ -15,6 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/logoutBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/green"
@@ -83,11 +84,13 @@
             android:text="user_name" />
 
         <ImageView
+            android:focusable="true"
+            android:clickable="true"
             android:id="@+id/locationImg"
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:layout_marginEnd="4dp"
-            android:src="@drawable/ic_location"
+            android:src="@drawable/ic_outline_location_on_24"
             app:layout_constraintEnd_toStartOf="@id/location"
             app:layout_constraintStart_toStartOf="@id/name"
             app:layout_constraintTop_toBottomOf="@id/usernameImg" />
