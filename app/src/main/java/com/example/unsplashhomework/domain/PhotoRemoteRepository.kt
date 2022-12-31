@@ -7,7 +7,7 @@ import com.example.unsplashhomework.data.state.Requester
 
 interface PhotoRemoteRepository {
 
-    suspend fun test(requester: Requester, page: Int): PhotoListDto
+    suspend fun getPhotoList(requester: Requester, page: Int): PhotoListDto
 
     suspend fun getPhotoDetails(id: String): PhotoDetailsDto
 

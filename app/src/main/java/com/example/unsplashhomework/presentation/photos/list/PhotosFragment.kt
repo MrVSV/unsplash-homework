@@ -1,8 +1,6 @@
 package com.example.unsplashhomework.presentation.photos.list
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.widget.SearchView
@@ -10,10 +8,10 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.example.unsplashhomework.domain.model.Photo
 import com.example.unsplashhomework.data.state.ClickableView
 import com.example.unsplashhomework.data.state.LoadState
 import com.example.unsplashhomework.databinding.FragmentPhotosBinding
+import com.example.unsplashhomework.domain.model.Photo
 import com.example.unsplashhomework.presentation.photos.list.adapter.PhotoPagingAdapter
 import com.example.unsplashhomework.tools.BaseFragment
 import com.example.unsplashhomework.tools.setChangeTextListener
@@ -42,13 +40,14 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
         loadStateLike()
         settingAdapter()
         setSearchView()
+        refresh()
+        initRefresher()
     }
 
     private fun observe() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.getPhoto().collect { pagingData ->
                 adapter.submitData(pagingData)
-                Log.d(TAG, "observe: $pagingData")
             }
         }
     }
@@ -88,6 +87,18 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
                 binding.error.isVisible =
                     loadStateLike == LoadState.ERROR
             }
+        }
+    }
+
+    private fun refresh(){
+        binding.photoRecycler.isVisible = true
+        adapter.refresh()
+    }
+
+    private fun initRefresher(){
+        binding.swipeRefresh.setOnRefreshListener {
+            refresh()
+            binding.swipeRefresh.isRefreshing = false
         }
     }
 }

@@ -17,10 +17,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-            app:title="Название коллекции длинное бывает"
             app:expandedTitleTextAppearance="@style/ExpandedBarTextStyle"
-            app:maxLines="2">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
+            app:maxLines="2"
+            app:title="Название коллекции длинное бывает">
 
             <ImageView
                 android:id="@+id/preview"
@@ -43,11 +43,11 @@
                     android:id="@+id/description"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:gravity="center"
                     android:text="описание коллекции"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     app:layout_constrainedWidth="true"
-                    android:gravity="center"
                     app:layout_constraintBottom_toTopOf="@id/data"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -57,41 +57,41 @@
                     android:id="@+id/tags"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="список тегов"
-                    app:layout_constrainedWidth="true"
-                    android:gravity="center"
                     android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:text="список тегов"
                     android:textColor="@color/black"
-                    app:layout_constraintTop_toBottomOf="@id/digestTitle"
+                    app:layout_constrainedWidth="true"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/digestTitle" />
 
                 <TextView
                     android:id="@+id/digestTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constrainedWidth="true"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="15dp"
                     android:gravity="center"
                     android:text="Название коллекции длинное придлинное"
-                    android:textSize="20sp"
-                    android:layout_marginStart="15dp"
-                    android:layout_marginEnd="15dp"
-                    android:layout_marginTop="10dp"
                     android:textColor="@color/black"
+                    android:textSize="20sp"
+                    app:layout_constrainedWidth="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
                     android:id="@+id/data"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginBottom="5dp"
                     android:text="100 фоток от Васи Пупкина"
                     android:textColor="@color/black"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    android:layout_marginEnd="5dp"
-                    android:layout_marginBottom="5dp"/>
+                    app:layout_constraintEnd_toEndOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -105,33 +105,56 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
+    <!--    <androidx.core.widget.NestedScrollView-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">-->
+    <!--        -->
+    <!--&lt;!&ndash;        <TextView&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:layout_width="match_parent"&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:layout_height="wrap_content"&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:layout_margin="@dimen/text_margin"&ndash;&gt;-->
+    <!--&lt;!&ndash;            android:text="@string/large_text" />&ndash;&gt;-->
+    <!--       -->
+    <!--    </androidx.core.widget.NestedScrollView>-->
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-        <!--    <ScrollView-->
-        <!--        android:layout_width="match_parent"-->
-        <!--        android:layout_height="wrap_content">-->
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/photoRecycler"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/photo_view_holder" />
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+    <FrameLayout
+        android:id="@+id/error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|bottom"
+        android:background="@color/black_100"
+        android:paddingHorizontal="45dp"
+        android:paddingVertical="5dp"
+        android:visibility="invisible">
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/text_margin"
-            android:text="@string/large_text" />
-        <!--    </ScrollView>-->
-    </androidx.core.widget.NestedScrollView>
+            android:layout_gravity="center_vertical"
+            android:text="@string/no_connection"
+            android:textColor="#F63F3F" />
 
-    <!--    <androidx.recyclerview.widget.RecyclerView-->
-    <!--        android:id="@+id/photoRecycler"-->
-    <!--        app:layoutManager="androidx.recyclerview.widget.StaggeredGridLayoutManager"-->
-    <!--        app:spanCount="2"-->
-    <!--        android:orientation="vertical"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        app:layout_constrainedHeight="true"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/appBar"-->
-    <!--        tools:listitem="@layout/photo_view_holder"/>-->
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|center_vertical"
+            android:src="@drawable/ic_wifi_off"
+            app:tint="@color/error_text" />
+    </FrameLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

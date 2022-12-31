@@ -2,15 +2,16 @@ package com.example.unsplashhomework.tools
 
 import android.widget.ImageView
 import androidx.appcompat.widget.SearchView
-
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.unsplashhomework.R
 import com.example.unsplashhomework.data.api.digestdto.DigestDto
+import com.example.unsplashhomework.data.api.digestdto.DigestTagDto
 import com.example.unsplashhomework.data.api.photodto.PhotoDto
 import com.example.unsplashhomework.data.api.photodto.TagDto
-import com.example.unsplashhomework.domain.model.Digest
 import com.example.unsplashhomework.data.local.entity.PhotoEntity
+import com.example.unsplashhomework.domain.model.Digest
+import com.example.unsplashhomework.domain.model.DigestTag
 import com.example.unsplashhomework.domain.model.Photo
 import com.example.unsplashhomework.domain.model.Tags
 
@@ -34,6 +35,10 @@ fun List<DigestDto>.toListDigest(): List<Digest> {
         newList.add(item.toDigest())
     }
     return newList
+}
+
+fun List<DigestTagDto>.toListDigestTag(): List<DigestTag> {
+    return this.map { item -> item.toDigestTag() }
 }
 
 fun List<PhotoDto>.toListPhotoEntity(): List<PhotoEntity> {

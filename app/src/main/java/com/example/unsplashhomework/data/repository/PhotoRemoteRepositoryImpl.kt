@@ -1,5 +1,8 @@
 package com.example.unsplashhomework.data.repository
 
+import android.content.ContentValues.TAG
+import android.util.Log
+import com.example.unsplashhomework.data.api.ApiDigest
 import com.example.unsplashhomework.data.api.ApiPhotos
 import com.example.unsplashhomework.data.api.photodto.PhotoDetailsDto
 import com.example.unsplashhomework.data.api.photodto.PhotoListDto
@@ -8,17 +11,20 @@ import com.example.unsplashhomework.data.state.Requester
 import com.example.unsplashhomework.domain.PhotoRemoteRepository
 import javax.inject.Inject
 
-class PhotoRemoteRepositoryImpl @Inject constructor(private val apiPhotos: ApiPhotos) :
+class PhotoRemoteRepositoryImpl @Inject constructor(
+    private val apiPhotos: ApiPhotos,
+    private val apiDigest: ApiDigest
+) :
     PhotoRemoteRepository {
 
-    override suspend fun test(requester: Requester, page: Int) =
-        when (requester) {
-            Requester.ALL_LIST -> checkRequester(requester.query, page)
-            Requester.COLLECTIONS -> {
-                /**  а вот тут вызов колеекции*/
-                PhotoListDto()
-            }
+    override suspend fun getPhotoList(requester: Requester, page: Int): PhotoListDto {
+        Log.d(TAG, "getPhotoList: $requester")
+        return when (requester) {
+            Requester.ALL_LIST -> checkRequester(requester.param, page)
+            Requester.COLLECTIONS -> apiDigest.getDigestPhotos(requester.param, page)
+
         }
+    }
 
     private suspend fun checkRequester(query: String, page: Int) =
         if (query == "") apiPhotos.getPhotos(page)

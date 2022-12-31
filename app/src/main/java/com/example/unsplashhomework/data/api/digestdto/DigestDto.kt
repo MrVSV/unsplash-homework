@@ -2,6 +2,7 @@ package com.example.unsplashhomework.data.api.digestdto
 
 
 import com.example.unsplashhomework.domain.model.Digest
+import com.example.unsplashhomework.tools.toListDigestTag
 import com.google.gson.annotations.SerializedName
 
 data class DigestDto(
@@ -21,6 +22,8 @@ data class DigestDto(
         totalPhotos = totalPhotos,
         userUsername = user.username,
         userProfileImage = user.profileImage.small,
-        previewPhoto = previewPhotos.random().urls.small
+        previewPhoto = previewPhotos.random().urls.small,
+        description = description,
+        tags = tags.toListDigestTag()
     )
 }

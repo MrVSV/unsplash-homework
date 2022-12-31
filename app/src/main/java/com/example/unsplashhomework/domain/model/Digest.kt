@@ -6,8 +6,13 @@ data class Digest(
     val totalPhotos: Int,
     val userUsername: String,
     val userProfileImage: String,
-    val previewPhoto: String
+    val previewPhoto: String,
+    val description: String?,
+    val tags: List<DigestTag>
 )
 
+data class DigestTag(
+    val title: String
+)
 
 
