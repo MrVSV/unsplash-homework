@@ -22,13 +22,9 @@ class PhotosViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private val query = MutableStateFlow("")
-    /** это переменная она поидеи должнать всегда в верху
-     * мне так просто проще было именно в тот момент*/
     private var job: Job? = null
 
-    /** тут далой условие вопервых слишком по уебански выглядить во вторых так не будет работать
-     * потому что ты меняешь не состояния потока а сам поток
-     * поэтомы оставляем только так, а вся магия по выбору откуда грузить ложится на плечи медиатора*/
+
     @OptIn(ExperimentalCoroutinesApi::class)
     fun getPhoto() = query.asStateFlow()
         .flatMapLatest { photosPagingUseCase.getPhoto(Requester.ALL_LIST.apply { query =it }) }

@@ -20,26 +20,9 @@ class PhotoRemoteRepositoryImpl @Inject constructor(private val apiPhotos: ApiPh
             }
         }
 
-
-    /** вот тут у вас два экстеншена которые делают одно и тоже , написаны чуть по разному выберете
-     * тот который нравится ьольше другой удалите
-     * ааа .... надо просто думать что возвращаете в одном месте аррей лист в другом просто лист
-     * поэтому вам так просто не выбрать, что бы не удалили что то отвалится*/
-
     private suspend fun checkRequester(query: String, page: Int) =
         if (query == "") apiPhotos.getPhotos(page)
         else apiPhotos.searchPhotos(query, page).results
-
-
- /*   override suspend fun getPhotos(page: Int): PhotoListDto = apiPhotos.getPhotos(page)
-
-    *//** пусть так останется пока*//*
-
-    override suspend fun searchPhotos(query: String, page: Int): SearchDto =
-        apiPhotos.searchPhotos(query, page)*/
-
-    //две функции сверхк становятся приватными так как они нам негде больше не нужны, соответсвенно
-    // их можно удалить из интерфейса
 
     override suspend fun getPhotoDetails(id: String): PhotoDetailsDto =
         apiPhotos.getPhotoDetails(id)
