@@ -8,8 +8,8 @@ import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.example.unsplashhomework.data.local.entity.PhotoEntity
 import com.example.unsplashhomework.data.state.Requester
-import com.example.unsplashhomework.domain.LocalRepository
-import com.example.unsplashhomework.domain.PhotoRemoteRepository
+import com.example.unsplashhomework.domain.repository.LocalRepository
+import com.example.unsplashhomework.domain.repository.PhotoRemoteRepository
 import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
@@ -21,29 +21,36 @@ class PhotosRemoteMediator @Inject constructor(
 
     private var pageIndex = 0
 
+    override suspend fun initialize(): InitializeAction {
+        return InitializeAction.SKIP_INITIAL_REFRESH
+    }
+
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, PhotoEntity>,
     ): MediatorResult {
-        Log.d(TAG, "load: $requester")
+        Log.d(TAG, "load: $requester $pageIndex")
         pageIndex = getIndex(loadType) ?: return MediatorResult.Success(true)
 
         return try {
-
-            val response = remote.getPhotoList(requester,pageIndex).toListEntity()
+            val response = remote.getPhotoList(requester, pageIndex).toListEntity()
 
             if (loadType == LoadType.REFRESH) local.refresh(response)
             else local.insertData(response)
+
+            Log.d(TAG, "response:\n${response.joinToString("\n")}")
             MediatorResult.Success(endOfPaginationReached = response.isEmpty())
+
         } catch (e: Exception) {
             MediatorResult.Error(e)
         }
     }
 
     private fun getIndex(loadType: LoadType): Int? {
+        Log.d(TAG, "getIndex: $loadType")
         return when (loadType) {
             LoadType.PREPEND -> null
-            LoadType.REFRESH -> 1
+            LoadType.REFRESH -> 0
             LoadType.APPEND -> ++pageIndex
         }
     }

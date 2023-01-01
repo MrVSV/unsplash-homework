@@ -1,4 +1,4 @@
-package com.example.unsplashhomework.domain
+package com.example.unsplashhomework.domain.repository
 
 import com.example.unsplashhomework.data.api.photodto.PhotoDetailsDto
 import com.example.unsplashhomework.data.api.photodto.PhotoListDto

@@ -4,9 +4,9 @@ import android.app.DownloadManager
 import android.net.Uri
 import android.os.Environment
 import androidx.lifecycle.viewModelScope
-import com.example.unsplashhomework.domain.LikeDetailPhotoUseCaseImpl
-import com.example.unsplashhomework.domain.OnePhotoDetailsUseCaseImpl
 import com.example.unsplashhomework.domain.model.PhotoDetails
+import com.example.unsplashhomework.domain.usecase.LikeDetailPhotoUseCase
+import com.example.unsplashhomework.domain.usecase.OnePhotoDetailsUseCase
 import com.example.unsplashhomework.tools.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -16,12 +16,10 @@ import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
 
-//TODO:здесь должна быть зависимость на интерфейсы юзкейсов, переписать,
-// когда разберемся, где это все провайдить, без провайда не билдится
 @HiltViewModel
 class OnePhotoDetailsViewModel @Inject constructor(
-    private val onePhotoDetailsUseCase: OnePhotoDetailsUseCaseImpl,
-    private val likeDetailPhotoUseCase: LikeDetailPhotoUseCaseImpl
+    private val onePhotoDetailsUseCase: OnePhotoDetailsUseCase,
+    private val likeDetailPhotoUseCase: LikeDetailPhotoUseCase
 ) : BaseViewModel() {
 
     private val _state = MutableStateFlow<DetailsState>(DetailsState.NotStartedYet)

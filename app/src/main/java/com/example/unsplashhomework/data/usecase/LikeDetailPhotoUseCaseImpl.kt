@@ -1,7 +1,8 @@
-package com.example.unsplashhomework.domain
+package com.example.unsplashhomework.data.usecase
 
 import com.example.unsplashhomework.domain.model.PhotoDetails
 import com.example.unsplashhomework.data.repository.PhotosPagingSourceRepository
+import com.example.unsplashhomework.domain.usecase.LikeDetailPhotoUseCase
 import javax.inject.Inject
 
 //TODO:здесь должна быть зависимость на интерфейс репозитория, переписать, когда будет готов интерфейс

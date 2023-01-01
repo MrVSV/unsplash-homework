@@ -1,10 +1,13 @@
-package com.example.unsplashhomework.domain
+package com.example.unsplashhomework.data.usecase
 
-import com.example.unsplashhomework.domain.model.Photo
 import com.example.unsplashhomework.data.repository.PhotosPagingSourceRepository
+import com.example.unsplashhomework.domain.model.Photo
+import com.example.unsplashhomework.domain.usecase.PhotoLikeUseCase
 import javax.inject.Inject
 
-class PhotoLikeUseCase @Inject constructor(private val repository: PhotosPagingSourceRepository) {
+class PhotoLikeUseCaseImpl @Inject constructor(
+    private val repository: PhotosPagingSourceRepository
+    ): PhotoLikeUseCase {
 
     /** если прям доебываться это уже не юзкейс
      * юзкейс должен выполнять одно единственное действия...в нашем у тебя тут еще
@@ -14,7 +17,7 @@ class PhotoLikeUseCase @Inject constructor(private val repository: PhotosPagingS
      * а пользоваться репозиторием, это не запрещено
      * и да я тоже чутка покапался в вопросе юзкей не должен возвращать ни энтити ни дто*/
 
-    suspend fun likePhoto(item: Photo) {
+    override suspend fun likePhoto(item: Photo) {
         val response = if (item.likedByUser) repository.deleteLike(item.id).photo
         else repository.setLike(item.id).photo
         val newItem =
