@@ -30,7 +30,7 @@ class ApiModule {
     @LoggingInterceptorQualifier
     fun provideLoginInterceptor(): Interceptor =
         HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
+            .setLevel(HttpLoggingInterceptor.Level.BASIC)
 
     @Provides
     @Singleton

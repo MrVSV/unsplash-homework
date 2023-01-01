@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.unsplashhomework.data.api.TOKEN_ENABLED_KEY
 import com.example.unsplashhomework.data.api.TOKEN_SHARED_KEY
 import com.example.unsplashhomework.data.api.TOKEN_SHARED_NAME
 import com.example.unsplashhomework.data.state.ClickableView
@@ -132,7 +133,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     private fun setUpLogoutButton(preferences: SharedPreferences) {
         val button = binding.logoutBar.menu.getItem(0)
         button?.setOnMenuItemClickListener {
-//            preferences.edit().clear().apply()
             setUpAlertDialog(preferences)
             true
         }
@@ -143,8 +143,9 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         dialog.setTitle("Выйти из профиля?")
             .setMessage("Все локальные данные будут удалены")
             .setPositiveButton("Да") { _, _ ->
-                preferences.edit().clear().apply()
-                Log.d(TAG, "setUpLogoutButton: ${preferences.getString(TOKEN_SHARED_KEY, "")}")
+                preferences.edit().putString(TOKEN_SHARED_KEY, "").apply()
+                preferences.edit().putBoolean(TOKEN_ENABLED_KEY, false).apply()
+//                Log.d(TAG, "setUpLogoutButton: ${preferences.getString(TOKEN_ENABLED_KEY, "")}")
                 val action = ProfileFragmentDirections.actionNavigationUserToAuthFragment()
                 findNavController().navigate(action)
             }

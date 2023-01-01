@@ -1,6 +1,7 @@
 package com.example.unsplashhomework.presentation.photos.list
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.appcompat.widget.SearchView
@@ -34,6 +35,8 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Log.d("fragment", "фото")
 
         observe()
         loadStateItemsObserve()
@@ -95,5 +98,10 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
             adapter.refresh()
             binding.swipeRefresh.isRefreshing = false
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("fragment", "onDestroy: фото")
     }
 }

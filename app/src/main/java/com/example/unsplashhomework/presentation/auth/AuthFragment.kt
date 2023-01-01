@@ -4,6 +4,7 @@ import android.content.Intent
 import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.view.isVisible
@@ -12,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.unsplashhomework.R
+import com.example.unsplashhomework.data.api.TOKEN_ENABLED_KEY
 import com.example.unsplashhomework.data.api.TOKEN_SHARED_KEY
 import com.example.unsplashhomework.data.api.TOKEN_SHARED_NAME
 import com.example.unsplashhomework.data.api.call
@@ -29,6 +31,8 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        Log.d("fragment", "авторизация")
 
         startAuth()
         tokenObserve(createSharedPreference(TOKEN_SHARED_NAME))
@@ -48,6 +52,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.token.collect { token ->
                 preferences.edit().putString(TOKEN_SHARED_KEY, token).apply()
+                preferences.edit().putBoolean(TOKEN_ENABLED_KEY, true).apply()
             }
         }
     }

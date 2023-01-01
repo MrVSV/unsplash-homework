@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_onboarding">
+    app:startDestination="@+id/mainFragment">
 
     <fragment
         android:id="@+id/navigation_onboarding"
@@ -64,7 +64,8 @@
         <action
             android:id="@+id/action_authFragment_to_navigation_photos"
             app:destination="@id/navigation_photos"
-            app:popUpTo="@id/authFragment"/>
+            app:popUpTo="@id/authFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -86,6 +87,27 @@
         <action
             android:id="@+id/action_digestDetailsFragment_to_navigation_photo_details"
             app:destination="@id/navigation_photo_details" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.unsplashhomework.presentation.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_navigation_onboarding"
+            app:destination="@id/navigation_onboarding"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_mainFragment_to_authFragment"
+            app:destination="@id/authFragment"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true"/>
+        <action
+            android:id="@+id/action_mainFragment_to_navigation_photos"
+            app:destination="@id/navigation_photos"
+            app:popUpTo="@id/mainFragment"
+            app:popUpToInclusive="true"/>
     </fragment>
 
 </navigation>

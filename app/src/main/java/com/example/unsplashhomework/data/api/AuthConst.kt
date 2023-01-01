@@ -1,7 +1,7 @@
 package com.example.unsplashhomework.data.api
 
-const val ACCESS_KEY = "aFYYZK6kx8GMEoIHFhzT27rhwgZZtnENvc0M8mAW7XI"
-const val SECRET_KEY = "cOKBHRzF_cc6Cer9SKQ4gR_Y4vD-YFE2u-YGbLYqEMA"
+const val ACCESS_KEY = "TQBtxa7iGDE6aUYk12mA1mWdM7qLwJrkKgIsNXYEbtY"
+const val SECRET_KEY = "rA8Ntvr_vPSHofWpYz4Ib4coselWLvv8hcwjTv8lOA0"
 const val REDIRECT_URI = "urn:ietf:wg:oauth:2.0:oob"
 const val SCOPE =
     "public+read_user+" +
@@ -20,8 +20,10 @@ const val call =
             "&scope=" + SCOPE
 
 
-const val TOKEN_SHARED_NAME = "Pref_Token"
-const val TOKEN_SHARED_KEY = "Token"
+const val TOKEN_SHARED_NAME = "pref_token"
+const val TOKEN_SHARED_KEY = "token"
+const val TOKEN_ENABLED_KEY = "token_enabled"
+const val ONBOARDING_IS_SHOWN = "onboarding_is_shown"
 
 //раз
 //const val ACCESS_KEY = "OOlbm6FJx2pFPfaU8uLWLbsQ1Ez0u1J-tXX5L8WLya8"
