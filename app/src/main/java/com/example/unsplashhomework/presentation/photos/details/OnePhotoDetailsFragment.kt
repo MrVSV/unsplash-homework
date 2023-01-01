@@ -3,14 +3,13 @@ package com.example.unsplashhomework.presentation.photos.details
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.DownloadManager
 import android.content.*
+import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
@@ -30,7 +29,6 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-
 @AndroidEntryPoint
 class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
 
@@ -47,96 +45,84 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         requireContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
     }
 
+    private lateinit var receiver: BroadcastReceiver
     private var enableDownloadFlag = false
 
     private val launcher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { map ->
         if (map.values.isNotEmpty() && map.values.all { it }) {
-            Toast.makeText(context, "Permissions granted", Toast.LENGTH_SHORT).show()
+            Snackbar.make(
+                binding.myCoordinatorLayout,
+                getString(R.string.ok_to_download),
+                Snackbar.LENGTH_LONG
+            ).show()
             enableDownloadFlag = true
         } else {
             showMissingPermissionAlert()
         }
     }
-/*
-    private val downloadID = viewModel.downloadID
-
-    private val onDownloadComplete: BroadcastReceiver = object : BroadcastReceiver() {
-        override fun onReceive(context: Context, intent: Intent) {
-            //Fetching the download id received with the broadcast
-            val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
-            //Checking if the received broadcast is for our enqueued download by matching download id
-            if (downloadID == id) {
-                Toast.makeText(context, "Download Completed", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        registerReceiver(App.applicationContext(),onDownloadComplete,IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), RECEIVER_EXPORTED)
-
-    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         viewModel.loadPhotoDetails(args.photoId)
-        getCurrentState()
+        getLoadingState()
         setLocationClick()
         loadStateLike()
+    }
 
+    override fun onResume() {
+        super.onResume()
         val filter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
-        val receiver: BroadcastReceiver = object : BroadcastReceiver() {
+        receiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent) {
                 val reference = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
                 if (viewModel.downloadID == reference) {
-                    // Do something with downloaded file.
-                    Log.d("Kart", "референс тот")
-                    //if (viewModel.getDMStatus(downloadManager) == STATUS_SUCCESSFUL)
-                    //{showSnackbar()} else {Log.d("Kart", "ужос")}
-                    showSnackbar()
+                    viewModel.getDMStatus(downloadManager)
+                    while (viewModel.downloading) {
+                        //Log.d("Kart", ".")
+                    }
+                    if (viewModel.success) {
+                        val uri = downloadManager.getUriForDownloadedFile(viewModel.downloadID)
+                        showSuccessfulDownloadSnackbar(uri)
+                    } else {
+                        showFailedDownloadSnackbar()
+                    }
                 }
             }
         }
         registerReceiver(requireContext(), receiver, filter, RECEIVER_EXPORTED)
     }
 
-
-    private fun getCurrentState() {
+    private fun getLoadingState() {
         viewLifecycleOwner.lifecycleScope
             .launchWhenStarted {
-                viewModel.state
-                    .collect { state -> updateUi(state) }
+                viewModel.loadState.collect { loadState -> updateUiOnServerResponse(loadState) }
             }
     }
 
-/*    private fun getDownloadState(raw: String, downloadManager: DownloadManager) {
-        viewLifecycleOwner.lifecycleScope
-            .launchWhenStarted {
-                viewModel.downloadState
-                    .collect { downState ->
-                        delay(10_000)
-                        showSnackbar(downState) }
-            }
-    }*/
+    private fun updateUiOnServerResponse(loadState: LoadState) {
+        if (loadState == LoadState.ERROR) binding.error.isVisible = true
+        //TODO: спрятать верстку, показать пустой экран с ошибкой
+        if (loadState == LoadState.SUCCESS) {
+            viewLifecycleOwner.lifecycleScope
+                .launchWhenStarted {
+                    viewModel.state
+                        .collect { state -> updateUi(state) }
+                }
+        }
+    }
 
     private fun updateUi(state: DetailsState) {
         when (state) {
             DetailsState.NotStartedYet -> {}
             is DetailsState.Success -> {
-
                 bindUploadedTexts(state)
                 bindUploadedImages(state)
                 setUploadedLocation(state)
                 setToolbar(state.data.id)
                 setLikeClick(state.data)
                 setDownloadOnClick(state.data.urls.raw, downloadManager)
-            }
-            is DetailsState.LoadingError -> {
-                Toast.makeText(context, "Loading Error", Toast.LENGTH_SHORT).show()
-                //binding.loading.text = "Ошибка сети"
             }
         }
     }
@@ -156,7 +142,6 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         binding.aboutAuthor.text = getString(
             R.string.about, state.data.user.username, state.data.user.bio ?: "N/A"
         )
-
         binding.downloadsCount.text = getString(
             R.string.download, state.data.downloads.toString()
         )
@@ -193,28 +178,18 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
 
     private fun setDownloadOnClick(url: String, downloadManager: DownloadManager) {
         binding.downloadButton.setOnClickListener {
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-                checkPermission()
-            } else {
-                enableDownloadFlag = true
-            }
-            if (enableDownloadFlag) {
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.P) {
                 viewModel.startDownLoad(url, downloadManager)
-                //pickDownloadState(downloadManager)
+            } else {
+                checkPermission()
+                if (enableDownloadFlag) {
+                    viewModel.startDownLoad(url, downloadManager)
+                }
             }
         }
     }
-    //    fun pickDownloadState(downloadManager: DownloadManager) {
-//        val status = viewModel.getDMStatus(downloadManager)
-//        when (status) {
-//            DownloadManager.STATUS_SUCCESSFUL -> showSnackbar()
-//        }
-//    }
-    private fun showSnackbar() {
-/*        when (state) {
-            DownloadState.NotFinished -> {}
-            DownloadState.Finished -> {*/
 
+    private fun showSuccessfulDownloadSnackbar(uri: Uri) {
         val mySnackbar = Snackbar.make(
             binding.myCoordinatorLayout,
             getString(R.string.download_finished),
@@ -223,14 +198,21 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         mySnackbar.setAction(R.string.open, View.OnClickListener {
             val openIntent = Intent().apply {
                 action = Intent.ACTION_VIEW
-                type = "image/jpg" //только type без data открывает галерею
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
-            }
-            //val imgUri = Uri.fromFile(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))
-           // openIntent.setDataAndType(imgUri, "*/jpg")
+                flags = FLAG_GRANT_READ_URI_PERMISSION
+                }
+            openIntent.setDataAndType(uri, "image/jpg")
             startActivity(openIntent)
         })
         mySnackbar.show()
+    }
+
+    private fun showFailedDownloadSnackbar() {
+        Snackbar.make(
+            binding.myCoordinatorLayout,
+            getString(R.string.failed_download),
+            Snackbar.LENGTH_LONG
+        ).show()
     }
 
     private fun setLikeClick(photo: PhotoDetails) {
@@ -276,16 +258,15 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
                 WRITE_EXTERNAL_STORAGE
             ) == PackageManager.PERMISSION_GRANTED
         ) {
-            Toast.makeText(context, "Permission already granted", Toast.LENGTH_SHORT).show()
             enableDownloadFlag = true
         } else {
-            /**вот здесь упростить надо и убрать два клика для скачивания на апи <=28*/
+            //можно как-то упростить, убрав после запроса и разрешения необходимость клика на кнопку скачивания
             launcher.launch(arrayOf(WRITE_EXTERNAL_STORAGE))
         }
     }
 
     private fun showMissingPermissionAlert() {
-        val alertDialog = AlertDialog.Builder(requireActivity().applicationContext).create()
+        val alertDialog = AlertDialog.Builder(requireContext()).create()
         alertDialog.setTitle("Info")
         alertDialog.setMessage(getString(R.string.alert_text))
         alertDialog.setIcon(android.R.drawable.ic_dialog_alert)
@@ -293,5 +274,10 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
             dialog.cancel()
         }
         alertDialog.show()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        requireContext().unregisterReceiver(receiver)
     }
 }
