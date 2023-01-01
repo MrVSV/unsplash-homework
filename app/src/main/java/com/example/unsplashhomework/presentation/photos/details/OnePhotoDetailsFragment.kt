@@ -2,42 +2,34 @@ package com.example.unsplashhomework.presentation.photos.details
 
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.DownloadManager
-import android.content.ContentValues
-import android.content.Context
-import android.content.DialogInterface
-import android.content.Intent
+import android.content.*
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
-import android.os.Looper
-import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import androidx.core.content.ContextCompat.RECEIVER_EXPORTED
+import androidx.core.content.ContextCompat.registerReceiver
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.navArgs
 import com.example.unsplashhomework.R
-import com.example.unsplashhomework.domain.model.PhotoDetails
 import com.example.unsplashhomework.data.state.LoadState
 import com.example.unsplashhomework.databinding.FragmentOnePhotoDetailsBinding
+import com.example.unsplashhomework.domain.model.PhotoDetails
 import com.example.unsplashhomework.tools.BaseFragment
 import com.example.unsplashhomework.tools.loadImage
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-import java.io.*
-import java.net.HttpURLConnection
-import java.net.MalformedURLException
-import java.net.URL
-import java.util.concurrent.Executors
+
 
 @AndroidEntryPoint
 class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
@@ -67,6 +59,25 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
             showMissingPermissionAlert()
         }
     }
+/*
+    private val downloadID = viewModel.downloadID
+
+    private val onDownloadComplete: BroadcastReceiver = object : BroadcastReceiver() {
+        override fun onReceive(context: Context, intent: Intent) {
+            //Fetching the download id received with the broadcast
+            val id = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+            //Checking if the received broadcast is for our enqueued download by matching download id
+            if (downloadID == id) {
+                Toast.makeText(context, "Download Completed", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        registerReceiver(App.applicationContext(),onDownloadComplete,IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE), RECEIVER_EXPORTED)
+
+    }*/
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -75,7 +86,23 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         getCurrentState()
         setLocationClick()
         loadStateLike()
+
+        val filter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+        val receiver: BroadcastReceiver = object : BroadcastReceiver() {
+            override fun onReceive(context: Context?, intent: Intent) {
+                val reference = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
+                if (viewModel.downloadID == reference) {
+                    // Do something with downloaded file.
+                    Log.d("Kart", "референс тот")
+                    //if (viewModel.getDMStatus(downloadManager) == STATUS_SUCCESSFUL)
+                    //{showSnackbar()} else {Log.d("Kart", "ужос")}
+                    showSnackbar()
+                }
+            }
+        }
+        registerReceiver(requireContext(), receiver, filter, RECEIVER_EXPORTED)
     }
+
 
     private fun getCurrentState() {
         viewLifecycleOwner.lifecycleScope
@@ -84,6 +111,16 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
                     .collect { state -> updateUi(state) }
             }
     }
+
+/*    private fun getDownloadState(raw: String, downloadManager: DownloadManager) {
+        viewLifecycleOwner.lifecycleScope
+            .launchWhenStarted {
+                viewModel.downloadState
+                    .collect { downState ->
+                        delay(10_000)
+                        showSnackbar(downState) }
+            }
+    }*/
 
     private fun updateUi(state: DetailsState) {
         when (state) {
@@ -95,7 +132,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
                 setUploadedLocation(state)
                 setToolbar(state.data.id)
                 setLikeClick(state.data)
-                setDownloadClick(state.data.urls.raw, downloadManager)
+                setDownloadOnClick(state.data.urls.raw, downloadManager)
             }
             is DetailsState.LoadingError -> {
                 Toast.makeText(context, "Loading Error", Toast.LENGTH_SHORT).show()
@@ -154,10 +191,46 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         }
     }
 
-    private fun setDownloadClick(url: String, downloadManager: DownloadManager){
+    private fun setDownloadOnClick(url: String, downloadManager: DownloadManager) {
         binding.downloadButton.setOnClickListener {
-            viewModel.startDownLoad(url, downloadManager)
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
+                checkPermission()
+            } else {
+                enableDownloadFlag = true
+            }
+            if (enableDownloadFlag) {
+                viewModel.startDownLoad(url, downloadManager)
+                //pickDownloadState(downloadManager)
+            }
         }
+    }
+    //    fun pickDownloadState(downloadManager: DownloadManager) {
+//        val status = viewModel.getDMStatus(downloadManager)
+//        when (status) {
+//            DownloadManager.STATUS_SUCCESSFUL -> showSnackbar()
+//        }
+//    }
+    private fun showSnackbar() {
+/*        when (state) {
+            DownloadState.NotFinished -> {}
+            DownloadState.Finished -> {*/
+
+        val mySnackbar = Snackbar.make(
+            binding.myCoordinatorLayout,
+            getString(R.string.download_finished),
+            Snackbar.LENGTH_INDEFINITE
+        )
+        mySnackbar.setAction(R.string.open, View.OnClickListener {
+            val openIntent = Intent().apply {
+                action = Intent.ACTION_VIEW
+                type = "image/jpg" //только type без data открывает галерею
+                flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            }
+            //val imgUri = Uri.fromFile(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS))
+           // openIntent.setDataAndType(imgUri, "*/jpg")
+            startActivity(openIntent)
+        })
+        mySnackbar.show()
     }
 
     private fun setLikeClick(photo: PhotoDetails) {
@@ -195,88 +268,6 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         sharingIntent.type = "text/plain"
         sharingIntent.putExtra(Intent.EXTRA_TEXT, "https://unsplash.com/photos/$id")
         startActivity(Intent.createChooser(sharingIntent, "Share using"))
-    }
-
-//TODO: Переписать на download manager с нотификацией и загрузкой в фоне, тестировать отсутствие сети
-    /** сюда не лезу...единственно что что либо убери отсюда сет он клик лисененр, и вызывай этот
-     * методод внутри лиснера, либо переименую этот медот так что бы было понятно что
-     * это именно действие по клику. Просто по названию должно быть четко понятно что это такое*/
-    private fun setDownload(path: String) {
-        var mImage: Bitmap?
-
-        binding.downloadButton.setOnClickListener {
-//TODO: после загрузки показать снэкбар по клику на который м.открыть фото в галерее
-            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.P) {
-                checkPermission()
-            } else {
-                enableDownloadFlag = true
-            }
-            if (enableDownloadFlag) {
-                // executor will fetch the image and handler will store it locally
-                Executors.newSingleThreadExecutor().execute {
-                    mImage = loadImage(path)
-                    android.os.Handler(Looper.getMainLooper()).post {
-                        if (mImage != null) {
-                            saveMediaToStorage(mImage)
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    private fun saveMediaToStorage(bitmap: Bitmap?) {
-        val filename = "${System.currentTimeMillis()}.jpg"
-        var fileOutputStream: OutputStream? = null
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-            requireActivity().contentResolver?.also { resolver ->
-                val contentValues = ContentValues().apply {
-                    put(MediaStore.MediaColumns.DISPLAY_NAME, filename)
-                    put(MediaStore.MediaColumns.MIME_TYPE, "image/jpg")
-                    put(
-                        MediaStore.MediaColumns.RELATIVE_PATH,
-                        Environment.DIRECTORY_PICTURES
-                    )
-                }
-                val imageUri: Uri? = resolver.insert(
-                    MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-                    contentValues
-                )
-                fileOutputStream = imageUri?.let { resolver.openOutputStream(it) }
-            }
-        } else {
-            val imagesDir =
-                Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES)
-            val image = File(imagesDir, filename)
-            fileOutputStream = FileOutputStream(image)
-        }
-        fileOutputStream?.use {
-            bitmap?.compress(Bitmap.CompressFormat.JPEG, 100, it)
-            Toast.makeText(context, "Saved to Gallery", Toast.LENGTH_SHORT).show()
-        }
-    }
-
-    private fun loadImage(string: String): Bitmap? {
-        val url: URL = convertStringToURL(string)!!
-        val connection: HttpURLConnection?
-        try {
-            connection = url.openConnection() as HttpURLConnection
-            connection.connect()
-            return BitmapFactory.decodeStream(BufferedInputStream(connection.inputStream))
-        } catch (e: IOException) {
-            e.printStackTrace()
-            Toast.makeText(context, "Error", Toast.LENGTH_LONG).show()
-        }
-        return null
-    }
-
-    private fun convertStringToURL(string: String): URL? {
-        try {
-            return URL(string)
-        } catch (e: MalformedURLException) {
-            e.printStackTrace()
-        }
-        return null
     }
 
     private fun checkPermission() {
