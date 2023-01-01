@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.unsplashhomework.R
+import com.example.unsplashhomework.data.api.TOKEN_SHARED_KEY
 import com.example.unsplashhomework.data.api.TOKEN_SHARED_NAME
 import com.example.unsplashhomework.data.api.call
 import com.example.unsplashhomework.data.state.LoadState
@@ -46,7 +47,7 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
     private fun tokenObserve(preferences: SharedPreferences) {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.token.collect { token ->
-                preferences.edit().putString("Token", token).apply()
+                preferences.edit().putString(TOKEN_SHARED_KEY, token).apply()
             }
         }
     }

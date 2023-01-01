@@ -5,9 +5,9 @@ import android.content.Context
 class AuthTokenProvider(private val context: Context) {
 
     fun getToken(): String? {
-        val pref = context.getSharedPreferences("Pref_Token", Context.MODE_PRIVATE)
+        val pref = context.getSharedPreferences(TOKEN_SHARED_NAME, Context.MODE_PRIVATE)
 
-        return pref.getString("Token", "")
+        return pref.getString(TOKEN_SHARED_KEY, "")
     }
 
 }
