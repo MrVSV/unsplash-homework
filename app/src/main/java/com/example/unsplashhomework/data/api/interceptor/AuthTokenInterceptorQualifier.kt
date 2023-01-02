@@ -1,4 +1,4 @@
-package com.example.unsplashhomework.data.api
+package com.example.unsplashhomework.data.api.interceptor
 
 import javax.inject.Qualifier
 

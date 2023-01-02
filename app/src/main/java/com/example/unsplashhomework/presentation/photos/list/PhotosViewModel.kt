@@ -40,7 +40,7 @@ class PhotosViewModel @Inject constructor(
 
     fun setQuery(newText: String, refresh: () -> Unit) {
         job?.cancel()
-        job = viewModelScope.launch() {
+        job = viewModelScope.launch {
             delay(500)
             query.value = newText
             refresh()

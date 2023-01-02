@@ -3,9 +3,9 @@ package com.example.unsplashhomework.presentation.photos.list.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
-import com.example.unsplashhomework.domain.model.Photo
 import com.example.unsplashhomework.data.state.ClickableView
 import com.example.unsplashhomework.databinding.PhotoViewHolderBinding
+import com.example.unsplashhomework.domain.model.Photo
 
 
 class PhotoPagingAdapter(
@@ -15,10 +15,7 @@ class PhotoPagingAdapter(
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
         getItem(position)?.let { item ->
             holder.bind(item) { ClickableView, Photo ->
-                onClick(
-                    ClickableView,
-                    Photo
-                )
+                onClick(ClickableView, Photo)
             }
         }
     }

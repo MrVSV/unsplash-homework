@@ -46,6 +46,11 @@
     <string name="username">user_name</string>
     <string name="user_location">Location</string>
     <string name="user_email">example@gmail.com</string>
+    <string name="user_total_likes">Images you liked %1$d</string>
+    <string name="logout_title">Are you sure you want to logout?</string>
+    <string name="logout_message">All local data will be deleted.</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
     <!--Лента-->
     <!--Проверьте состояние сети-->
     <!--Авторизация прошла успешно-->

@@ -13,6 +13,7 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.unsplashhomework.R
 import com.example.unsplashhomework.data.api.TOKEN_ENABLED_KEY
 import com.example.unsplashhomework.data.api.TOKEN_SHARED_KEY
 import com.example.unsplashhomework.data.api.TOKEN_SHARED_NAME
@@ -91,9 +92,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
                 binding.locationButton.isEnabled = true
                 viewModel.setUsername(state.data.userName) { adapter.refresh() }
                 binding.location.text = state.data.location
+                if (state.data.location == null) binding.locationString.visibility = View.GONE
                 binding.username.text = state.data.userName
                 binding.name.text = state.data.name
-                binding.likes.text = "likes: ${state.data.totalLikes}"
+                binding.likes.text = getString(R.string.user_total_likes, state.data.totalLikes)
                 binding.avatar.loadImage(state.data.avatar)
                 location = state.data.location
             }
@@ -169,16 +171,15 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
 
     private fun setUpAlertDialog(preferences: SharedPreferences) {
         val dialog = AlertDialog.Builder(requireContext())
-        dialog.setTitle("Выйти из профиля?")
-            .setMessage("Все локальные данные будут удалены")
-            .setPositiveButton("Да") { _, _ ->
+        dialog.setTitle(R.string.logout_title)
+            .setMessage(R.string.logout_message)
+            .setPositiveButton(R.string.yes) { _, _ ->
                 preferences.edit().putString(TOKEN_SHARED_KEY, "").apply()
                 preferences.edit().putBoolean(TOKEN_ENABLED_KEY, false).apply()
-//                Log.d(TAG, "setUpLogoutButton: ${preferences.getString(TOKEN_ENABLED_KEY, "")}")
                 val action = ProfileFragmentDirections.actionNavigationUserToAuthFragment()
                 findNavController().navigate(action)
             }
-            .setNegativeButton("Нет") { _, _ ->
+            .setNegativeButton(R.string.no) { _, _ ->
                 dialog.create().hide()
             }
         dialog.create().show()

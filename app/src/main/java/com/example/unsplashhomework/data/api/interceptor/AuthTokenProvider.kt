@@ -1,6 +1,8 @@
-package com.example.unsplashhomework.data.api
+package com.example.unsplashhomework.data.api.interceptor
 
 import android.content.Context
+import com.example.unsplashhomework.data.api.TOKEN_SHARED_KEY
+import com.example.unsplashhomework.data.api.TOKEN_SHARED_NAME
 
 class AuthTokenProvider(private val context: Context) {
 

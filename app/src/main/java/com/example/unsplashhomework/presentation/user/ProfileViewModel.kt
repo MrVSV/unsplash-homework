@@ -53,7 +53,7 @@ class ProfileViewModel @Inject constructor(
 
     fun setUsername(newText: String, refresh: () -> Unit) {
         job?.cancel()
-        job = viewModelScope.launch() {
+        job = viewModelScope.launch {
             userName.value = newText
             refresh()
         }

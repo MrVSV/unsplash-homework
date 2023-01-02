@@ -16,7 +16,7 @@ interface PhotosDao {
     @Query("DELETE FROM photos")
     suspend fun deleteAll()
 
-    @Update()
+    @Update
     suspend fun updateLocalLikes(photoEntity: PhotoEntity)
 
     @Transaction

@@ -1,7 +1,5 @@
 package com.example.unsplashhomework.data.repository
 
-import android.content.ContentValues.TAG
-import android.util.Log
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
@@ -25,7 +23,6 @@ class PhotosRemoteMediator @Inject constructor(
         loadType: LoadType,
         state: PagingState<Int, PhotoEntity>,
     ): MediatorResult {
-        Log.d(TAG, "load: $requester $pageIndex")
         pageIndex = getIndex(loadType) ?: return MediatorResult.Success(true)
 
         return try {
@@ -39,7 +36,6 @@ class PhotosRemoteMediator @Inject constructor(
     }
 
     private fun getIndex(loadType: LoadType): Int? {
-        Log.d(TAG, "getIndex: $loadType")
         return when (loadType) {
             LoadType.PREPEND -> null
             LoadType.REFRESH -> 0

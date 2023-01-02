@@ -2,6 +2,10 @@ package com.example.unsplashhomework.di
 
 import android.content.Context
 import com.example.unsplashhomework.data.api.*
+import com.example.unsplashhomework.data.api.interceptor.AuthTokenInterceptor
+import com.example.unsplashhomework.data.api.interceptor.AuthTokenInterceptorQualifier
+import com.example.unsplashhomework.data.api.interceptor.AuthTokenProvider
+import com.example.unsplashhomework.data.api.interceptor.LoggingInterceptorQualifier
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -30,7 +34,7 @@ class ApiModule {
     @LoggingInterceptorQualifier
     fun provideLoginInterceptor(): Interceptor =
         HttpLoggingInterceptor()
-            .setLevel(HttpLoggingInterceptor.Level.BODY)
+            .setLevel(HttpLoggingInterceptor.Level.BASIC)
 
     @Provides
     @Singleton

@@ -3,7 +3,6 @@ package com.example.unsplashhomework.presentation
 import android.os.Bundle
 import android.os.StrictMode
 import android.os.StrictMode.VmPolicy
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -28,7 +27,6 @@ class MainActivity : AppCompatActivity() {
                 .build()
         )
 
-        Log.d("fragment", "активити")
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -43,10 +41,5 @@ class MainActivity : AppCompatActivity() {
                 navView.visibility = View.GONE
             else navView.visibility = View.VISIBLE
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("fragment", "onDestroy: активити")
     }
 }

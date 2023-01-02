@@ -51,7 +51,7 @@ class DigestDetailsViewModel @Inject constructor(
 
     fun setId(newText: String, refresh: () -> Unit) {
         job?.cancel()
-        job = viewModelScope.launch() {
+        job = viewModelScope.launch {
             id.value = newText
             refresh()
         }

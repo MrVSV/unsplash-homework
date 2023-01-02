@@ -1,7 +1,6 @@
 package com.example.unsplashhomework.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -20,8 +19,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        Log.d("fragment", "стартовый")
 
         val prefs = createSharedPreference(TOKEN_SHARED_NAME)
         val toOnboardingFragment = MainFragmentDirections.actionMainFragmentToNavigationOnboarding()
@@ -46,9 +43,4 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
             }
         }
     }
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("fragment", "onDestroy: стартовый")
-    }
-
 }

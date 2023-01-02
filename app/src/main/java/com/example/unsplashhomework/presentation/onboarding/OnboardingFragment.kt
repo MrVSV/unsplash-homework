@@ -1,9 +1,6 @@
 package com.example.unsplashhomework.presentation.onboarding
 
-import android.content.ContentValues.TAG
-import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.navigation.fragment.findNavController
@@ -24,8 +21,6 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        Log.d("fragment", "онбординг")
 
         binding.viewPager.adapter =
             ViewPagerAdapter(resources.getStringArray(R.array.onboarding_texts_array))
@@ -50,8 +45,7 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
             findNavController().navigate(R.id.action_navigation_onboarding_to_navigation_auth)
         }
 
-        val prefs = requireContext().getSharedPreferences(TOKEN_SHARED_NAME, Context.MODE_PRIVATE)
+        val prefs = createSharedPreference(TOKEN_SHARED_NAME)
         prefs.edit().putBoolean(ONBOARDING_IS_SHOWN, true).apply()
-        Log.d(TAG, "onboarding is shown: ${prefs.getBoolean(ONBOARDING_IS_SHOWN, false)}")
     }
 }
