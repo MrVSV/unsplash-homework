@@ -51,6 +51,9 @@
     <string name="logout_message">All local data will be deleted.</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="author_account">\@%1$s</string>
+    <string name="search_menu_title">Search</string>
+    <string name="total_photos">photos</string>
     <!--Лента-->
     <!--Проверьте состояние сети-->
     <!--Авторизация прошла успешно-->

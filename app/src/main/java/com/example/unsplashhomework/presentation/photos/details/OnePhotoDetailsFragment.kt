@@ -3,13 +3,11 @@ package com.example.unsplashhomework.presentation.photos.details
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.DownloadManager
 import android.content.*
-import android.content.ContentValues.TAG
 import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -104,7 +102,6 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
     }
 
     private fun updateUiOnServerResponse(loadState: LoadState) {
-        Log.v(TAG, "стейт детальный фото: $loadState", )
         if (loadState == LoadState.ERROR) {
             binding.error.isVisible = true
             binding.scroll.isVisible = false
@@ -135,7 +132,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
 
     private fun bindUploadedTexts(state: DetailsState.Success) {
         binding.authorName.text = state.data.user.name
-        binding.authorAccount.text = "@" + state.data.user.username
+        binding.authorAccount.text = getString(R.string.author_account, state.data.user.username)
 
         binding.location.text = state.data.location.city ?: "N/A"
         binding.currentLikes.text = state.data.likes.toString()
