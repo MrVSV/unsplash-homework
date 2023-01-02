@@ -52,7 +52,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         initRefresher()
         setLocationClick()
         setUpLogoutButton(createSharedPreference(TOKEN_SHARED_NAME))
-//        setUpAlertDialog()
     }
 
     private fun observe() {

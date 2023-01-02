@@ -11,11 +11,8 @@ import com.example.unsplashhomework.domain.usecase.PhotoLikeUseCase
 import com.example.unsplashhomework.domain.usecase.PhotosPagingUseCase
 import com.example.unsplashhomework.tools.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -35,7 +32,7 @@ class ProfileViewModel @Inject constructor(
     @OptIn(ExperimentalCoroutinesApi::class)
     fun getPhoto() = userName.asStateFlow()
         .flatMapLatest { photosPagingUseCase.getPhoto(Requester.PROFILE.apply { param = it })}
-        .cachedIn(viewModelScope)
+        .cachedIn(CoroutineScope(Dispatchers.IO))
 
     fun like(item: Photo) {
         viewModelScope.launch(Dispatchers.IO + handler) {

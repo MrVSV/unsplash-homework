@@ -39,6 +39,9 @@
     <string name="open">OPEN</string>
     <string name="failed_download">Download unsuccessful</string>
     <string name="ok_to_download">Permission granted, Download button is enabled now</string>
+    <string name="digest_name">Collection</string>
+    <string name="digest_data">%1$d photos by %2$s</string>
+    <string name="content_description">image</string>
     <!--Лента-->
     <!--Проверьте состояние сети-->
     <!--Авторизация прошла успешно-->

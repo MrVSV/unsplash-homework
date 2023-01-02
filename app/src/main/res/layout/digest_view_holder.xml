@@ -15,7 +15,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        tools:srcCompat="@tools:sample/backgrounds/scenic"
+        android:contentDescription="@string/content_description" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/authorAvatar"
@@ -37,7 +38,6 @@
         android:shadowDx="5"
         android:shadowDy="5"
         android:shadowRadius="1"
-        android:text="Имя Автора"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="@id/authorAvatar"
@@ -54,7 +54,6 @@
         android:shadowDx="5"
         android:shadowDy="5"
         android:shadowRadius="1"
-        android:text="200 фотографий"
         android:textColor="@color/white"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="parent"
@@ -71,7 +70,6 @@
         android:shadowDx="5"
         android:shadowDy="5"
         android:shadowRadius="1"
-        android:text="название коллекции"
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textSize="34sp"

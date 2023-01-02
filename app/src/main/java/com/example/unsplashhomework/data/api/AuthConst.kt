@@ -1,7 +1,7 @@
 package com.example.unsplashhomework.data.api
 
-const val ACCESS_KEY = "OOlbm6FJx2pFPfaU8uLWLbsQ1Ez0u1J-tXX5L8WLya8"
-const val SECRET_KEY = "70SAVhXIiZ6ySujad4zR7b4-PZ9TymGOU_H_qDu-9_A"
+const val ACCESS_KEY = "mj_2vu5NRd4iwh6pYzpqOymkmK79_WqclNutm5-O2UQ"
+const val SECRET_KEY = "C_vgTr-b2b6-ZdhllFr35MO5uNLk5mxGmFpuoq4-Bt0"
 const val REDIRECT_URI = "urn:ietf:wg:oauth:2.0:oob"
 const val SCOPE =
     "public+read_user+" +

@@ -64,6 +64,8 @@ class DigestFragment : BaseFragment<FragmentDigestBinding>() {
         adapter.addLoadStateListener { loadState ->
             binding.error.isVisible =
                 loadState.refresh is androidx.paging.LoadState.Error
+            binding.recyclerProgressBar.isVisible =
+                loadState.refresh is androidx.paging.LoadState.Loading
         }
     }
 }

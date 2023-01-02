@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.example.unsplashhomework.R
 import com.example.unsplashhomework.data.state.ClickableView
 import com.example.unsplashhomework.data.state.LoadState
 import com.example.unsplashhomework.databinding.FragmentDigestDetailsBinding
@@ -38,7 +39,7 @@ class DigestDetailsFragment : BaseFragment<FragmentDigestDetailsBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         observe()
-        showInfo()
+        getLoadingState()
         loadStateItemsObserve()
         loadStateLike()
         settingAdapter()
@@ -47,25 +48,52 @@ class DigestDetailsFragment : BaseFragment<FragmentDigestDetailsBinding>() {
 
     private fun observe() {
         viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.getPhoto(args.id).collect { pagingData ->
+            viewModel.setId(args.id) { adapter.refresh() }
+            viewModel.getPhoto().collect { pagingData ->
                 adapter.submitData(pagingData)
             }
         }
     }
 
-    private fun showInfo(){
-        viewLifecycleOwner.lifecycleScope.launch {
-            val digestInfo = viewModel.getDigestInfo(args.id)
-            binding.collapsingToolbarLayout.title = digestInfo.title
-            binding.digestTitle.text = digestInfo.title
-            binding.description.text = digestInfo.description
-            binding.tags.text = digestInfo.tags.joinToString{ tag ->
-                "#${tag.title}"
+    private fun getLoadingState() {
+        viewModel.getDigestInfo(args.id)
+        viewLifecycleOwner.lifecycleScope
+            .launchWhenStarted {
+                viewModel.loadState.collect { loadState -> updateUiOnServerResponse(loadState) }
             }
-            binding.data.text = "${digestInfo.totalPhotos} photos by ${digestInfo.userUsername}"
-            binding.preview.loadImage(digestInfo.previewPhoto)
-        }
+    }
 
+    private fun updateUiOnServerResponse(loadState: LoadState) {
+        if (loadState == LoadState.ERROR) {
+            binding.error.isVisible = true
+        }
+        if (loadState == LoadState.SUCCESS) {
+            viewLifecycleOwner.lifecycleScope
+                .launchWhenStarted {
+                    viewModel.state
+                        .collect { state -> showInfo(state) }
+                }
+        }
+    }
+
+    private fun showInfo(state: DigestState) {
+        when (state) {
+            DigestState.NotStartedYet -> {
+                binding.toolProgressBar.visibility = View.VISIBLE
+            }
+            is DigestState.Success -> {
+                binding.toolProgressBar.visibility = View.GONE
+                binding.collapsingToolbarLayout.title = state.data.title
+                binding.digestTitle.text = state.data.title
+                binding.description.text = state.data.description
+                binding.tags.text = state.data.tags.joinToString { tag ->
+                    "#${tag.title}"
+                }
+                binding.data.text =
+                    getString(R.string.digest_data, state.data.totalPhotos, state.data.userUsername)
+                binding.preview.loadImage(state.data.previewPhoto)
+            }
+        }
     }
 
     private fun onClick(buttonState: ClickableView, item: Photo) {
@@ -87,6 +115,8 @@ class DigestDetailsFragment : BaseFragment<FragmentDigestDetailsBinding>() {
         adapter.addLoadStateListener { loadState ->
             binding.error.isVisible =
                 loadState.mediator?.refresh is androidx.paging.LoadState.Error
+            binding.recyclerProgressBar.isVisible =
+                loadState.mediator?.refresh is androidx.paging.LoadState.Loading
         }
     }
 
