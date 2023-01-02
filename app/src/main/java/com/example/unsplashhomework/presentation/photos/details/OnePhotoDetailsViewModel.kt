@@ -1,9 +1,13 @@
 package com.example.unsplashhomework.presentation.photos.details
 
+import android.annotation.SuppressLint
 import android.app.DownloadManager
+import android.database.Cursor
 import android.net.Uri
 import android.os.Environment
+import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.example.unsplashhomework.data.state.LoadState
 import com.example.unsplashhomework.domain.LikeDetailPhotoUseCaseImpl
 import com.example.unsplashhomework.domain.OnePhotoDetailsUseCaseImpl
 import com.example.unsplashhomework.domain.model.PhotoDetails
@@ -16,8 +20,8 @@ import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
 
-//TODO:здесь должна быть зависимость на интерфейсы юзкейсов, переписать,
-// когда разберемся, где это все провайдить, без провайда не билдится
+//TODO:здесь должна быть зависимость на интерфейсы юзкейсов,
+// переписать после merge with main
 @HiltViewModel
 class OnePhotoDetailsViewModel @Inject constructor(
     private val onePhotoDetailsUseCase: OnePhotoDetailsUseCaseImpl,
@@ -27,23 +31,24 @@ class OnePhotoDetailsViewModel @Inject constructor(
     private val _state = MutableStateFlow<DetailsState>(DetailsState.NotStartedYet)
     val state = _state.asStateFlow()
 
+    var downloadID = 0L
+    var downloading = true
+    var success = false
+
     fun loadPhotoDetails(id: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            try {
+        viewModelScope.launch(Dispatchers.IO + handler) {
                 val a = onePhotoDetailsUseCase.getPhotoDetails(id = id)
+                _loadState.value = LoadState.SUCCESS
                 _state.value = DetailsState.Success(a)
-            } catch (_: Exception) {
-                _state.value = DetailsState.LoadingError
-            }
         }
     }
 
     fun like(item: PhotoDetails) {
         viewModelScope.launch(Dispatchers.IO + handler) {
-                likeDetailPhotoUseCase.likeDetailPhoto(item)
-                val a = onePhotoDetailsUseCase.getPhotoDetails(id = item.id)
-                _state.value = DetailsState.Success(a)
-
+            likeDetailPhotoUseCase.likeDetailPhoto(item)
+            val a = onePhotoDetailsUseCase.getPhotoDetails(id = item.id)
+            _loadState.value = LoadState.SUCCESS
+            _state.value = DetailsState.Success(a)
         }
     }
 
@@ -53,9 +58,39 @@ class OnePhotoDetailsViewModel @Inject constructor(
             .setTitle("Unsplash photo")
             .setDestinationInExternalPublicDir(
                 Environment.DIRECTORY_DOWNLOADS,
-                File.separator + "fromUnsplash.jpg")
+                File.separator + "fromUnsplash.jpg"
+            )
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
 
-        downloadManager.enqueue(downloadRequest)
+        downloadID = downloadManager.enqueue(downloadRequest)
+    }
+
+    @SuppressLint("Range")
+    fun getDMStatus(myDownloadManager: DownloadManager) {
+        viewModelScope.launch(Dispatchers.IO + handler) {
+            val request = DownloadManager.Query().setFilterById(downloadID)
+            var cursor: Cursor?
+            request.setFilterByStatus(DownloadManager.STATUS_FAILED or DownloadManager.STATUS_SUCCESSFUL)
+            while (downloading) {
+                cursor = myDownloadManager.query(request)
+                if (cursor.moveToPosition(0) && downloading) {
+                    Log.i("Kart", "Downloading")
+                    val status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS))
+                    if (status == DownloadManager.STATUS_SUCCESSFUL) {
+                        downloading = false
+                        success = true
+                        cursor.close()
+                    }
+                    if (status == DownloadManager.STATUS_FAILED) {
+                        downloading = false
+                        success = false
+                        cursor.close()
+                    }
+                } else {
+                    cursor.close()
+                }
+            }
+            Log.i("Kart", "Success = $success")
+        }
     }
 }

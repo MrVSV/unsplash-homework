@@ -26,7 +26,7 @@
     <string name="error_text"> "Ошибка загрузки!\n
         Приносим извинения за предоставленные неудобства"</string>
     <string name="auth_success">Successful authorisation</string>
-    <string name="alert_text">You have not given permission needed to save photo in the gallery. Please give permission and return back to the app.</string>
+    <string name="alert_text">You have not given permission needed to save photo in the gallery. Please give permission.</string>
     <string name="search_hint">request</string>
     <string name="title_activity_scrolling">ScrollingActivity</string>
     <string name="action_settings">Settings</string>
@@ -35,6 +35,10 @@
     <string name="collection_fragment_tittle">Collections</string>
     <string name="logout">Logout</string>
     <string name="user_fragment_title">Profile</string>
+    <string name="download_finished">Download finished</string>
+    <string name="open">OPEN</string>
+    <string name="failed_download">Download unsuccessful</string>
+    <string name="ok_to_download">Permission granted, Download button is enabled now</string>
     <!--Лента-->
     <!--Проверьте состояние сети-->
     <!--Авторизация прошла успешно-->
