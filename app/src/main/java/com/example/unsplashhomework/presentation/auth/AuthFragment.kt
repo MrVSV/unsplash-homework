@@ -15,7 +15,7 @@ import com.example.unsplashhomework.R
 import com.example.unsplashhomework.data.api.TOKEN_ENABLED_KEY
 import com.example.unsplashhomework.data.api.TOKEN_SHARED_KEY
 import com.example.unsplashhomework.data.api.TOKEN_SHARED_NAME
-import com.example.unsplashhomework.data.api.call
+import com.example.unsplashhomework.data.api.CALL
 import com.example.unsplashhomework.data.state.LoadState
 import com.example.unsplashhomework.databinding.FragmentAuthBinding
 import com.example.unsplashhomework.tools.BaseFragment
@@ -38,9 +38,9 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
 
     }
 
-    private fun startAuth(){
+    private fun startAuth() {
         binding.btnAuth.setOnClickListener {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(call))
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(CALL))
             startActivity(intent)
         }
     }
@@ -59,14 +59,30 @@ class AuthFragment : BaseFragment<FragmentAuthBinding>() {
             viewModel.loadState.collect { loadState ->
                 when (loadState) {
                     LoadState.START ->
-                        setLoadState(buttonIsEnabled = true, textIsVisible = false, progressIsVisible = false)
-                    LoadState.LOADING -> setLoadState(buttonIsEnabled = false, textIsVisible = false, progressIsVisible = true)
+                        setLoadState(
+                            buttonIsEnabled = true,
+                            textIsVisible = false,
+                            progressIsVisible = false
+                        )
+                    LoadState.LOADING -> setLoadState(
+                        buttonIsEnabled = false,
+                        textIsVisible = false,
+                        progressIsVisible = true
+                    )
                     LoadState.SUCCESS -> {
-                        setLoadState(buttonIsEnabled = false, textIsVisible = true, progressIsVisible = false)
+                        setLoadState(
+                            buttonIsEnabled = false,
+                            textIsVisible = true,
+                            progressIsVisible = false
+                        )
                         findNavController().navigate(R.id.action_authFragment_to_navigation_photos)
                     }
                     LoadState.ERROR -> {
-                        setLoadState(buttonIsEnabled = true, textIsVisible = true, progressIsVisible = false)
+                        setLoadState(
+                            buttonIsEnabled = true,
+                            textIsVisible = true,
+                            progressIsVisible = false
+                        )
                         binding.text.text = loadState.message
                     }
                 }
