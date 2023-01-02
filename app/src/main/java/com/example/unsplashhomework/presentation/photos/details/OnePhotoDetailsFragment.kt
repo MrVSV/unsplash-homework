@@ -106,7 +106,6 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
             binding.error.isVisible = true
             binding.scroll.isVisible = false
         }
-        //TODO: спрятать верстку, показать пустой экран с ошибкой
         if (loadState == LoadState.SUCCESS) {
             viewLifecycleOwner.lifecycleScope
                 .launchWhenStarted {
@@ -166,6 +165,8 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         binding.locationButton.setOnClickListener {
             if (lat != null && lon != null) {
                 showLocationOnMap(Uri.parse("geo: $lat,$lon"))
+            } else {
+                showNoLocationDataSnackbar()
             }
         }
     }
@@ -203,7 +204,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
                 action = Intent.ACTION_VIEW
                 flags = Intent.FLAG_ACTIVITY_NEW_TASK
                 flags = FLAG_GRANT_READ_URI_PERMISSION
-                }
+            }
             openIntent.setDataAndType(uri, "image/jpg")
             startActivity(openIntent)
         })
@@ -242,6 +243,14 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         startActivity(intent)
     }
 
+    private fun showNoLocationDataSnackbar() {
+        Snackbar.make(
+            binding.myCoordinatorLayout,
+            getString(R.string.no_location),
+            Snackbar.LENGTH_LONG
+        ).show()
+    }
+
     private fun setToolbar(id: String) {
         binding.toolbar.setOnClickListener {
             shareLinkOnPhoto(id)
@@ -263,7 +272,6 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         ) {
             enableDownloadFlag = true
         } else {
-            //можно как-то упростить, убрав после запроса и разрешения необходимость клика на кнопку скачивания
             launcher.launch(arrayOf(WRITE_EXTERNAL_STORAGE))
         }
     }

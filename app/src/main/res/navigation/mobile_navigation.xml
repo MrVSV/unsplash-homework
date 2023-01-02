@@ -76,7 +76,10 @@
         tools:layout="@layout/fragment_one_photo_details">
         <argument
             android:name="photo_id"
-            app:argType="string" />
+            android:defaultValue="8n72OQoS3pI"/>
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="https://unsplash.com/photos/{photo_id}" />
     </fragment>
     <fragment
         android:id="@+id/digestDetailsFragment"
