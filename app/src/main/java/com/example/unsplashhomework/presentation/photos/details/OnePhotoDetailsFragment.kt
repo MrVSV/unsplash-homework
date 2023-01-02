@@ -134,8 +134,18 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
     private fun bindUploadedTexts(state: DetailsState.Success) {
         binding.authorName.text = state.data.user.name
         binding.authorAccount.text = getString(R.string.author_account, state.data.user.username)
-
-        binding.location.text = state.data.location.city ?: "N/A"
+        if (state.data.location.city == null) {
+            if (state.data.location.position.latitude != null &&
+                state.data.location.position.longitude != null
+            )
+                binding.location.text = getString(
+                    R.string.position,
+                    state.data.location.position.latitude.toInt(),
+                    state.data.location.position.longitude.toInt()
+                )
+            else binding.location.text = "N/A"
+        } else
+            binding.location.text = state.data.location.city
         binding.currentLikes.text = state.data.likes.toString()
         binding.isLiked.isSelected = state.data.likedByUser
 
@@ -287,7 +297,10 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         alertDialog.setTitle(getString(R.string.alert_title))
         alertDialog.setMessage(getString(R.string.alert_text))
         alertDialog.setIcon(android.R.drawable.ic_dialog_alert)
-        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.ok)) { dialog, _ ->
+        alertDialog.setButton(
+            DialogInterface.BUTTON_POSITIVE,
+            getString(R.string.ok)
+        ) { dialog, _ ->
             dialog.cancel()
         }
         alertDialog.show()

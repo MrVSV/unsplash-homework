@@ -21,6 +21,7 @@
     <string name="focal_length">Focal length: %1$s\n</string>
     <string name="iso">ISO: %1$s</string>
     <string name="download">Downloads (%1$d)</string>
+    <string name="position">%1$d %2$d</string>
     <string name="error_text"> "Ошибка загрузки!\n
         Приносим извинения за предоставленные неудобства"</string>
     <string name="auth_success">Successful authorisation</string>
