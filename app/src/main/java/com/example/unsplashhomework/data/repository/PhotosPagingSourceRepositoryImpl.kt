@@ -7,33 +7,34 @@ import com.example.unsplashhomework.data.state.Requester
 import com.example.unsplashhomework.domain.model.Photo
 import com.example.unsplashhomework.domain.repository.LocalRepository
 import com.example.unsplashhomework.domain.repository.PhotoRemoteRepository
+import com.example.unsplashhomework.domain.repository.PhotosPagingSourceRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class PhotosPagingSourceRepository @Inject constructor(
-    private val remote: PhotoRemoteRepository,
-    private val local: LocalRepository
-) {
+class PhotosPagingSourceRepositoryImpl @Inject constructor(
+    private val photoRemoteRepository: PhotoRemoteRepository,
+    private val localRepository: LocalRepository
+): PhotosPagingSourceRepository {
 
     @OptIn(ExperimentalPagingApi::class)
-    fun getFlowPhoto(requester: Requester): Flow<PagingData<Photo>>
+    override fun getFlowPhoto(requester: Requester): Flow<PagingData<Photo>>
         = Pager(
             config = PagingConfig(
                 pageSize = 10,
                 enablePlaceholders = false
             ),
-            remoteMediator = PhotosRemoteMediator(local, remote, requester),
-            pagingSourceFactory = { local.getPagingData() }
+            remoteMediator = PhotosRemoteMediator(localRepository, photoRemoteRepository, requester),
+            pagingSourceFactory = { localRepository.getPagingData() }
         ).flow.map {
             it.map { entity ->
                 entity.toPhoto()
             }
         }
 
-    suspend fun setLike(id: String): WrapperPhotoDto = remote.likePhoto(id)
+    override suspend fun setLike(id: String): WrapperPhotoDto = photoRemoteRepository.likePhoto(id)
 
-    suspend fun deleteLike(id: String): WrapperPhotoDto = remote.unlikePhoto(id)
+    override suspend fun deleteLike(id: String): WrapperPhotoDto = photoRemoteRepository.unlikePhoto(id)
 
-    suspend fun updateLikeDB(entity: PhotoEntity) = local.setLikeInDataBase(entity)
+    override suspend fun updateLikeDB(entity: PhotoEntity) = localRepository.setLikeInDataBase(entity)
 }

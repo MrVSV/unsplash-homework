@@ -1,7 +1,7 @@
 package com.example.unsplashhomework.data.usecase
 
-import com.example.unsplashhomework.data.repository.PhotosPagingSourceRepository
 import com.example.unsplashhomework.domain.model.Photo
+import com.example.unsplashhomework.domain.repository.PhotosPagingSourceRepository
 import com.example.unsplashhomework.domain.usecase.PhotoLikeUseCase
 import javax.inject.Inject
 

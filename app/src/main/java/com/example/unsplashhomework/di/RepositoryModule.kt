@@ -1,13 +1,7 @@
 package com.example.unsplashhomework.di
 
-import com.example.unsplashhomework.data.repository.DigestRemoteRepositoryImpl
-import com.example.unsplashhomework.data.repository.LocalRepositoryImpl
-import com.example.unsplashhomework.data.repository.PhotoRemoteRepositoryImpl
-import com.example.unsplashhomework.data.repository.ProfileRemoteRepositoryImpl
-import com.example.unsplashhomework.domain.repository.DigestRemoteRepository
-import com.example.unsplashhomework.domain.repository.LocalRepository
-import com.example.unsplashhomework.domain.repository.PhotoRemoteRepository
-import com.example.unsplashhomework.domain.repository.ProfileRemoteRepository
+import com.example.unsplashhomework.data.repository.*
+import com.example.unsplashhomework.domain.repository.*
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -41,4 +35,10 @@ abstract class RepositoryModule {
     abstract fun bindProfileRemoteRepository(
         profileRemoteRepository: ProfileRemoteRepositoryImpl
     ): ProfileRemoteRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindPhotosPagingSourceRepository(
+        photosPagingSourceRepository: PhotosPagingSourceRepositoryImpl
+    ): PhotosPagingSourceRepository
 }

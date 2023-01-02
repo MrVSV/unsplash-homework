@@ -14,8 +14,8 @@ import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
 class PhotosRemoteMediator @Inject constructor(
-    private val local: LocalRepository,
-    private val remote: PhotoRemoteRepository,
+    private val localRepository: LocalRepository,
+    private val photoRemoteRepository: PhotoRemoteRepository,
     private val requester: Requester
 ) : RemoteMediator<Int, PhotoEntity>() {
 
@@ -29,9 +29,9 @@ class PhotosRemoteMediator @Inject constructor(
         pageIndex = getIndex(loadType) ?: return MediatorResult.Success(true)
 
         return try {
-            val response = remote.getPhotoList(requester, pageIndex).toListEntity()
-            if (loadType == LoadType.REFRESH) local.refresh(response)
-            else local.insertData(response)
+            val response = photoRemoteRepository.getPhotoList(requester, pageIndex).toListEntity()
+            if (loadType == LoadType.REFRESH) localRepository.refresh(response)
+            else localRepository.insertData(response)
             MediatorResult.Success(endOfPaginationReached = response.isEmpty())
         } catch (e: Exception) {
             MediatorResult.Error(e)
