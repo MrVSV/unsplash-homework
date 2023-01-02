@@ -40,7 +40,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:maxLines="3"
-        android:text="@string/user_name"
         android:textColor="@color/black"
         android:textSize="28sp"
         android:textStyle="bold"
@@ -70,7 +69,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginVertical="3dp"
-                android:src="@drawable/ic_person"
+                android:src="@drawable/ic_baseline_person_outline_24"
                 android:layout_gravity="center_vertical"
                 />
 
@@ -81,7 +80,6 @@
                 android:maxLines="1"
                 android:maxWidth="150dp"
                 android:layout_height="wrap_content"
-                android:text="@string/username"
                 android:layout_marginStart="5dp"
                 android:textColor="@color/black"
                 android:textSize="@dimen/user_data_text_size"
@@ -114,7 +112,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:maxWidth="150dp"
-                android:text="@string/user_location"
                 android:textColor="@color/black"
                 android:layout_gravity="center_vertical"
                 android:textSize="@dimen/user_data_text_size" />

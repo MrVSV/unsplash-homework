@@ -66,7 +66,6 @@ class DigestDetailsFragment : BaseFragment<FragmentDigestDetailsBinding>() {
     }
 
     private fun updateUiOnServerResponse(loadState: LoadState) {
-        Log.v(ContentValues.TAG, "стейт детальный дайджест: $loadState", )
         if (loadState == LoadState.ERROR) {
             binding.error.isVisible = true
         }
@@ -93,7 +92,12 @@ class DigestDetailsFragment : BaseFragment<FragmentDigestDetailsBinding>() {
                     "#${tag.title}"
                 }
                 binding.data.text =
-                    getString(R.string.digest_data, state.data.totalPhotos, state.data.userUsername)
+                    resources.getQuantityString(
+                        R.plurals.digest_data,
+                        state.data.totalPhotos,
+                        state.data.totalPhotos,
+                        state.data.userUsername
+                    )
                 binding.preview.loadImage(state.data.previewPhoto)
             }
         }

@@ -59,7 +59,6 @@ class DigestFragment : BaseFragment<FragmentDigestBinding>() {
         }
     }
 
-// не работает почему-то. пока не стал вникать
     private fun loadStateItemsObserve() {
         adapter.addLoadStateListener { loadState ->
             binding.error.isVisible =

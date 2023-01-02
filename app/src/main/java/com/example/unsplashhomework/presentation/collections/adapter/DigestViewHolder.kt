@@ -18,7 +18,12 @@ class DigestViewHolder(private val binding: DigestViewHolderBinding) :
         binding.preview.loadImage(item.previewPhoto)
         binding.authorAvatar.loadImage(item.userProfileImage)
         binding.authorName.text = item.userUsername
-        binding.totalPhotos.text = "${item.totalPhotos}${R.string.total_photos}"
+        binding.totalPhotos.text =
+            itemView.context.resources.getQuantityString(
+                R.plurals.total_photos,
+                item.totalPhotos,
+                item.totalPhotos
+            )
         binding.collectionTitle.text = item.title
 
     }

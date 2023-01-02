@@ -20,7 +20,7 @@
             android:background="@color/green"
             android:textAlignment="textEnd"
             app:navigationIcon="@drawable/ic_baseline_share_24"
-            app:title="Share"
+            app:title="@string/one_photo_fragment_tittle"
             app:titleTextColor="@color/black" />
 
         <ScrollView

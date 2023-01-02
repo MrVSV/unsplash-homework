@@ -146,7 +146,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
             R.string.about, state.data.user.username, state.data.user.bio ?: "N/A"
         )
         binding.downloadsCount.text = getString(
-            R.string.download, state.data.downloads.toString()
+            R.string.download, state.data.downloads, state.data.downloads
         )
     }
 
@@ -270,10 +270,10 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
 
     private fun showMissingPermissionAlert() {
         val alertDialog = AlertDialog.Builder(requireContext()).create()
-        alertDialog.setTitle("Info")
+        alertDialog.setTitle(getString(R.string.alert_title))
         alertDialog.setMessage(getString(R.string.alert_text))
         alertDialog.setIcon(android.R.drawable.ic_dialog_alert)
-        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "Ok") { dialog, _ ->
+        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.ok)) { dialog, _ ->
             dialog.cancel()
         }
         alertDialog.show()

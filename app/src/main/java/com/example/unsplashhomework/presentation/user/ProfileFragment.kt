@@ -56,13 +56,13 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
     }
 
     private fun observe() {
-        Log.d(TAG, "observe: ")
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.getPhoto().collect { pagingData ->
                 adapter.submitData(pagingData)
             }
         }
     }
+
     private fun getLoadingState() {
         viewModel.getProfile()
         viewLifecycleOwner.lifecycleScope
