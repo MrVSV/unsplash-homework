@@ -17,6 +17,7 @@ import com.example.unsplashhomework.presentation.photos.list.adapter.PhotoPaging
 import com.example.unsplashhomework.tools.BaseFragment
 import com.example.unsplashhomework.tools.setChangeTextListener
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -77,9 +78,15 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
     }
 
     private fun loadStateItemsObserve() {
-        adapter.addLoadStateListener { loadState ->
-            binding.error.isVisible =
-                loadState.mediator?.refresh is androidx.paging.LoadState.Error
+        viewLifecycleOwner.lifecycleScope.launch {
+            adapter.loadStateFlow.collect { loadState ->
+                binding.error.isVisible =
+                    loadState.mediator?.refresh is androidx.paging.LoadState.Error
+                delay(5000)
+                Log.i("state", "prepend ${loadState.mediator?.prepend} ")
+                Log.i("state", "refresh ${loadState.mediator?.refresh} ")
+                Log.i("state", "append ${loadState.mediator?.append} ")
+            }
         }
     }
 
@@ -92,7 +99,7 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
         }
     }
 
-    private fun initRefresher(){
+    private fun initRefresher() {
         binding.swipeRefresh.setOnRefreshListener {
             binding.photoRecycler.isVisible = true
             adapter.refresh()
