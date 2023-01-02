@@ -5,7 +5,7 @@ import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.unsplashhomework.domain.model.Digest
-import com.example.unsplashhomework.domain.DigestRemoteRepository
+import com.example.unsplashhomework.domain.repository.DigestRemoteRepository
 import javax.inject.Inject
 
 class DigestPagingSource @Inject constructor(private val repository: DigestRemoteRepository) :

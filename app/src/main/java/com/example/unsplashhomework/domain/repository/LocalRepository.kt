@@ -1,4 +1,4 @@
-package com.example.unsplashhomework.domain
+package com.example.unsplashhomework.domain.repository
 
 import androidx.paging.PagingSource
 import com.example.unsplashhomework.data.local.entity.PhotoEntity

@@ -1,4 +1,4 @@
-package com.example.unsplashhomework.domain
+package com.example.unsplashhomework.domain.usecase
 
 import com.example.unsplashhomework.domain.model.PhotoDetails
 

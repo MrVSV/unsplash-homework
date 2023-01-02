@@ -9,7 +9,7 @@ import com.example.unsplashhomework.data.api.photodto.PhotoDetailsDto
 import com.example.unsplashhomework.data.api.photodto.PhotoListDto
 import com.example.unsplashhomework.data.api.photodto.WrapperPhotoDto
 import com.example.unsplashhomework.data.state.Requester
-import com.example.unsplashhomework.domain.PhotoRemoteRepository
+import com.example.unsplashhomework.domain.repository.PhotoRemoteRepository
 import javax.inject.Inject
 
 class PhotoRemoteRepositoryImpl @Inject constructor(

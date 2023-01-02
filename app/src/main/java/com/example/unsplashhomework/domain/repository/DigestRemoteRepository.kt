@@ -1,4 +1,4 @@
-package com.example.unsplashhomework.domain
+package com.example.unsplashhomework.domain.repository
 
 import com.example.unsplashhomework.domain.model.Digest
 

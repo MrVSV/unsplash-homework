@@ -3,10 +3,10 @@ package com.example.unsplashhomework.presentation.collections
 import androidx.lifecycle.viewModelScope
 import com.example.unsplashhomework.data.state.LoadState
 import com.example.unsplashhomework.data.state.Requester
-import com.example.unsplashhomework.domain.GetDigestInfoUseCase
-import com.example.unsplashhomework.domain.PhotoLikeUseCase
-import com.example.unsplashhomework.domain.PhotosPagingUseCase
 import com.example.unsplashhomework.domain.model.Photo
+import com.example.unsplashhomework.domain.usecase.GetDigestInfoUseCase
+import com.example.unsplashhomework.domain.usecase.PhotoLikeUseCase
+import com.example.unsplashhomework.domain.usecase.PhotosPagingUseCase
 import com.example.unsplashhomework.tools.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers

@@ -1,8 +1,8 @@
-package com.example.unsplashhomework.domain
+package com.example.unsplashhomework.domain.usecase
 
 import com.example.unsplashhomework.domain.model.Profile
 
-interface ProfileRemoteRepository {
+interface GetProfileUseCase {
 
     suspend fun getProfile(): Profile
 }
