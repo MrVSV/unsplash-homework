@@ -2,14 +2,27 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!--queries>
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+
+            <data
+                android:host="www.unsplash.com"
+                android:path="/photos/{photo_id}"
+                android:scheme="https" />
+        </intent-filter>
+    </queries-->
+
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
-        android:maxSdkVersion="28"/>
+        android:maxSdkVersion="28" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".App"
@@ -24,8 +37,7 @@
         tools:targetApi="31">
         <activity
             android:name=".presentation.MainActivity"
-            android:exported="true"
-            android:label="@string/app_name">
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,11 +45,23 @@
 
                 <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
 
-            <nav-graph android:value="@navigation/mobile_navigation"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-            <meta-data android:name="android.app.searchable"
-                android:resource="@xml/searchable"/>
+                <data
+                    android:host="www.unsplash.com"
+                    android:path="/photos/{photo_id}"
+                    android:scheme="https" />
+            </intent-filter>
+
+            <nav-graph android:value="@navigation/mobile_navigation" />
+
+            <meta-data
+                android:name="android.app.searchable"
+                android:resource="@xml/searchable" />
 
 
             <meta-data
