@@ -1,6 +1,8 @@
 package com.example.unsplashhomework.presentation.collections
 
+import android.content.ContentValues
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.core.view.isVisible
@@ -64,6 +66,7 @@ class DigestDetailsFragment : BaseFragment<FragmentDigestDetailsBinding>() {
     }
 
     private fun updateUiOnServerResponse(loadState: LoadState) {
+        Log.v(ContentValues.TAG, "стейт детальный дайджест: $loadState", )
         if (loadState == LoadState.ERROR) {
             binding.error.isVisible = true
         }

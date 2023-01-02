@@ -12,7 +12,7 @@
         <action
             android:id="@+id/action_navigation_onboarding_to_navigation_auth"
             app:destination="@id/authFragment"
-            app:popUpTo="@id/navigation_onboarding"
+            app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true" />
     </fragment>
 
@@ -47,7 +47,9 @@
             app:destination="@id/navigation_photo_details" />
         <action
             android:id="@+id/action_navigation_user_to_authFragment"
-            app:destination="@id/authFragment" />
+            app:destination="@id/authFragment"
+            app:popUpTo="@id/navigation_photos"
+            app:popUpToInclusive="true"/>
     </fragment>
 
     <fragment
@@ -64,7 +66,7 @@
         <action
             android:id="@+id/action_authFragment_to_navigation_photos"
             app:destination="@id/navigation_photos"
-            app:popUpTo="@id/authFragment"
+            app:popUpTo="@id/mainFragment"
             app:popUpToInclusive="true"/>
     </fragment>
 

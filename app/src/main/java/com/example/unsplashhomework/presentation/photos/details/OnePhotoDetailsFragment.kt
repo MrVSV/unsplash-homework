@@ -3,11 +3,13 @@ package com.example.unsplashhomework.presentation.photos.details
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.DownloadManager
 import android.content.*
+import android.content.ContentValues.TAG
 import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -102,7 +104,11 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
     }
 
     private fun updateUiOnServerResponse(loadState: LoadState) {
-        if (loadState == LoadState.ERROR) binding.error.isVisible = true
+        Log.v(TAG, "стейт детальный фото: $loadState", )
+        if (loadState == LoadState.ERROR) {
+            binding.error.isVisible = true
+            binding.scroll.isVisible = false
+        }
         //TODO: спрятать верстку, показать пустой экран с ошибкой
         if (loadState == LoadState.SUCCESS) {
             viewLifecycleOwner.lifecycleScope
