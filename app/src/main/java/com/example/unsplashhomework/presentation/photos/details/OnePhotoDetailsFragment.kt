@@ -3,11 +3,13 @@ package com.example.unsplashhomework.presentation.photos.details
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.DownloadManager
 import android.content.*
+import android.content.ContentValues.TAG
 import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -162,10 +164,14 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
     }
 
     private fun setLocationClick() {
+
         binding.locationButton.setOnClickListener {
+            Log.d(TAG, "lat $lat\nlon $lon ")
             if (lat != null && lon != null) {
+                Log.d(TAG, "map open")
                 showLocationOnMap(Uri.parse("geo: $lat,$lon"))
             } else {
+                Log.d(TAG, "map don't open ")
                 showNoLocationDataSnackbar()
             }
         }

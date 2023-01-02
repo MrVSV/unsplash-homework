@@ -61,6 +61,7 @@
     <string name="title_photos">Фотографии</string>
     <string name="title_collections">Коллекции</string>
     <string name="title_user">Профиль</string>
+    <string name="no_location">Для этой фотографии нет данных о местоположении</string>
     <!--Лента-->
     <!--Проверьте состояние сети-->
     <!--Авторизация прошла успешно-->
