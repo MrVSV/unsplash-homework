@@ -51,6 +51,7 @@
     <string name="logout_message">All local data will be deleted.</string>
     <string name="yes">Yes</string>
     <string name="no">No</string>
+    <string name="no_location">No location data for this photo</string>
     <!--Лента-->
     <!--Проверьте состояние сети-->
     <!--Авторизация прошла успешно-->
