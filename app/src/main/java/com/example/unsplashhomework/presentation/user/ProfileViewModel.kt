@@ -24,10 +24,20 @@ class ProfileViewModel @Inject constructor(
 
     private val userName = MutableStateFlow("")
     private var job: Job? = null
+
     private val _profile = MutableSharedFlow<Profile>()
     val profile = _profile.asSharedFlow()
 
-    suspend fun getProfile()  = getProfileUseCase.getProfile()
+    private val _state = MutableStateFlow<ProfileState>(ProfileState.NotStartedYet)
+    val state = _state.asStateFlow()
+
+    fun getProfile() {
+        viewModelScope.launch(Dispatchers.IO + handler) {
+            val a = getProfileUseCase.getProfile()
+            _loadState.value = LoadState.SUCCESS
+            _state.value = ProfileState.Success(a)
+        }
+    }
 
     @OptIn(ExperimentalCoroutinesApi::class)
     fun getPhoto() = userName.asStateFlow()

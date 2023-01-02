@@ -30,13 +30,9 @@ class PhotosRemoteMediator @Inject constructor(
 
         return try {
             val response = remote.getPhotoList(requester, pageIndex).toListEntity()
-
             if (loadType == LoadType.REFRESH) local.refresh(response)
             else local.insertData(response)
-
-            Log.d(TAG, "response:\n${response.joinToString("\n")}")
             MediatorResult.Success(endOfPaginationReached = response.isEmpty())
-
         } catch (e: Exception) {
             MediatorResult.Error(e)
         }
@@ -47,7 +43,7 @@ class PhotosRemoteMediator @Inject constructor(
         return when (loadType) {
             LoadType.PREPEND -> null
             LoadType.REFRESH -> 0
-            LoadType.APPEND -> ++pageIndex
+            LoadType.APPEND -> null /*поменять на ++pageIndex чтобы грузить всё*/
         }
     }
 }

@@ -45,7 +45,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         super.onViewCreated(view, savedInstanceState)
 
         observe()
-        showInfo()
+        getLoadingState()
         loadStateItemsObserve()
         loadStateLike()
         settingAdapter()
@@ -62,19 +62,43 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             }
         }
     }
+    private fun getLoadingState() {
+        viewModel.getProfile()
+        viewLifecycleOwner.lifecycleScope
+            .launchWhenStarted {
+                viewModel.loadState.collect { loadState -> updateUiOnServerResponse(loadState) }
+            }
+    }
 
-    private fun showInfo() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            val profileInfo = viewModel.getProfile()
-            viewModel.setUsername(profileInfo.userName) { adapter.refresh() }
-            binding.location.text = profileInfo.location
-            binding.username.text = profileInfo.userName
-            binding.name.text = profileInfo.name
-            binding.likes.text = "likes: ${profileInfo.totalLikes}"
-            binding.avatar.loadImage(profileInfo.avatar)
-            location = profileInfo.location
+    private fun updateUiOnServerResponse(loadState: LoadState) {
+        if (loadState == LoadState.ERROR) {
+            binding.error.isVisible = true
+            binding.locationButton.isEnabled = false
         }
+        if (loadState == LoadState.SUCCESS) {
+            viewLifecycleOwner.lifecycleScope
+                .launchWhenStarted {
+                    viewModel.state
+                        .collect { state -> showInfo(state) }
+                }
+        }
+    }
 
+    private fun showInfo(state: ProfileState) {
+        when (state) {
+            ProfileState.NotStartedYet -> {}
+            is ProfileState.Success -> {
+                binding.locationButton.isEnabled = true
+                viewModel.setUsername(state.data.userName) { adapter.refresh() }
+                binding.location.text = state.data.location
+                binding.username.text = state.data.userName
+                binding.name.text = state.data.name
+                binding.likes.text = "likes: ${state.data.totalLikes}"
+                binding.avatar.loadImage(state.data.avatar)
+                location = state.data.location
+            }
+
+        }
     }
 
     private fun onClick(buttonState: ClickableView, item: Photo) {
@@ -83,7 +107,10 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         when (buttonState) {
             ClickableView.PHOTO ->
                 findNavController().navigate(action)
-            ClickableView.LIKE -> viewModel.like(item)
+            ClickableView.LIKE -> {
+                viewModel.like(item)
+                getLoadingState()
+            }
         }
     }
 
@@ -96,6 +123,8 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
         adapter.addLoadStateListener { loadState ->
             binding.error.isVisible =
                 loadState.mediator?.refresh is androidx.paging.LoadState.Error
+            binding.recyclerProgressBar.isVisible =
+                loadState.mediator?.refresh is androidx.paging.LoadState.Loading
         }
     }
 
@@ -104,6 +133,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>() {
             viewModel.loadState.collect { loadStateLike ->
                 binding.error.isVisible =
                     loadStateLike == LoadState.ERROR
+
             }
         }
     }

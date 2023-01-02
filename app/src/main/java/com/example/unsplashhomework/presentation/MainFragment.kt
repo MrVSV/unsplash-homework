@@ -1,6 +1,5 @@
 package com.example.unsplashhomework.presentation
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -24,17 +23,27 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 
         Log.d("fragment", "стартовый")
 
-        val prefs = requireContext().getSharedPreferences(TOKEN_SHARED_NAME, Context.MODE_PRIVATE)
+        val prefs = createSharedPreference(TOKEN_SHARED_NAME)
         val toOnboardingFragment = MainFragmentDirections.actionMainFragmentToNavigationOnboarding()
         val toAuthFragment = MainFragmentDirections.actionMainFragmentToAuthFragment()
         val toPhotosFragment = MainFragmentDirections.actionMainFragmentToNavigationPhotos()
 
-        if(!prefs.getBoolean(ONBOARDING_IS_SHOWN, false))
+        binding.auth.setOnClickListener {
+            findNavController().navigate(toAuthFragment)
+        }
+
+        binding.onBoarding.setOnClickListener {
             findNavController().navigate(toOnboardingFragment)
-        else{
-            if(!prefs.getBoolean(TOKEN_ENABLED_KEY, false))
-                findNavController().navigate(toAuthFragment)
-            else  findNavController().navigate(toPhotosFragment)
+        }
+
+        binding.asShouldBe.setOnClickListener {
+            if (!prefs.getBoolean(ONBOARDING_IS_SHOWN, false))
+                findNavController().navigate(toOnboardingFragment)
+            else {
+                if (!prefs.getBoolean(TOKEN_ENABLED_KEY, false))
+                    findNavController().navigate(toAuthFragment)
+                else findNavController().navigate(toPhotosFragment)
+            }
         }
     }
     override fun onDestroy() {
