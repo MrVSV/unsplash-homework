@@ -45,7 +45,7 @@ abstract class BaseFragment<B:ViewBinding>:Fragment() {
                 when (state) {
                     LoadState.LOADING -> progressBar.isVisible = true
                     LoadState.SUCCESS -> progressBar.isVisible = false
-                    LoadState.ERROR -> errorView.text = getString(R.string.error_text)
+                    LoadState.ERROR -> errorView.text = getString(R.string.no_connection)
                     else->{}
                 }
             }

@@ -8,9 +8,6 @@
         <item>Share with friends, make collections</item>
         <item>Upload your favorite pictures and track statistics</item>
     </string-array>
-    <!--Создавайте снимки, публикуйте, собирайте аудиторию, получайте фидбек!-->
-    <!--Делитесь с друзьями, собирайте коллекции-->
-    <!--Загружайте любимые снимки и отслеживайте статистику-->
     <string name="go_straight_to_authorization">Skip</string>
     <string name="login_via_unsplash">Login via Unsplash</string>
     <string name="about">About \@%1$s:\n%2$s</string>
@@ -22,8 +19,6 @@
     <string name="iso">ISO: %1$s</string>
     <string name="download">Downloads (%1$d)</string>
     <string name="position" translatable="false">%1$d %2$d</string>
-    <string name="error_text"> "Ошибка загрузки!\n
-        Приносим извинения за предоставленные неудобства"</string>
     <string name="auth_success">Successful authorisation</string>
     <string name="alert_title">Info</string>
     <string name="alert_text">
@@ -61,8 +56,4 @@
     </plurals>
     <string name="no_location">No location data for this photo</string>
     <string name="one_photo_fragment_title">Photo Details</string>
-    <!--Лента-->
-    <!--Проверьте состояние сети-->
-    <!--Авторизация прошла успешно-->
-    <!--Пропустить. Войти через приложение-->
 </resources>

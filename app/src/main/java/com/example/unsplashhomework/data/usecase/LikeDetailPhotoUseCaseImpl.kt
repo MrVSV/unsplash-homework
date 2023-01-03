@@ -5,8 +5,6 @@ import com.example.unsplashhomework.domain.repository.PhotosPagingSourceReposito
 import com.example.unsplashhomework.domain.usecase.LikeDetailPhotoUseCase
 import javax.inject.Inject
 
-//TODO:здесь должна быть зависимость на интерфейс репозитория, переписать, когда будет готов интерфейс
-
 class LikeDetailPhotoUseCaseImpl @Inject constructor(private val repository: PhotosPagingSourceRepository) :
     LikeDetailPhotoUseCase {
 

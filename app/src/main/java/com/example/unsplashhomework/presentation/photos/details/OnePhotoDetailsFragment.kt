@@ -134,18 +134,8 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
     private fun bindUploadedTexts(state: DetailsState.Success) {
         binding.authorName.text = state.data.user.name
         binding.authorAccount.text = getString(R.string.author_account, state.data.user.username)
-        if (state.data.location.city == null) {
-            if (state.data.location.position.latitude != null &&
-                state.data.location.position.longitude != null
-            )
-                binding.location.text = getString(
-                    R.string.position,
-                    state.data.location.position.latitude.toInt(),
-                    state.data.location.position.longitude.toInt()
-                )
-            else binding.location.text = "N/A"
-        } else
-            binding.location.text = state.data.location.city
+
+        binding.location.text = state.data.location.city ?: "N/A"
         binding.currentLikes.text = state.data.likes.toString()
         binding.isLiked.isSelected = state.data.likedByUser
 
@@ -178,10 +168,11 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         binding.locationButton.setOnClickListener {
             Log.d(TAG, "lat $lat\nlon $lon ")
             if (lat != null && lon != null) {
-                Log.d(TAG, "map open")
-                showLocationOnMap(Uri.parse("geo: $lat,$lon"))
+                if (lat != 0.0 && lon != 0.0) {
+                Log.d(TAG, "open map")
+                showLocationOnMap(Uri.parse("geo: $lat,$lon"))}
             } else {
-                Log.d(TAG, "map don't open ")
+                Log.d(TAG, "don't open map")
                 showNoLocationDataSnackbar()
             }
         }
@@ -279,7 +270,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         val sharingIntent = Intent(Intent.ACTION_SEND)
         sharingIntent.type = "text/plain"
         sharingIntent.putExtra(Intent.EXTRA_TEXT, "https://unsplash.com/photos/$id")
-        startActivity(Intent.createChooser(sharingIntent, "Share using"))
+        startActivity(Intent.createChooser(sharingIntent, getString(R.string.share)))
     }
 
     private fun checkPermission() {

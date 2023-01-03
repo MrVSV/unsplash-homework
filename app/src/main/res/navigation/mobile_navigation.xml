@@ -31,7 +31,7 @@
         android:id="@+id/navigation_digest"
         android:name="com.example.unsplashhomework.presentation.collections.DigestFragment"
         android:label="@string/title_collections"
-        tools:layout="@layout/fragment_digest" >
+        tools:layout="@layout/fragment_digest">
         <action
             android:id="@+id/action_navigation_digest_to_digestDetailsFragment"
             app:destination="@id/digestDetailsFragment" />
@@ -41,7 +41,7 @@
         android:id="@+id/navigation_user"
         android:name="com.example.unsplashhomework.presentation.user.ProfileFragment"
         android:label="@string/title_user"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_navigation_user_to_navigation_photo_details"
             app:destination="@id/navigation_photo_details" />
@@ -49,25 +49,25 @@
             android:id="@+id/action_navigation_user_to_authFragment"
             app:destination="@id/authFragment"
             app:popUpTo="@id/navigation_photos"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
         android:id="@+id/authFragment"
         android:name="com.example.unsplashhomework.presentation.auth.AuthFragment"
-        tools:layout="@layout/fragment_auth" >
-    <deepLink
-        android:id="@+id/deepLink"
-        app:uri="https://unsplash.com/oauth/authorize/native?code={code}" />
-    <argument
-        android:name="code"
-        android:defaultValue=""
-        app:argType="string" />
+        tools:layout="@layout/fragment_auth">
+        <deepLink
+            android:id="@+id/deepLink"
+            app:uri="https://unsplash.com/oauth/authorize/native?code={code}" />
+        <argument
+            android:name="code"
+            android:defaultValue=""
+            app:argType="string" />
         <action
             android:id="@+id/action_authFragment_to_navigation_photos"
             app:destination="@id/navigation_photos"
             app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
 
     <fragment
@@ -76,7 +76,7 @@
         tools:layout="@layout/fragment_one_photo_details">
         <argument
             android:name="photo_id"
-            android:defaultValue="8n72OQoS3pI"/>
+            android:defaultValue="8n72OQoS3pI" />
         <deepLink
             android:id="@+id/deepLink"
             app:uri="https://unsplash.com/photos/{photo_id}" />
@@ -85,7 +85,7 @@
         android:id="@+id/digestDetailsFragment"
         android:name="com.example.unsplashhomework.presentation.collections.DigestDetailsFragment"
         android:label="fragment_digest_details"
-        tools:layout="@layout/fragment_digest_details" >
+        tools:layout="@layout/fragment_digest_details">
         <argument
             android:name="id"
             app:argType="string" />
@@ -97,22 +97,22 @@
         android:id="@+id/mainFragment"
         android:name="com.example.unsplashhomework.presentation.MainFragment"
         android:label="fragment_main"
-        tools:layout="@layout/fragment_main" >
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/action_mainFragment_to_navigation_onboarding"
             app:destination="@id/navigation_onboarding"
             app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainFragment_to_authFragment"
             app:destination="@id/authFragment"
             app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_mainFragment_to_navigation_photos"
             app:destination="@id/navigation_photos"
             app:popUpTo="@id/mainFragment"
-            app:popUpToInclusive="true"/>
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

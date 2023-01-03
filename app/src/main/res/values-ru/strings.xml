@@ -7,9 +7,6 @@
         <item>Делитесь с друзьями, собирайте коллекции</item>
         <item>Загружайте любимые снимки и отслеживайте статистику</item>
     </string-array>
-    <!--Создавайте снимки, публикуйте, собирайте аудиторию, получайте фидбек!-->
-    <!--Делитесь с друзьями, собирайте коллекции-->
-    <!--Загружайте любимые снимки и отслеживайте статистику-->
     <string name="login_via_unsplash">Войти через Unsplash</string>
     <string name="about">О \@%1$s:\n%2$s</string>
     <string name="made_with">Производитель: %1$s\n</string>
@@ -19,12 +16,10 @@
     <string name="focal_length">Фокусное расстояние: %1$s\n</string>
     <string name="iso">ISO: %1$s</string>
     <string name="download">Загрузок (%1$d)</string>
-    <string name="error_text"> "Ошибка загрузки!\n
-        Приносим извинения за предоставленные неудобства"</string>
     <string name="auth_success">Авторизация прошла успешно</string>
     <string name="alert_title">Информация</string>
     <string name="alert_text">
-        Необходимо разрешение чтобы сохранить фотографию на устройстве
+        Необходимо разрешение, чтобы сохранить фотографию на устройстве
     </string>
     <string name="search_hint">Найти фото...</string>
     <string name="no_connection">Проверьте состояние сети</string>
@@ -63,8 +58,4 @@
     <string name="title_user">Профиль</string>
     <string name="no_location">Для этой фотографии нет данных о местоположении</string>
     <string name="one_photo_fragment_title">Фотография</string>
-    <!--Лента-->
-    <!--Проверьте состояние сети-->
-    <!--Авторизация прошла успешно-->
-    <!--Пропустить. Войти через приложение-->
 </resources>
