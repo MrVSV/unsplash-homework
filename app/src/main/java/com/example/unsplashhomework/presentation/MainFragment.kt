@@ -25,15 +25,15 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         val toAuthFragment = MainFragmentDirections.actionMainFragmentToAuthFragment()
         val toPhotosFragment = MainFragmentDirections.actionMainFragmentToNavigationPhotos()
 
-        binding.auth.setOnClickListener {
-            findNavController().navigate(toAuthFragment)
-        }
-
-        binding.onBoarding.setOnClickListener {
-            findNavController().navigate(toOnboardingFragment)
-        }
-
-        binding.asShouldBe.setOnClickListener {
+//        binding.auth.setOnClickListener {
+//            findNavController().navigate(toAuthFragment)
+//        }
+//
+//        binding.onBoarding.setOnClickListener {
+//            findNavController().navigate(toOnboardingFragment)
+//        }
+//
+//        binding.asShouldBe.setOnClickListener {
             if (!prefs.getBoolean(ONBOARDING_IS_SHOWN, false))
                 findNavController().navigate(toOnboardingFragment)
             else {
@@ -41,6 +41,6 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
                     findNavController().navigate(toAuthFragment)
                 else findNavController().navigate(toPhotosFragment)
             }
-        }
+//        }
     }
 }

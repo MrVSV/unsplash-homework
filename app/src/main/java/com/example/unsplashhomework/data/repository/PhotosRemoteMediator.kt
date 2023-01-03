@@ -39,7 +39,7 @@ class PhotosRemoteMediator @Inject constructor(
         return when (loadType) {
             LoadType.PREPEND -> null
             LoadType.REFRESH -> 0
-            LoadType.APPEND -> null /*поменять на ++pageIndex чтобы грузить всё*/
+            LoadType.APPEND -> ++pageIndex /*поменять на null чтобы грузить 1 страницу*/
         }
     }
 }
