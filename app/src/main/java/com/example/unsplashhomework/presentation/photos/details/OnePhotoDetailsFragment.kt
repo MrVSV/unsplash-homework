@@ -268,8 +268,10 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
     }
 
     private fun setToolbar(id: String) {
-        binding.toolbar.setOnClickListener {
+        val button = binding.shareBar.menu.getItem(0)
+        button?.setOnMenuItemClickListener {
             shareLinkOnPhoto(id)
+            true
         }
     }
 
