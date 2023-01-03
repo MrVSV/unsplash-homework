@@ -21,6 +21,7 @@
     <string name="focal_length">Focal length: %1$s\n</string>
     <string name="iso">ISO: %1$s</string>
     <string name="download">Downloads (%1$d)</string>
+    <string name="position" translatable="false">%1$d %2$d</string>
     <string name="error_text"> "Ошибка загрузки!\n
         Приносим извинения за предоставленные неудобства"</string>
     <string name="auth_success">Successful authorisation</string>
@@ -53,12 +54,13 @@
     <string name="ok">Ok</string>
     <string name="author_account" translatable="false">\@%1$s</string>
     <string name="search_menu_title">Search</string>
-    <string name="one_photo_fragment_tittle">Share</string>
+    <string name="share">Share</string>
     <plurals name="total_photos">
         <item quantity="one">%1$d photo</item>
         <item quantity="other">%1$d photos</item>
     </plurals>
     <string name="no_location">No location data for this photo</string>
+    <string name="one_photo_fragment_title">Photo Details</string>
     <!--Лента-->
     <!--Проверьте состояние сети-->
     <!--Авторизация прошла успешно-->

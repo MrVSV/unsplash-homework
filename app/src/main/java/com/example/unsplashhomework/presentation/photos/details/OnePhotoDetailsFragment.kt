@@ -3,11 +3,13 @@ package com.example.unsplashhomework.presentation.photos.details
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.app.DownloadManager
 import android.content.*
+import android.content.ContentValues.TAG
 import android.content.Intent.FLAG_GRANT_READ_URI_PERMISSION
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
@@ -132,8 +134,18 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
     private fun bindUploadedTexts(state: DetailsState.Success) {
         binding.authorName.text = state.data.user.name
         binding.authorAccount.text = getString(R.string.author_account, state.data.user.username)
-
-        binding.location.text = state.data.location.city ?: "N/A"
+        if (state.data.location.city == null) {
+            if (state.data.location.position.latitude != null &&
+                state.data.location.position.longitude != null
+            )
+                binding.location.text = getString(
+                    R.string.position,
+                    state.data.location.position.latitude.toInt(),
+                    state.data.location.position.longitude.toInt()
+                )
+            else binding.location.text = "N/A"
+        } else
+            binding.location.text = state.data.location.city
         binding.currentLikes.text = state.data.likes.toString()
         binding.isLiked.isSelected = state.data.likedByUser
 
@@ -162,10 +174,14 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
     }
 
     private fun setLocationClick() {
+
         binding.locationButton.setOnClickListener {
+            Log.d(TAG, "lat $lat\nlon $lon ")
             if (lat != null && lon != null) {
+                Log.d(TAG, "map open")
                 showLocationOnMap(Uri.parse("geo: $lat,$lon"))
             } else {
+                Log.d(TAG, "map don't open ")
                 showNoLocationDataSnackbar()
             }
         }
@@ -252,8 +268,10 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
     }
 
     private fun setToolbar(id: String) {
-        binding.toolbar.setOnClickListener {
+        val button = binding.shareBar.menu.getItem(0)
+        button?.setOnMenuItemClickListener {
             shareLinkOnPhoto(id)
+            true
         }
     }
 
@@ -281,7 +299,10 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         alertDialog.setTitle(getString(R.string.alert_title))
         alertDialog.setMessage(getString(R.string.alert_text))
         alertDialog.setIcon(android.R.drawable.ic_dialog_alert)
-        alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, getString(R.string.ok)) { dialog, _ ->
+        alertDialog.setButton(
+            DialogInterface.BUTTON_POSITIVE,
+            getString(R.string.ok)
+        ) { dialog, _ ->
             dialog.cancel()
         }
         alertDialog.show()
