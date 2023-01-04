@@ -19,12 +19,17 @@ class OnboardingFragment : BaseFragment<FragmentOnboardingBinding>() {
     override fun initBinding(inflater: LayoutInflater) =
         FragmentOnboardingBinding.inflate(inflater)
 
+
+
+    /**нужно расзнести все по функциям а в он вью криейт вызывать эти функции*/
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         binding.viewPager.adapter =
             ViewPagerAdapter(resources.getStringArray(R.array.onboarding_texts_array))
 
+        /** я понимаю что  я это показывал, и вроде такой пожход даже гугл признает, но вызывать так
+         * обжект внутри кода мне прям не нравится, по мне лучше создать класс и его тут вызывать */
         binding.viewPager.registerOnPageChangeCallback(
             object : ViewPager2.OnPageChangeCallback(){
                 override fun onPageScrolled(

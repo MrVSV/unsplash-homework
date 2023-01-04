@@ -24,7 +24,7 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
         val toOnboardingFragment = MainFragmentDirections.actionMainFragmentToNavigationOnboarding()
         val toAuthFragment = MainFragmentDirections.actionMainFragmentToAuthFragment()
         val toPhotosFragment = MainFragmentDirections.actionMainFragmentToNavigationPhotos()
-
+/**все что закоментированно не должно попадпть в мейн ветку*/
 //        binding.auth.setOnClickListener {
 //            findNavController().navigate(toAuthFragment)
 //        }
@@ -34,6 +34,9 @@ class MainFragment : BaseFragment<FragmentMainBinding>() {
 //        }
 //
 //        binding.asShouldBe.setOnClickListener {
+        /**я бы сначала проверял на токен, если токен есть токен есть то дальше и нет смысла вести проверку
+         * если токена нет то проверям на то превый это запуск или нет
+         * и не совсем пойму зачем вам отрицание? точно норм работает?*/
             if (!prefs.getBoolean(ONBOARDING_IS_SHOWN, false))
                 findNavController().navigate(toOnboardingFragment)
             else {

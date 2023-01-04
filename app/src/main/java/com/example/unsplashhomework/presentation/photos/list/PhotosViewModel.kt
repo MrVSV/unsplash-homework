@@ -24,7 +24,6 @@ class PhotosViewModel @Inject constructor(
     private val query = MutableStateFlow("")
     private var job: Job? = null
 
-
     @OptIn(ExperimentalCoroutinesApi::class)
     fun getPhoto() = query.asStateFlow()
         .flatMapLatest { photosPagingUseCase.getPhoto(Requester.ALL_LIST.apply { param =it }) }

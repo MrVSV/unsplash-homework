@@ -31,6 +31,12 @@ import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
+/**смотри фрагмет в триста строчек это прям сложно...я на 100й уже устал читать)))
+ * кто тебе мешает сосзать абстрактный класс создать BaseOnePhotoDetailsFragment который также
+ * будет унаследован от BaseFragment и скинуть туда хотя бы функции загрузки, все оперции со снек барами
+ * ну и еще что нибудь
+ * А этот фрагмент уже унаследовать от BaseOnePhotoDetailsFragment */
+
 @AndroidEntryPoint
 class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
 
@@ -40,6 +46,8 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
     private val viewModel: OnePhotoDetailsViewModel by viewModels()
     private val args by navArgs<OnePhotoDetailsFragmentArgs>()
 
+    /**все переменные который не требуют контекста или еще чего то что прям необходимо объявить во фрагменте
+     * лучше прятать во фрагменте, А конкретно для этой пары лучше создать свой отдельный класс */
     private var lat: Double? = null
     private var lon: Double? = null
 
@@ -47,9 +55,11 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         requireContext().getSystemService(Context.DOWNLOAD_SERVICE) as DownloadManager
     }
 
+    /**лет инит вар зло...нужен только для даггера, старайтесь без него обходится*/
     private lateinit var receiver: BroadcastReceiver
     private var enableDownloadFlag = false
 
+    /** тут для более низких апи проверка на пермишены? */
     private val launcher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { map ->
@@ -72,15 +82,20 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         setLocationClick()
         loadStateLike()
     }
-
+/** почему в onResume */
     override fun onResume() {
         super.onResume()
         val filter = IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE)
+        /**броад каст рессивер нужен что бы при свернутом приложении мы получили оповещение
+         * что мы файл до качали, так как у нас менеджер загрузок мы и так узнаем когда файл будет скачен
+         * и я уже говорил что лучше вынести в отдельный класс...как минимум это сократит количество строчек
+         * во фрагменте*/
         receiver = object : BroadcastReceiver() {
             override fun onReceive(context: Context?, intent: Intent) {
                 val reference = intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)
                 if (viewModel.downloadID == reference) {
                     viewModel.getDMStatus(downloadManager)
+                    /**это вообще что? цикл который ниделает ничего */
                     while (viewModel.downloading) {
                         //Log.d("Kart", ".")
                     }
@@ -96,6 +111,7 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         registerReceiver(requireContext(), receiver, filter, RECEIVER_EXPORTED)
     }
 
+    /**опять это обсервер*/
     private fun getLoadingState() {
         viewLifecycleOwner.lifecycleScope
             .launchWhenStarted {
@@ -103,12 +119,14 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
             }
     }
 
+    /**when для кого придумали?*/
     private fun updateUiOnServerResponse(loadState: LoadState) {
         if (loadState == LoadState.ERROR) {
             binding.error.isVisible = true
             binding.scroll.isVisible = false
         }
         if (loadState == LoadState.SUCCESS) {
+            /** опять кто мешал нам коррутину спрять в функцию?*/
             viewLifecycleOwner.lifecycleScope
                 .launchWhenStarted {
                     viewModel.state
@@ -117,6 +135,9 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         }
     }
 
+
+    /**Салед класс тут не к селу ни к городу
+     * из за этого ты данные почему то обзываешь стейтом, что очегь странно*/
     private fun updateUi(state: DetailsState) {
         when (state) {
             DetailsState.NotStartedYet -> {}
@@ -146,9 +167,8 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
         binding.aboutAuthor.text = getString(
             R.string.about, state.data.user.username, state.data.user.bio ?: "N/A"
         )
-        binding.downloadsCount.text = getString(
-            R.string.download, state.data.downloads, state.data.downloads
-        )
+        binding.downloadsCount.text =
+            getString(R.string.download, state.data.downloads, state.data.downloads)
     }
 
     private fun bindUploadedImages(state: DetailsState.Success) {
@@ -169,15 +189,18 @@ class OnePhotoDetailsFragment : BaseFragment<FragmentOnePhotoDetailsBinding>() {
             Log.d(TAG, "lat $lat\nlon $lon ")
             if (lat != null && lon != null) {
                 if (lat != 0.0 && lon != 0.0) {
-                Log.d(TAG, "open map")
-                showLocationOnMap(Uri.parse("geo: $lat,$lon"))}
+                    Log.d(TAG, "open map")
+                    showLocationOnMap(Uri.parse("geo: $lat,$lon"))
+                }
             } else {
                 Log.d(TAG, "don't open map")
                 showNoLocationDataSnackbar()
             }
         }
     }
-
+/** тут прям надо объснять как лучше делать....потому что то что я видел ни куда не годится
+ * сами путаетесь
+ * */
     private fun loadStateLike() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.loadState.collect { loadStateLike ->

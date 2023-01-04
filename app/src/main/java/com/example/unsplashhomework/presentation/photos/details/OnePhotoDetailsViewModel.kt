@@ -34,6 +34,9 @@ class OnePhotoDetailsViewModel @Inject constructor(
     var downloading = true
     var success = false
 
+    /**ну вот я открыл твой код не зна я что это за код
+     * что такое а?
+     * про стейты молчу уже и кстати...Все норм работает? лоадинг показывается?*/
     fun loadPhotoDetails(id: String) {
         viewModelScope.launch(Dispatchers.IO + handler) {
                 val a = onePhotoDetailsUseCase.getPhotoDetails(id = id)
@@ -42,6 +45,9 @@ class OnePhotoDetailsViewModel @Inject constructor(
         }
     }
 
+    /**зачем тут два запроса?  про стейты молчу уже и кстати...Все норм работает? лоадинг показывается?
+     * апишку если почитать то при получения лайка мы получаем точно такой же объект
+     * не очень правильно тратить лишний трафик пользователь, ну и наши запросы...*/
     fun like(item: PhotoDetails) {
         viewModelScope.launch(Dispatchers.IO + handler) {
             likeDetailPhotoUseCase.likeDetailPhoto(item)

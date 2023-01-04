@@ -20,9 +20,7 @@ class DigestViewHolder(private val binding: DigestViewHolderBinding) :
         binding.authorName.text = item.userUsername
         binding.totalPhotos.text =
             itemView.context.resources.getQuantityString(
-                R.plurals.total_photos,
-                item.totalPhotos,
-                item.totalPhotos
+                R.plurals.total_photos, item.totalPhotos, item.totalPhotos
             )
         binding.collectionTitle.text = item.title
 

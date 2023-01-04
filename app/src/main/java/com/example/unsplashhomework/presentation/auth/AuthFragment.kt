@@ -24,6 +24,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class AuthFragment : BaseFragment<FragmentAuthBinding>() {
+
     override fun initBinding(inflater: LayoutInflater) = FragmentAuthBinding.inflate(inflater)
     private val viewModel by viewModels<AuthViewModel>()
     private val args by navArgs<AuthFragmentArgs>()

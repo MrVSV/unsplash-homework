@@ -22,6 +22,7 @@ class ProfileViewModel @Inject constructor(
     private val photoLikeUseCase: PhotoLikeUseCase
 ) : BaseViewModel() {
 
+    /**флоу и джоба лишниее*/
     private val userName = MutableStateFlow("")
     private var job: Job? = null
 
@@ -31,6 +32,7 @@ class ProfileViewModel @Inject constructor(
     private val _state = MutableStateFlow<ProfileState>(ProfileState.NotStartedYet)
     val state = _state.asStateFlow()
 
+    /**что такое а?*/
     fun getProfile() {
         viewModelScope.launch(Dispatchers.IO + handler) {
             val a = getProfileUseCase.getProfile()
@@ -39,11 +41,13 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    /**перемудрил...писал в другом классе почему*/
     @OptIn(ExperimentalCoroutinesApi::class)
     fun getPhoto() = userName.asStateFlow()
         .flatMapLatest { photosPagingUseCase.getPhoto(Requester.PROFILE.apply { param = it })}
         .cachedIn(CoroutineScope(Dispatchers.IO))
 
+    /**зачем тут сексес?*/
     fun like(item: Photo) {
         viewModelScope.launch(Dispatchers.IO + handler) {
             photoLikeUseCase.likePhoto(item)
@@ -51,6 +55,7 @@ class ProfileViewModel @Inject constructor(
         }
     }
 
+    /**перемудрил*/
     fun setUsername(newText: String, refresh: () -> Unit) {
         job?.cancel()
         job = viewModelScope.launch {

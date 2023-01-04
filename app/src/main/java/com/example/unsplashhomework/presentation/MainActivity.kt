@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        /**врать не буду я не знаю что это, оно точно вам нужно?*/
         StrictMode.setVmPolicy(
             VmPolicy.Builder(StrictMode.getVmPolicy())
                 .detectLeakedClosableObjects()

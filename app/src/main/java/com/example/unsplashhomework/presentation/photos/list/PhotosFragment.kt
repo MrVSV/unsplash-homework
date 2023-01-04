@@ -61,6 +61,7 @@ class PhotosFragment : BaseFragment<FragmentPhotosBinding>() {
         }
     }
 
+    /** я надеюсь что хотя бы разобрались что происходит*/
     private fun setSearchView() {
         val searchView = binding.searchBar.menu.getItem(0).actionView as SearchView
         searchView.setChangeTextListener { query ->

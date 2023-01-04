@@ -34,6 +34,7 @@ abstract class BaseFragment<B:ViewBinding>:Fragment() {
     protected fun createSharedPreference(sharedName: String) =
         requireContext().getSharedPreferences(sharedName, Context.MODE_PRIVATE)
 
+/**это мы нигде не юзаем...я не придумал как универсальный обсервер написать, вы тоже, так что удаляем*/
     protected fun loadStateObserve(
         stateFlow: StateFlow<LoadState>,
         progressBar: View,
